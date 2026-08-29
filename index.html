@@ -1,92 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Student Resource Hub</title>
   <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Ambient Hacker Decor -->
-  <div class="side-decor left-decor" id="decorLeft">
+  <!-- Ambient side emojis -->
+  <div class="side-decor left-decor">
     <p>0</p><p>1</p><p>☺</p><p>1</p><p>0</p><p>🐧</p><p>1</p><p>👾</p><p>0</p>
   </div>
-  <div class="side-decor right-decor" id="decorRight">
+  <div class="side-decor right-decor">
     <p>1</p><p>0</p><p>👾</p><p>0</p><p>1</p><p>🐧</p><p>1</p><p>0</p><p>☺</p>
   </div>
 
-  <!-- Homepage -->
-  <div class="container" id="homeUI">
+  <main class="container" id="homeUI">
     <h1>Student Resource Hub</h1>
-    <p style="opacity: .9; margin-bottom: 16px;">Browse downloads, games, and the Y*utube dashboard.</p>
+    <p style="opacity:.9; margin-bottom:18px;">Browse games, downloads, and the Y*utube dashboard.</p>
 
-    <div class="classroom-grid" style="margin-bottom: 18px;">
-      <div style="background: var(--card-bg); padding: 18px; border-radius: 8px; text-align: center;">
-        <h3 style="margin: 0 0 6px 0;">▶ Y*utube</h3>
-        <p style="margin: 0 0 10px 0; color: var(--text-muted);">Embedded video resources</p>
-        <button id="openYBtn" type="button">Open Y*utube</button>
+    <div class="classroom-grid">
+      <div class="feature-item">
+        <div>
+          <h3 style="margin:0 0 8px 0;">▶ Y*utube</h3>
+          <div style="color:var(--text-muted);">Embedded video resources</div>
+        </div>
+        <div style="align-self:center">
+          <a href="Y*utube.html" class="info-btn" style="display:inline-block; padding:10px 14px; text-decoration:none;">Open</a>
+        </div>
       </div>
 
-      <div style="background: var(--card-bg); padding: 18px; border-radius: 8px; text-align: center;">
-        <h3 style="margin: 0 0 6px 0;">🎮 Games</h3>
-        <p style="margin: 0 0 10px 0; color: var(--text-muted);">Browser-based activities (coming soon)</p>
-        <a href="#" class="info-btn" style="display:inline-block; padding:8px 12px; text-decoration:none;">Browse</a>
+      <div class="feature-item">
+        <div>
+          <h3 style="margin:0 0 8px 0;">🎮 Games</h3>
+          <div style="color:var(--text-muted);">Browser-based activities</div>
+        </div>
+        <div style="align-self:center">
+          <a href="games.html" class="info-btn" style="display:inline-block; padding:10px 14px; text-decoration:none;">Open</a>
+        </div>
       </div>
 
-      <div style="background: var(--card-bg); padding: 18px; border-radius: 8px; text-align: center;">
-        <h3 style="margin: 0 0 6px 0;">⬇️ Downloads</h3>
-        <p style="margin: 0 0 10px 0; color: var(--text-muted);">Files and resources (coming soon)</p>
-        <a href="#" class="info-btn" style="display:inline-block; padding:8px 12px; text-decoration:none;">Browse</a>
+      <div class="feature-item">
+        <div>
+          <h3 style="margin:0 0 8px 0;">⬇️ Downloads</h3>
+          <div style="color:var(--text-muted);">Files and resources (coming soon)</div>
+        </div>
+        <div style="align-self:center">
+          <a href="#" class="info-btn" style="display:inline-block; padding:10px 14px; text-decoration:none;">Browse</a>
+        </div>
       </div>
 
-      <div style="background: var(--card-bg); padding: 18px; border-radius: 8px; text-align: center;">
-        <h3 style="margin: 0 0 6px 0;">⚙️ Tools</h3>
-        <p style="margin: 0 0 10px 0; color: var(--text-muted);">Utilities for students</p>
-        <a href="#" class="info-btn" style="display:inline-block; padding:8px 12px; text-decoration:none;">Open</a>
-      </div>
-    </div>
-
-    <div style="text-align: center; margin-top: 6px;">
-      <a href="info.html" class="info-btn">How to use</a>
-    </div>
-  </div>
-
-  <!-- Y*utube Dashboard (hidden until opened) -->
-  <div class="container" id="youtubeUI" style="display: none;">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <h1>Y*utube Dashboard</h1>
-      <div>
-        <button id="backHomeBtn" type="button" style="margin-right:10px;">Back</button>
-      </div>
-    </div>
-
-    <div class="search-bar" style="margin-top: 14px;">
-      <label for="videoUrl" class="visually-hidden">Y*utube URL or ID</label>
-      <input type="text" id="videoUrl" placeholder="Enter resource ID or link..." aria-label="Video URL or ID">
-      <button id="loadBtn" type="button">Load</button>
-    </div>
-
-    <iframe id="player" class="player-frame" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Resource player"></iframe>
-  </div>
-
-  <!-- Panic Screen (kept as before but simplified) -->
-  <div id="panicUI" style="display: none; font-family: 'Google Sans', Roboto, Arial, sans-serif; background-color: #f8f9fa; min-height: 100vh; width: 100%; position: absolute; top: 0; left: 0; z-index: 50;">
-    <div style="display:flex; height:100vh; align-items:center; justify-content:center;">
-      <div style="max-width:900px; width:100%; padding:20px;">
-        <div style="background:#fff; border:1px solid #dadce0; border-radius:8px; padding:20px;">
-          <h2 style="margin:0 0 10px 0; color:#3c4043;">Classroom</h2>
-          <p style="margin:0; color:#5f6368;">You have no work due in the next 7 days.</p>
+      <div class="feature-item">
+        <div>
+          <h3 style="margin:0 0 8px 0;">⚙️ Tools</h3>
+          <div style="color:var(--text-muted);">Utilities for students</div>
+        </div>
+        <div style="align-self:center">
+          <a href="#" class="info-btn" style="display:inline-block; padding:10px 14px; text-decoration:none;">Open</a>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <div class="footer" id="footerUI">
-    Made by Flipping286, Optimized for students.
-  </div>
+    <div style="text-align:center; margin-top:16px;">
+      <a href="info.html" class="info-btn">How to use</a>
+    </div>
+  </main>
+
+  <footer class="footer">Made by Flipping286, Optimized for students.</footer>
 
   <script src="script.js"></script>
 </body>
