@@ -1,47 +1,110 @@
-// games.js - behavior for Games dashboard (demo mode)
-
-(() => {
+// games.js - improved behavior: load local games into the iframe (in-page) and attempt fullscreen.
+// For external games we try to load in the iframe first but do NOT redirect automatically.
+// If embedding is not possible, an "Open in new tab" control will appear so the user can open it manually.
+(function(){
   const frame = document.getElementById('game-frame');
-  const launchButtons = Array.from(document.querySelectorAll('.game-launch'));
   const stopBtn = document.getElementById('game-stop');
+  const grid = document.getElementById('gamesGrid');
 
-  // Build a likely external URL (source repo) from the data-slug stored on the card.
-  // These are placeholders; when you're ready we can replace them with exact URLs or local copies.
-  function externalUrlFromSlug(slug) {
-    // GitHub Pages site for the public collection we referenced earlier
-    return `https://git-hub-games.github.io/play/${slug}.html`;
+  // Helper: show the iframe area and set src
+  function showInFrame(src) {
+    if (!frame) return;
+    frame.style.visibility = 'visible';
+    frame.style.height = '560px';
+    frame.style.border = '1px solid var(--border-color)';
+    frame.src = src;
+    // try to focus
+    try { frame.focus(); } catch (e){}
+    // try to request fullscreen on the iframe element (may be blocked for cross-origin)
+    try {
+      if (frame.requestFullscreen) frame.requestFullscreen();
+      else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
+    } catch (err) {
+      // ignore; user can use the Open button if needed
+    }
   }
 
-  function loadDemoInFrame(title, slug) {
+  function clearFrame() {
     if (!frame) return;
-    const ext = externalUrlFromSlug(slug);
-    const demoHtml = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial;display:flex;align-items:center;justify-content:center;height:100vh;background:#0b0d12;color:#e2e8f0"><div style="text-align:center;padding:20px;max-width:760px"><h2 style="color:#00ff9d">${escapeHtml(title)}</h2><p style="color:#94a3b8">This is a demo placeholder for the game. When you add the real game files or a direct link, this iframe will load the game. For now you can open the original source in a new tab.</p><p style=\"margin-top:18px\"><a href=\"${ext}\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"padding:10px 14px;background:#00ff9d;color:#000;border-radius:8px;text-decoration:none;font-weight:700\">Open original source</a></p></div></body></html>`;
-    // Use srcdoc so we don't try to load external content yet
-    frame.srcdoc = demoHtml;
-    frame.removeAttribute('src');
-    frame.focus();
-  }
-
-  function stopFrame() {
-    if (!frame) return;
-    frame.srcdoc = '';
     frame.src = '';
+    frame.style.height = '0';
+    frame.style.visibility = 'hidden';
+    // try to exit fullscreen
+    try { if (document.exitFullscreen) document.exitFullscreen(); } catch (e){}
+    // hide external open button if present
+    const openBtn = document.getElementById('open-external-btn');
+    if (openBtn) openBtn.style.display = 'none';
   }
 
-  function escapeHtml(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  // ensure stop button clears
+  if (stopBtn) stopBtn.addEventListener('click', (e)=>{ e.preventDefault(); clearFrame(); });
+
+  // create or return the Open in new tab button (placed next to stop)
+  function ensureOpenButton() {
+    let btn = document.getElementById('open-external-btn');
+    if (btn) return btn;
+    // find the controls area (same parent as stop button)
+    const controls = stopBtn ? stopBtn.parentElement : document.body;
+    btn = document.createElement('a');
+    btn.id = 'open-external-btn';
+    btn.textContent = 'Open in new tab';
+    btn.target = '_blank';
+    btn.rel = 'noopener';
+    btn.style.marginLeft = '12px';
+    btn.className = 'info-btn'; // reuse the same visual style
+    btn.style.display = 'none';
+    controls.appendChild(btn);
+    return btn;
   }
 
-  launchButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const card = e.currentTarget.closest('.game-card');
-      const title = card ? (card.querySelector('h4')||{textContent:''}).textContent : 'Game';
-      const slug = card ? (card.getAttribute('data-slug')||'') : '';
-      loadDemoInFrame(title, slug);
-    });
+  function isLocalSrc(src) {
+    if (!src) return false;
+    // treat relative paths or same-origin absolute URLs as local
+    try {
+      const u = new URL(src, location.href);
+      return u.origin === location.origin;
+    } catch (e) {
+      // malformed -> treat as relative/local
+      return true;
+    }
+  }
+
+  // click handler: prefer data-src (local), then data-external, then data-slug
+  grid && grid.addEventListener('click', (e) => {
+    const btn = e.target.closest && e.target.closest('.game-launch');
+    if (!btn) return;
+    e.preventDefault();
+    const card = btn.closest && btn.closest('.game-card');
+    const slug = card ? card.getAttribute('data-slug') : '';
+    const srcAttr = btn.getAttribute('data-src');
+    const externalAttr = btn.getAttribute('data-external');
+
+    // Determine target URL
+    let target = '';
+    if (srcAttr) target = srcAttr;
+    else if (externalAttr) target = externalAttr;
+    else if (slug) target = `https://git-hub-games.github.io/play/${slug}.html`;
+
+    if (!target) return;
+
+    // If it's local (same origin or relative path), load in iframe
+    if (isLocalSrc(target)) {
+      showInFrame(target);
+      // hide open button (not needed)
+      const ob = ensureOpenButton(); ob.style.display = 'none';
+      return;
+    }
+
+    // External source: try to load in iframe first (doesn't redirect automatically)
+    showInFrame(target);
+
+    // show Open in new tab button so user can choose to open manually if embedding blocked
+    const openBtn = ensureOpenButton();
+    openBtn.href = target;
+    openBtn.style.display = 'inline-flex';
   });
 
-  // Allow keyboard Enter on the card to launch
+  // keyboard accessibility: allow Enter to activate Launch button when card is focused
   document.querySelectorAll('.game-card').forEach(card => {
     card.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -51,7 +114,5 @@
       }
     });
   });
-
-  if (stopBtn) stopBtn.addEventListener('click', (e) => { e.preventDefault(); stopFrame(); });
 
 })();
