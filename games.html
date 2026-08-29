@@ -19,15 +19,80 @@
 
   <main class="container">
     <h1 style="margin-bottom:6px;">Games</h1>
-    <p class="welcome-text">Welcome to Games!</p>
+    <p class="welcome-text">Welcome to Games! Click a tile to load the game preview below. Proprietary titles will open in a new tab.</p>
 
-    <!-- Games grid is intentionally empty for now; add thumbnails here later -->
     <div id="gamesGrid" class="games-grid" aria-live="polite">
-      <!-- thumbnails will be added here when ready -->
+      <!-- Test batch of 10 games -->
+
+      <article class="game-card" tabindex="0" data-slug="idle-breakout">
+        <div class="thumb" aria-hidden="true">🧱</div>
+        <h4>Idle Breakout</h4>
+        <button class="game-launch" data-src="assets/games/idle-breakout/index.html">Launch</button>
+      </article>
+
+      <article class="game-card" tabindex="0" data-slug="awesome-tanks">
+        <div class="thumb" aria-hidden="true">� tank</div>
+        <h4>Awesome Tanks</h4>
+        <button class="game-launch" data-src="assets/games/awesome-tanks/index.html">Launch</button>
+      </article>
+
+      <article class="game-card" tabindex="0" data-slug="five-nights-at-freddys-2">
+        <div class="thumb" aria-hidden="true">👾</div>
+        <h4>Five Nights at Freddy's 2</h4>
+        <button class="game-launch" data-external="https://git-hub-games.github.io/play/five-nights-at-freddys-2.html">Open (new tab)</button>
+      </article>
+
+      <article class="game-card" tabindex="0" data-slug="flappy-bird">
+        <div class="thumb" aria-hidden="true">🐦</div>
+        <h4>Flappy Bird</h4>
+        <button class="game-launch" data-external="https://git-hub-games.github.io/play/flappy-bird.html">Open (new tab)</button>
+      </article>
+
+      <article class="game-card" tabindex="0" data-slug="moto-x3m">
+        <div class="thumb" aria-hidden="true">🏍️</div>
+        <h4>Moto X3M</h4>
+        <button class="game-launch" data-src="assets/games/moto-x3m/index.html">Launch</button>
+      </article>
+
+      <article class="game-card" tabindex="0" data-slug="age-of-war">
+        <div class="thumb" aria-hidden="true">⚔️</div>
+        <h4>Age of War</h4>
+        <button class="game-launch" data-src="assets/games/age-of-war/index.html">Launch</button>
+      </article>
+
+      <article class="game-card" tabindex="0" data-slug="gun-mayhem-2">
+        <div class="thumb" aria-hidden="true">🔫</div>
+        <h4>Gun Mayhem 2</h4>
+        <button class="game-launch" data-src="assets/games/gun-mayhem-2/index.html">Launch</button>
+      </article>
+
+      <article class="game-card" tabindex="0" data-slug="bullet-force">
+        <div class="thumb" aria-hidden="true">💥</div>
+        <h4>Bullet Force</h4>
+        <button class="game-launch" data-src="assets/games/bullet-force/index.html">Launch</button>
+      </article>
+
+      <article class="game-card" tabindex="0" data-slug="pixel-gun-survival">
+        <div class="thumb" aria-hidden="true">🛡️</div>
+        <h4>Pixel Gun Survival</h4>
+        <button class="game-launch" data-src="assets/games/pixel-gun-survival/index.html">Launch</button>
+      </article>
+
+      <article class="game-card" tabindex="0" data-slug="sniper-gun-shooting">
+        <div class="thumb" aria-hidden="true">🎯</div>
+        <h4>Sniper Gun Shooting</h4>
+        <button class="game-launch" data-src="assets/games/sniper-gun-shooting/index.html">Launch</button>
+      </article>
+
     </div>
 
-    <div style="margin-top:28px; text-align:left;">
-      <a href="index.html" class="info-btn">Back</a>
+    <div style="margin-top:22px;">
+      <iframe id="game-frame" class="player-frame" src="" frameborder="0" title="Game frame" aria-label="Game player"></iframe>
+    </div>
+
+    <div style="margin-top:12px;">
+      <button id="game-stop">Stop</button>
+      <a href="index.html" class="info-btn" style="margin-left:12px;">Back</a>
     </div>
   </main>
 
