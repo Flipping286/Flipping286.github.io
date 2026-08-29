@@ -18,46 +18,37 @@
   </div>
 
   <main class="container">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <h1>Games</h1>
+    <h1 style="margin-bottom:6px;">Games</h1>
+    <p class="welcome-text">Welcome to Games!</p>
+
+    <!-- Simple thumbnail grid: no boxes, just thumbnails below the heading -->
+    <div id="gamesGrid" class="games-grid" aria-live="polite">
+      <!-- Example placeholders: replace src/thumb with real assets when available -->
+      <button class="game-thumb" data-src="assets/games/demo1/index.html" aria-label="Play Demo 1">
+        <span class="thumb-icon">🎮</span>
+        <span class="thumb-title">Demo 1</span>
+      </button>
+
+      <button class="game-thumb" data-src="assets/games/demo2/index.html" aria-label="Play Demo 2">
+        <span class="thumb-icon">🕹️</span>
+        <span class="thumb-title">Demo 2</span>
+      </button>
+
+      <button class="game-thumb" data-src="assets/games/demo3/index.html" aria-label="Play Demo 3">
+        <span class="thumb-icon">🚗</span>
+        <span class="thumb-title">Demo 3</span>
+      </button>
+
+      <button class="game-thumb" data-src="assets/games/demo4/index.html" aria-label="Play Demo 4">
+        <span class="thumb-icon">🍪</span>
+        <span class="thumb-title">Demo 4</span>
+      </button>
+
+      <!-- more thumbnails can be added later -->
+    </div>
+
+    <div style="margin-top:28px; text-align:left;">
       <a href="index.html" class="info-btn">Back</a>
-    </div>
-
-    <p style="margin-top:12px; color:var(--text-muted);">Coming soon — games will appear here as tiles with thumbnails. Click a tile to load it into the player below.</p>
-
-    <section class="games-grid" aria-live="polite" style="margin-top:18px;">
-      <!-- Placeholder game cards -->
-      <article class="game-card" tabindex="0">
-        <div class="thumb" aria-hidden="true">🎮</div>
-        <h4>Example Game A</h4>
-        <button class="game-launch" data-src="about:blank">Launch</button>
-      </article>
-
-      <article class="game-card" tabindex="0">
-        <div class="thumb" aria-hidden="true">🟩</div>
-        <h4>Example Game B</h4>
-        <button class="game-launch" data-src="about:blank">Launch</button>
-      </article>
-
-      <article class="game-card" tabindex="0">
-        <div class="thumb" aria-hidden="true">🟦</div>
-        <h4>Example Game C</h4>
-        <button class="game-launch" data-src="about:blank">Launch</button>
-      </article>
-
-      <article class="game-card" tabindex="0">
-        <div class="thumb" aria-hidden="true">🍪</div>
-        <h4>Example Game D</h4>
-        <button class="game-launch" data-src="about:blank">Launch</button>
-      </article>
-    </section>
-
-    <div style="margin-top:20px;">
-      <iframe id="game-frame" src="" frameborder="0" title="Game frame"></iframe>
-    </div>
-
-    <div style="margin-top:12px;">
-      <button id="game-stop">Stop</button>
     </div>
   </main>
 
