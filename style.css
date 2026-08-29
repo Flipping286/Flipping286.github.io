@@ -28,13 +28,10 @@ body {
   background: var(--card-bg);
   padding: 24px;
 
-  border: 8px solid transparent;
-  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M0 4 Q4 0 8 4 T16 4 T24 4 T32 4 M0 28 Q4 32 8 28 T16 28 T24 28 T32 28 M4 0 Q0 4 4 8 T4 16 T4 24 T4 32 M28 0 Q32 4 28 8 T28 16 T28 24 T28 32' fill='none' stroke='%2300ff9d' stroke-width='2.5'/%3E%3C/svg%3E") 8 round;
+  border: 6px solid transparent;
+  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M0 5 Q4 1 8 5 T16 5 T24 5 T32 5 M5 0 Q1 4 5 8 T5 16 T5 24 T5 32' fill='none' stroke='%2300ff9d' stroke-width='2.5'/%3E%3C/svg%3E") 8 round;
 
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 0 20px rgba(0, 255, 157, 0.2);
-
+  box-shadow: 0 8px 32px rgba(0,0,0,.5), 0 0 20px rgba(0,255,157,.2);
   z-index: 2;
 }
 
