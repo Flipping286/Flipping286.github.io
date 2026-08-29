@@ -9,7 +9,7 @@
 }
 
 /* =========================
-   PAGE
+   BODY
    ========================= */
 
 body {
@@ -35,8 +35,6 @@ body {
 .container {
   width: 85%;
   max-width: 850px;
-
-  /* Keeps padding and border INSIDE the width */
   box-sizing: border-box;
 
   margin-top: 50px;
@@ -44,28 +42,57 @@ body {
 
   background: var(--card-bg);
 
-  /* Wavy border */
-  border: 6px solid transparent;
-
-  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M0 6 Q4 2 8 6 T16 6 T24 6 T32 6 T40 6 M6 0 Q2 4 6 8 T6 16 T6 24 T6 32 T6 40 M40 34 Q36 38 32 34 T24 34 T16 34 T8 34 T0 34 M34 0 Q38 4 34 8 T34 16 T34 24 T34 32 T34 40' fill='none' stroke='%2300ff9d' stroke-width='2.5'/%3E%3C/svg%3E") 10 round;
-
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 0 20px rgba(0, 255, 157, 0.2);
+  border: none;
+  border-radius: 14px;
 
   position: relative;
   z-index: 2;
+
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(0, 255, 157, 0.12);
 }
 
 /* =========================
-   HEADINGS
+   CLEAN WAVY OUTLINE
+   ========================= */
+
+.container::before {
+  content: "";
+
+  position: absolute;
+
+  /* Controls how far the wave sits inside the container */
+  inset: 8px;
+
+  pointer-events: none;
+  z-index: 3;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M3 3 C5 1 7 1 9 3 S13 5 15 3 S19 1 21 3 S25 5 27 3 S31 1 33 3 S37 5 39 3 S43 1 45 3 S49 5 51 3 S55 1 57 3 S61 5 63 3 S67 1 69 3 S73 5 75 3 S79 1 81 3 S85 5 87 3 S91 1 93 3 S97 5 97 7 C99 9 99 11 97 13 S95 17 97 19 S99 23 97 25 S95 29 97 31 S99 35 97 37 S95 41 97 43 S99 47 97 49 S95 53 97 55 S99 59 97 61 S95 65 97 67 S99 71 97 73 S95 77 97 79 S99 83 97 85 S95 89 97 91 S99 95 97 97 C95 99 93 99 91 97 S87 95 85 97 S81 99 79 97 S75 95 73 97 S69 99 67 97 S63 95 61 97 S57 99 55 97 S51 95 49 97 S45 99 43 97 S39 95 37 97 S33 99 31 97 S27 95 25 97 S21 99 19 97 S15 95 13 97 S9 99 7 97 S3 95 3 93 C1 91 1 89 3 87 S5 83 3 81 S1 77 3 75 S5 71 3 69 S1 65 3 63 S5 59 3 57 S1 53 3 51 S5 47 3 45 S1 41 3 39 S5 35 3 33 S1 29 3 27 S5 23 3 21 S1 17 3 15 S5 11 3 9 Z' fill='none' stroke='%2300ff9d' stroke-width='1.4' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+
+  filter:
+    drop-shadow(0 0 3px rgba(0, 255, 157, 0.65))
+    drop-shadow(0 0 6px rgba(0, 255, 157, 0.2));
+}
+
+/* =========================
+   HEADING
    ========================= */
 
 h1 {
   color: var(--text-main);
+
   font-size: 1.8rem;
-  margin-top: 0;
+
+  margin-top: 5px;
   margin-bottom: 20px;
+
+  position: relative;
+  z-index: 4;
 }
 
 /* =========================
@@ -75,7 +102,11 @@ h1 {
 .search-bar {
   display: flex;
   gap: 10px;
+
   margin-bottom: 20px;
+
+  position: relative;
+  z-index: 4;
 }
 
 /* =========================
@@ -85,13 +116,17 @@ h1 {
 input[type="text"] {
   flex: 1;
 
+  min-width: 0;
+
   padding: 12px 16px;
 
-  background: var(--bg-color);
+  background: #0b0d12;
+
   border: 1px solid var(--border-color);
   border-radius: 6px;
 
   color: var(--text-main);
+
   font-size: 1rem;
 
   outline: none;
@@ -100,6 +135,10 @@ input[type="text"] {
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
+}
+
+input[type="text"]::placeholder {
+  color: var(--text-muted);
 }
 
 input[type="text"]:focus {
@@ -121,6 +160,7 @@ button {
   color: #000;
 
   font-weight: bold;
+  font-size: 0.95rem;
 
   border: none;
   border-radius: 6px;
@@ -151,16 +191,20 @@ button:active {
    ========================= */
 
 .player-frame {
+  display: block;
+
   width: 100%;
   height: 480px;
+
+  box-sizing: border-box;
 
   border: 1px solid var(--border-color);
   border-radius: 8px;
 
   background: #000;
 
-  box-sizing: border-box;
-  display: block;
+  position: relative;
+  z-index: 4;
 }
 
 /* =========================
@@ -178,6 +222,7 @@ button:active {
   text-align: center;
 
   opacity: 0.7;
+
   letter-spacing: 1px;
 
   z-index: 2;
@@ -211,7 +256,10 @@ button:active {
     0 0 12px var(--accent-glow);
 
   transition:
-    all 0.2s ease;
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 
   z-index: 100;
 }
@@ -289,7 +337,7 @@ button:active {
 }
 
 /* =========================
-   GOOGLE CLASSROOM GRID
+   CLASSROOM GRID
    ========================= */
 
 .classroom-grid {
@@ -306,11 +354,11 @@ button:active {
 }
 
 /* =========================
-   PANIC SCREEN
+   PANIC UI
    ========================= */
 
 #panicUI {
-  display: none;
+  box-sizing: border-box;
 }
 
 /* =========================
@@ -338,5 +386,12 @@ button:active {
 
   .side-decor {
     display: none;
+  }
+
+  .info-btn {
+    bottom: 12px;
+    right: 12px;
+
+    padding: 8px 14px;
   }
 }
