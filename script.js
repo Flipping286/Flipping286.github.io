@@ -1,5 +1,4 @@
-//  Vid Loading Engine
-// Made by Flipping286
+// V!deo Loading Engine
 function loadVideo() {
   const input = document.getElementById('videoUrl').value.trim();
   const player = document.getElementById('player');
@@ -16,24 +15,33 @@ function loadVideo() {
   }
 }
 
-//  Google Classroom Panic Button & Secrt Un-Panic Key
+// sTealtH Logic 
 let typedKeys = "";
 document.addEventListener('keydown', function(event) {
-  // Panic Mode Trigger (Escape Key)
+  
+  // Panic Mode (Escape Key)
   if (event.key === 'Escape') {
     document.getElementById('mainUI').style.display = 'none';
+    document.getElementById('decorLeft').style.display = 'none';
+    document.getElementById('decorRight').style.display = 'none';
+    document.getElementById('footerUI').style.display = 'none';
+    
     document.getElementById('panicUI').style.display = 'block';
-    document.getElementById('player').src = ''; // Kills the audio instantly
-    document.body.style.backgroundColor = '#ffffff'; // Changes to boring white
-    typedKeys = ""; // Reset secret key tracker
+    document.getElementById('player').src = ''; // Kill audio
+    document.body.style.backgroundColor = '#ffffff';
+    typedKeys = ""; 
   }
 
-  // Secret Un-Panic Trigger (Type "back")
+  // Un-Panic Mode (Type "back")
   typedKeys += event.key.toLowerCase();
   if (typedKeys.endsWith("back")) {
     document.getElementById('mainUI').style.display = 'block';
+    document.getElementById('decorLeft').style.display = 'flex';
+    document.getElementById('decorRight').style.display = 'flex';
+    document.getElementById('footerUI').style.display = 'block';
+    
     document.getElementById('panicUI').style.display = 'none';
-    document.body.style.backgroundColor = '#0b0d12'; // Restores dark theme
+    document.body.style.backgroundColor = '#0b0d12'; 
     typedKeys = "";
   }
 });
