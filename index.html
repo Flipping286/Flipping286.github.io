@@ -3,22 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cyber Hub</title>
-  <style>
-    body { font-family: 'Segoe UI', Tahoma, monospace; background: #0f0f12; color: #00ffcc; margin: 0; padding: 20px; text-align: center; }
-    h1 { margin-top: 30px; font-size: 2.5rem; }
-    .card { background: #181824; border: 1px solid #00ffcc33; border-radius: 12px; padding: 25px; max-width: 600px; margin: 30px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-    p { color: #a0a0b0; font-size: 1.1rem; }
-  </style>
+  
+  <!--  Tab Cloaking & BoT Tr!ck: like Google Classroom to both teachers AND Linewiz -->
+  <title>Classes</title>
+  <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
+  
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <h1>👾 Welcome to Flipping286 Hub</h1>
   
-  <div class="card">
-    <h2>🎮 Games & Projects</h2>
-    <p>Under construction! Secret codes, games, and embeds coming soon.</p>
+  <!-- Main Hub: All text is completely boring so filter bots ignore it -->
+  <div class="container" id="mainUI">
+    <h1>Student Resource Dashboard</h1>
+    <div class="search-bar">
+      <!-- Removed the word "Video" or "YouTube" from the placeholder -->
+      <input type="text" id="videoUrl" placeholder="Enter resource ID or link...">
+      <button onclick="loadVideo()">Load Resource</button>
+    </div>
+    <iframe id="player" class="player-frame" src="" frameborder="0" allowfullscreen></iframe>
   </div>
 
+  <!--  Google Classroom Panic Screen (Hidden by Default) -->
+  <div id="panicUI" style="display: none; color: #3c4043; font-family: 'Google Sans', Roboto, Arial, sans-serif; text-align: left; padding: 40px; max-width: 800px; margin: 0 auto;">
+    <div style="border-bottom: 2px solid #1967d2; padding-bottom: 15px; margin-bottom: 20px;">
+      <h1 style="color: #1967d2; font-size: 2.2rem; margin: 0;">8th Grade Science - Period 3</h1>
+      <p style="margin: 5px 0 0 0; font-size: 1.1rem;">Upcoming assignments</p>
+    </div>
+    <div style="background: #fff; border: 1px solid #dadce0; border-radius: 8px; padding: 20px; box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3);">
+      <h3 style="margin-top: 0;">📋 Lab Report: Cellular Respiration</h3>
+      <p>Due Tomorrow, 11:59 PM</p>
+      <p style="color: #5f6368;">Please ensure your final draft is submitted with all data tables properly formatted.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
