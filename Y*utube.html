@@ -1,1 +1,38 @@
-to be modified
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Y*utube Dashboard</title>
+  <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Hacker Decor -->
+  <div class="side-decor left-decor">
+    <p>0</p><p>1</p><p>☺</p><p>1</p><p>0</p><p>🐧</p><p>1</p><p>👾</p><p>0</p>
+  </div>
+  <div class="side-decor right-decor">
+    <p>1</p><p>0</p><p>👾</p><p>0</p><p>1</p><p>🐧</p><p>1</p><p>0</p><p>☺</p>
+  </div>
+
+  <main class="container">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h1>Y*utube Dashboard</h1>
+      <a href="index.html" class="info-btn">Back</a>
+    </div>
+
+    <p style="margin-top:12px; color:var(--text-muted);">Paste a Y*utube link or ID below and click <strong>Load</strong>. The player uses the no-cookie embed.</p>
+
+    <div class="search-bar" style="margin-top:12px;">
+      <input type="text" id="videoUrl" placeholder="Enter Y*utube link or ID" aria-label="Video URL or ID">
+      <button id="loadBtn" type="button">Load</button>
+    </div>
+
+    <iframe id="player" class="player-frame" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Resource player" style="margin-top:18px;"></iframe>
+
+  </main>
+
+  <script src="youtube.js"></script>
+</body>
+</html>
