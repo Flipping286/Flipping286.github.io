@@ -1,3 +1,4 @@
+/* Core theme variables */
 :root {
   --bg-color: #0b0d12;
   --card-bg: #161922;
@@ -8,6 +9,15 @@
   --border-color: #262b38;
 }
 
+/* === Force removal of any border-image/wavy decorations that may remain === */
+/* This overrides any leftover border-image rules or SVG data URIs in other files */
+* {
+  -webkit-border-image: none !important;
+  -moz-border-image: none !important;
+  border-image: none !important;
+  background-image: none !important; /* ensure no decorative background images show */
+}
+
 /* =========================
    BODY
    ========================= */
@@ -15,16 +25,12 @@
 body {
   background-color: var(--bg-color);
   color: var(--text-main);
-
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
   margin: 0;
   min-height: 100vh;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
   position: relative;
   overflow-x: hidden;
 }
@@ -37,15 +43,13 @@ body {
 .container {
   width: 85%;
   max-width: 850px;
-
   box-sizing: border-box;
-
   margin-top: 50px;
-  padding: 34px;
-
+  padding: 40px; /* increased padding so content doesn't overlap border */
   background: var(--card-bg);
 
-  border: none;
+  /* Simple straight green outline instead of the wavy border */
+  border: 3px solid var(--accent-color);
   border-radius: 14px;
 
   position: relative;
@@ -56,37 +60,7 @@ body {
     0 0 20px rgba(0, 255, 157, 0.12);
 }
 
-
-/* =========================
-   WAVY INNER OUTLINE
-   ========================= */
-
-.container::before {
-  content: "";
-
-  position: absolute;
-
-  /* Move the outline inward */
-  inset: 10px;
-
-  pointer-events: none;
-
-  z-index: 0;
-
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M3 3 Q5 1 7 3 T11 3 T15 3 T19 3 T23 3 T27 3 T31 3 T35 3 T39 3 T43 3 T47 3 T51 3 T55 3 T59 3 T63 3 T67 3 T71 3 T75 3 T79 3 T83 3 T87 3 T91 3 T95 3 T97 5 Q99 7 97 9 T97 13 T97 17 T97 21 T97 25 T97 29 T97 33 T97 37 T97 41 T97 45 T97 49 T97 53 T97 57 T97 61 T97 65 T97 69 T97 73 T97 77 T97 81 T97 85 T97 89 T97 93 Q99 95 97 97 Q95 99 93 97 T89 97 T85 97 T81 97 T77 97 T73 97 T69 97 T65 97 T61 97 T57 97 T53 97 T49 97 T45 97 T41 97 T37 97 T33 97 T29 97 T25 97 T21 97 T17 97 T13 97 T9 97 T5 97 Q3 99 3 95 Q1 93 3 91 T3 87 T3 83 T3 79 T3 75 T3 71 T3 67 T3 63 T3 59 T3 55 T3 51 T3 47 T3 43 T3 39 T3 35 T3 31 T3 27 T3 23 T3 19 T3 15 T3 11 T3 7 Q1 5 3 3 Z' fill='none' stroke='%2300ff9d' stroke-width='1.2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
-
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-position: center;
-
-  filter:
-    drop-shadow(0 0 3px rgba(0, 255, 157, 0.55))
-    drop-shadow(0 0 7px rgba(0, 255, 157, 0.18));
-}
-
-
 /* Keep the actual container contents above the outline */
-
 .container > * {
   position: relative;
   z-index: 1;
@@ -99,10 +73,8 @@ body {
 
 h1 {
   color: var(--text-main);
-
   font-size: 1.8rem;
   font-weight: 700;
-
   margin-top: 5px;
   margin-bottom: 20px;
 }
@@ -114,11 +86,8 @@ h1 {
 
 .search-bar {
   display: flex;
-
   gap: 10px;
-
   margin-bottom: 20px;
-
   position: relative;
   z-index: 2;
 }
@@ -130,24 +99,15 @@ h1 {
 
 input[type="text"] {
   flex: 1;
-
   min-width: 0;
-
   padding: 12px 16px;
-
   background: var(--bg-color);
-
   border: 1px solid var(--border-color);
   border-radius: 6px;
-
   color: var(--text-main);
-
   font-size: 1rem;
-
   outline: none;
-
   box-sizing: border-box;
-
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease,
@@ -160,7 +120,6 @@ input[type="text"]::placeholder {
 
 input[type="text"]:focus {
   border-color: var(--accent-color);
-
   box-shadow:
     0 0 8px var(--accent-glow),
     0 0 16px rgba(0, 255, 157, 0.08);
@@ -173,18 +132,13 @@ input[type="text"]:focus {
 
 button {
   padding: 12px 24px;
-
   background: var(--accent-color);
   color: #000;
-
   font-weight: bold;
   font-size: 0.95rem;
-
   border: none;
   border-radius: 6px;
-
   cursor: pointer;
-
   transition:
     transform 0.1s ease,
     box-shadow 0.2s ease;
@@ -192,14 +146,12 @@ button {
 
 button:hover {
   transform: translateY(-2px);
-
   box-shadow:
     0 0 12px rgba(0, 255, 157, 0.35);
 }
 
 button:active {
   transform: scale(0.95);
-
   box-shadow:
     0 0 15px var(--accent-color);
 }
@@ -211,17 +163,12 @@ button:active {
 
 .player-frame {
   display: block;
-
   width: 100%;
   height: 480px;
-
   box-sizing: border-box;
-
   border: 1px solid var(--border-color);
   border-radius: 8px;
-
   background: #000;
-
   position: relative;
   z-index: 2;
 }
@@ -233,19 +180,12 @@ button:active {
 
 .footer {
   margin-top: auto;
-
   padding: 30px 20px;
-
   color: var(--text-muted);
-
   font-size: 0.95rem;
-
   text-align: center;
-
   opacity: 0.7;
-
   letter-spacing: 1px;
-
   z-index: 2;
 }
 
@@ -256,110 +196,81 @@ button:active {
 
 .info-btn {
   position: fixed;
-
   bottom: 20px;
   right: 20px;
-
   background: var(--card-bg);
   color: var(--accent-color);
-
   border: 2px solid var(--accent-color);
   border-radius: 8px;
-
   padding: 10px 18px;
-
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
   font-weight: bold;
   font-size: 0.9rem;
-
   text-decoration: none;
-
-  box-shadow:
-    0 0 12px var(--accent-glow);
-
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
-
+  box-shadow: 0 0 12px var(--accent-glow);
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   z-index: 100;
+}
+
+/* Remove focus outline artifact and keep a consistent glow */
+.info-btn:focus {
+  outline: none;
+  box-shadow: 0 0 22px rgba(0, 255, 157, 0.45);
 }
 
 .info-btn:hover {
   background: var(--accent-color);
   color: #000;
-
-  box-shadow:
-    0 0 20px var(--accent-color);
-
+  box-shadow: 0 0 20px var(--accent-color);
   transform: translateY(-2px);
 }
 
 
 /* =========================
-   SIDE DECOR
+   SIDE DECOR (EMOJIS + LIGHT FLASH)
    ========================= */
 
 .side-decor {
   position: fixed;
-
   top: 0;
   bottom: 0;
-
   width: 50px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-
   font-size: 2.2rem;
-
   color: var(--accent-color);
-
-  text-shadow:
-    0 0 15px var(--accent-color),
-    0 0 25px var(--accent-color);
-
+  text-shadow: 0 0 15px var(--accent-color), 0 0 25px var(--accent-color);
   user-select: none;
-
   z-index: 1;
-
   pointer-events: none;
+  overflow: visible;
 }
 
-.left-decor {
-  left: 20px;
-}
-
-.right-decor {
-  right: 20px;
+.side-decor::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  background: radial-gradient(circle at center, rgba(0,255,157,0.08), transparent 40%);
+  filter: blur(8px);
+  border-radius: 12px;
+  z-index: 0;
 }
 
 .side-decor p {
   margin: 0;
-
-  animation:
-    pulse 3s infinite alternate;
+  animation: pulse 3s infinite alternate;
+  position: relative;
+  z-index: 2;
 }
 
+.left-decor { left: 20px; }
+.right-decor { right: 20px; }
+
 @keyframes pulse {
-  0% {
-    opacity: 0.5;
-
-    text-shadow:
-      0 0 8px var(--accent-color);
-  }
-
-  100% {
-    opacity: 1;
-
-    text-shadow:
-      0 0 22px var(--accent-color),
-      0 0 30px var(--accent-color);
-  }
+  0% { opacity: 0.5; text-shadow: 0 0 8px var(--accent-color); }
+  100% { opacity: 1; text-shadow: 0 0 22px var(--accent-color), 0 0 30px var(--accent-color); }
 }
 
 
@@ -369,171 +280,53 @@ button:active {
 
 .classroom-grid {
   display: grid;
-
-  grid-template-columns:
-    repeat(auto-fit, minmax(280px, 1fr));
-
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
-
   max-width: 900px;
-
   margin: 0 auto;
 }
+
+.feature-item { background: var(--card-bg); padding: 18px; border-radius: 8px; }
 
 
 /* =========================
    INFO PAGE
    ========================= */
 
-.info-container {
-  max-width: 700px;
-
-  text-align: left;
-
-  padding: 38px;
-}
-
-.info-content {
-  color: var(--text-main);
-
-  font-size: 1.05rem;
-
-  line-height: 1.6;
-
-  margin: 20px 0;
-}
-
-.info-content section {
-  margin-bottom: 28px;
-}
-
-.info-content h2 {
-  color: var(--accent-color);
-
-  font-size: 1.1rem;
-
-  margin-top: 0;
-  margin-bottom: 8px;
-}
-
-.info-content p {
-  margin: 8px 0;
-}
-
-.info-content code {
-  background: #262b38;
-
-  padding: 3px 7px;
-
-  border-radius: 4px;
-
-  color: var(--accent-color);
-
-  font-family: monospace;
-}
+.info-container { max-width: 700px; text-align: left; padding: 38px; }
+.info-content { color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin: 20px 0; }
+.info-content section { margin-bottom: 28px; }
+.info-content h2 { color: var(--accent-color); font-size: 1.1rem; margin-top: 0; margin-bottom: 8px; }
+.info-content p { margin: 8px 0; }
+.info-content code { background: #262b38; padding: 3px 7px; border-radius: 4px; color: var(--accent-color); font-family: monospace; }
 
 
 /* =========================
    FEATURE LIST
    ========================= */
 
-.feature-list {
-  display: grid;
-
-  gap: 10px;
-
-  margin-top: 15px;
-}
-
-.feature-item {
-  display: flex;
-
-  justify-content: space-between;
-  align-items: center;
-
-  gap: 20px;
-
-  padding: 12px 14px;
-
-  background: var(--bg-color);
-
-  border: 1px solid var(--border-color);
-
-  border-radius: 6px;
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
-}
-
-.feature-item:hover {
-  border-color: rgba(0, 255, 157, 0.4);
-
-  box-shadow:
-    0 0 10px rgba(0, 255, 157, 0.08);
-
-  transform: translateY(-1px);
-}
-
-.feature-item strong {
-  color: var(--accent-color);
-}
-
-.feature-item span {
-  color: var(--text-muted);
-
-  text-align: right;
-}
+.feature-list { display: grid; gap: 10px; margin-top: 15px; }
+.feature-item { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 12px 14px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 6px; transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; }
+.feature-item:hover { border-color: rgba(0, 255, 157, 0.4); box-shadow: 0 0 10px rgba(0, 255, 157, 0.08); transform: translateY(-1px); }
+.feature-item strong { color: var(--accent-color); }
+.feature-item span { color: var(--text-muted); text-align: right; }
 
 
 /* =========================
    INFO PAGE BACK BUTTON
    ========================= */
 
-.back-button-container {
-  margin-top: 30px;
-
-  text-align: center;
-}
-
-.info-back-btn {
-  display: inline-block;
-
-  padding: 12px 24px;
-
-  background: var(--accent-color);
-  color: #000;
-
-  font-weight: bold;
-
-  border-radius: 6px;
-
-  text-decoration: none;
-
-  box-shadow:
-    0 0 15px var(--accent-glow);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.info-back-btn:hover {
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 0 22px rgba(0, 255, 157, 0.45);
-}
+.back-button-container { margin-top: 30px; text-align: center; }
+.info-back-btn { display: inline-block; padding: 12px 24px; background: var(--accent-color); color: #000; font-weight: bold; border-radius: 6px; text-decoration: none; box-shadow: 0 0 15px var(--accent-glow); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.info-back-btn:focus { outline: none; box-shadow: 0 0 22px rgba(0,255,157,0.45); }
+.info-back-btn:hover { transform: translateY(-2px); box-shadow: 0 0 22px rgba(0, 255, 157, 0.45); }
 
 
 /* =========================
    PANIC SCREEN
    ========================= */
 
-#panicUI {
-  box-sizing: border-box;
-}
+#panicUI { box-sizing: border-box; }
 
 
 /* =========================
@@ -541,49 +334,13 @@ button:active {
    ========================= */
 
 @media (max-width: 700px) {
-
-  .container {
-    width: 92%;
-
-    padding: 22px;
-
-    margin-top: 30px;
-  }
-
-  .info-container {
-    padding: 26px 22px;
-  }
-
-  .search-bar {
-    flex-direction: column;
-  }
-
-  button {
-    width: 100%;
-  }
-
-  .player-frame {
-    height: 360px;
-  }
-
-  .side-decor {
-    display: none;
-  }
-
-  .info-btn {
-    bottom: 12px;
-    right: 12px;
-
-    padding: 8px 14px;
-  }
-
-  .feature-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-
-  .feature-item span {
-    text-align: left;
-  }
+  .container { width: 92%; padding: 22px; margin-top: 30px; }
+  .info-container { padding: 26px 22px; }
+  .search-bar { flex-direction: column; }
+  button { width: 100%; }
+  .player-frame { height: 360px; }
+  .side-decor { display: none; }
+  .info-btn { bottom: 12px; right: 12px; padding: 8px 14px; }
+  .feature-item { flex-direction: column; align-items: flex-start; gap: 5px; }
+  .feature-item span { text-align: left; }
 }
