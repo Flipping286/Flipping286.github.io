@@ -1,1 +1,27 @@
-games css file for dashboard, to be modified
+/* games.css — override container border only on the Games page */
+.container {
+  border: none !important;        /* remove green outline on games page */
+  padding: 30px !important;
+  background: var(--bg-color);    /* keep same background as site */
+  box-shadow: none !important;    /* remove container shadow on this page */
+}
+.welcome-text {
+  color: var(--text-main);
+  font-size: 1.6rem;
+  margin: 32px 0;
+  text-align: center;
+}
+.games-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+}
+.game-card {
+  background: transparent;
+  border: 1px dashed rgba(255,255,255,0.04);
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+  color: var(--text-main);
+}
