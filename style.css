@@ -210,6 +210,10 @@ button:active {
   box-shadow: 0 0 12px var(--accent-glow);
   transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 /* Remove focus outline artifact and keep a consistent glow */
@@ -223,6 +227,15 @@ button:active {
   color: #000;
   box-shadow: 0 0 20px var(--accent-color);
   transform: translateY(-2px);
+}
+
+/* Prevent small underline or rendering artifacts on hover/focus */
+.info-btn, .info-btn:hover, .info-btn:focus {
+  text-decoration: none !important;
+  -webkit-tap-highlight-color: transparent;
+  background-clip: padding-box;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 
@@ -306,7 +319,7 @@ button:active {
    ========================= */
 
 .feature-list { display: grid; gap: 10px; margin-top: 15px; }
-.feature-item { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 12px 14px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 6px; transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; }
+.feature-item { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 12px 14px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 6p[...]
 .feature-item:hover { border-color: rgba(0, 255, 157, 0.4); box-shadow: 0 0 10px rgba(0, 255, 157, 0.08); transform: translateY(-1px); }
 .feature-item strong { color: var(--accent-color); }
 .feature-item span { color: var(--text-muted); text-align: right; }
@@ -317,7 +330,7 @@ button:active {
    ========================= */
 
 .back-button-container { margin-top: 30px; text-align: center; }
-.info-back-btn { display: inline-block; padding: 12px 24px; background: var(--accent-color); color: #000; font-weight: bold; border-radius: 6px; text-decoration: none; box-shadow: 0 0 15px var(--accent-glow); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.info-back-btn { display: inline-block; padding: 12px 24px; background: var(--accent-color); color: #000; font-weight: bold; border-radius: 6px; text-decoration: none; box-shadow: 0 0 15px var(--accen[...]
 .info-back-btn:focus { outline: none; box-shadow: 0 0 22px rgba(0,255,157,0.45); }
 .info-back-btn:hover { transform: translateY(-2px); box-shadow: 0 0 22px rgba(0, 255, 157, 0.45); }
 
