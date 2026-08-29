@@ -9,7 +9,7 @@
 </head>
 <body>
   
-  <!-- Ambient Haker Decor -->
+  <!-- Ambient Hacker Decor -->
   <div class="side-decor left-decor" id="decorLeft">
     <p>0</p><p>1</p><p>☺</p><p>1</p><p>0</p><p>🐧</p><p>1</p><p>👾</p><p>0</p>
   </div>
@@ -32,52 +32,95 @@
     Made by Flipping286, Optimized for students.
   </div>
 
-  <!-- Photorealistic Google Classroom Panic Screen (Hidden by Default) -->
-  <div id="panicUI" style="display: none; padding: 20px; font-family: 'Google Sans', Roboto, Arial, sans-serif; background-color: #ffffff; min-height: 100vh; width: 100%; position: absolute; top: 0; left: 0;">
-    
-    <!-- Fake Top Nav Bar -->
-    <div style="display: flex; align-items: center; border-bottom: 1px solid #e0e0e0; padding-bottom: 15px; margin-bottom: 30px;">
-      <div style="font-size: 1.5rem; color: #5f6368; margin-right: 15px; cursor: pointer;">☰</div>
-      <div style="font-size: 1.3rem; color: #5f6368; display: flex; align-items: center;">
-        <span style="color: #4285f4; font-weight: bold; margin-right: 5px;">Google</span> Classroom
-      </div>
-    </div>
-    
-    <!-- Class Cards Grid (Matching your screenshot) -->
-    <div class="classroom-grid">
-      <!-- Calculus Card -->
-      <div class="class-card">
-        <div class="class-header" style="background-color: #d81b60;">
-          <h2>Algebra 1</h2>
-          <p>Dr jenkins</p>
+  <!-- 🚨 Modern Google Classroom Home Panic Screen (Hidden by Default) -->
+  <div id="panicUI" style="display: none; font-family: 'Google Sans', Roboto, Arial, sans-serif; background-color: #f8f9fa; min-height: 100vh; width: 100%; position: absolute; top: 0; left: 0; z-index: 9999; display: none;">
+    <div style="display: flex; height: 100vh; overflow: hidden;">
+      
+      <!-- Left Sidebar -->
+      <div style="width: 260px; background: #ffffff; border-right: 1px solid #dadce0; padding: 15px; display: flex; flex-direction: column; gap: 5px; flex-shrink: 0;">
+        <div style="display: flex; align-items: center; gap: 12px; font-size: 1.2rem; font-weight: 500; margin-bottom: 25px; padding-left: 10px;">
+          <span style="color: #5f6368; cursor: pointer;">☰</span>
+          <div style="display: flex; align-items: center; gap: 6px; color: #3c4043;">
+            <span style="background: #1967d2; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 0.9rem;">G</span> Classroom
+          </div>
         </div>
-        <div class="class-body">
-          <p>Due Monday</p>
-          <p style="color: #3c4043;">11:59 PM - Applications of Diff...</p>
-        </div>
+        <div style="background: #e8f0fe; color: #1967d2; padding: 12px 20px; border-radius: 0 24px 24px 0; font-weight: 500; display: flex; align-items: center; gap: 15px;">🏠 Home</div>
+        <div style="padding: 12px 20px; color: #3c4043; border-radius: 0 24px 24px 0; display: flex; align-items: center; gap: 15px;">📅 Calendar</div>
+        <div style="padding: 12px 20px; color: #3c4043; border-radius: 0 24px 24px 0; display: flex; align-items: center; gap: 15px;">📁 Archived classes</div>
+        <div style="padding: 12px 20px; color: #3c4043; border-radius: 0 24px 24px 0; display: flex; align-items: center; gap: 15px;">⚙️ Settings</div>
       </div>
 
-      <!-- Biology 2 Card -->
-      <div class="class-card">
-        <div class="class-header" style="background-color: #8e24aa;">
-          <h2>Science</h2>
-          <p>Mr. Marshall</p>
+      <!-- Main Content Dashboard -->
+      <div style="flex: 1; padding: 25px 40px; overflow-y: auto;">
+        
+        <!-- Top Utility Bar -->
+        <div style="display: flex; justify-content: flex-end; align-items: center; gap: 20px; margin-bottom: 25px; font-size: 1.2rem; color: #5f6368;">
+          <span style="cursor: pointer;">➕</span>
+          <span style="cursor: pointer;">∷∷</span>
+          <span style="background: #137333; color: white; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 500;">FB</span>
         </div>
-        <div class="class-body">
-          <p>Due Friday</p>
-          <p style="color: #3c4043;">Anatomy of a cell</p>
+
+        <!-- Due Soon Section -->
+        <div style="background: white; border: 1px solid #dadce0; border-radius: 8px; padding: 20px; margin-bottom: 25px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h3 style="margin: 0; color: #3c4043; font-size: 1.1rem; font-weight: 500;">Due soon</h3>
+            <a href="#" style="color: #1967d2; font-size: 0.9rem; text-decoration: none; font-weight: 500;">View To-do</a>
+          </div>
+          <p style="color: #5f6368; font-size: 0.9rem; margin: 0;">You don't have any work due in the next 7 days</p>
         </div>
-      </div>
-      
-      <!-- Computer Science Card -->
-      <div class="class-card">
-        <div class="class-header" style="background-color: #455a64;">
-          <h2>ELAR</h2>
-          <p>Ms. Semlear</p>
+
+        <!-- Classes Section Header -->
+        <div style="margin-bottom: 15px;">
+          <h2 style="margin: 0; color: #3c4043; font-size: 1.3rem; font-weight: 400;">Classes</h2>
         </div>
-        <div class="class-body">
-          <p>Due Friday</p>
-          <p style="color: #3c4043;">New kid book pages 49-79 Due</p>
+
+        <!-- Classes Grid (Your Real Classes) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;">
+          
+          <!-- Algebra 1 -->
+          <div style="background: white; border: 1px solid #dadce0; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
+            <div style="background: #1967d2; color: white; padding: 16px; min-height: 75px;">
+              <h4 style="margin: 0; font-size: 1.2rem; font-weight: 500;">Algebra 1</h4>
+              <p style="margin: 4px 0 0 0; font-size: 0.85rem; opacity: 0.9;">Dr. Jenkins</p>
+            </div>
+            <div style="padding: 16px; font-size: 0.85rem; color: #5f6368; border-top: 1px solid #f1f3f4;">
+              <p style="margin: 0; font-weight: 500; color: #3c4043;">Chapter 4 Review Worksheet</p>
+            </div>
+          </div>
+
+          <!-- History -->
+          <div style="background: white; border: 1px solid #dadce0; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
+            <div style="background: #e37400; color: white; padding: 16px; min-height: 75px;">
+              <h4 style="margin: 0; font-size: 1.2rem; font-weight: 500;">History</h4>
+              <p style="margin: 4px 0 0 0; font-size: 0.85rem; opacity: 0.9;">Ms. Bozman</p>
+            </div>
+            <div style="padding: 16px; font-size: 0.85rem; color: #5f6368; border-top: 1px solid #f1f3f4;">
+              <p style="margin: 0; font-weight: 500; color: #3c4043;">Reading pages 112-140</p>
+            </div>
+          </div>
+
+          <!-- Science -->
+          <div style="background: white; border: 1px solid #dadce0; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
+            <div style="background: #137333; color: white; padding: 16px; min-height: 75px;">
+              <h4 style="margin: 0; font-size: 1.2rem; font-weight: 500;">Science</h4>
+              <p style="margin: 4px 0 0 0; font-size: 0.85rem; opacity: 0.9;">Mr. Marshall</p>
+            </div>
+            <div style="padding: 16px; font-size: 0.85rem; color: #5f6368; border-top: 1px solid #f1f3f4;">
+              <p style="margin: 0; font-weight: 500; color: #3c4043;">Cellular Respiration Lab</p>
+            </div>
+          </div>
+
+          <!-- ELA -->
+          <div style="background: white; border: 1px solid #dadce0; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
+            <div style="background: #8e24aa; color: white; padding: 16px; min-height: 75px;">
+              <h4 style="margin: 0; font-size: 1.2rem; font-weight: 500;">ELA</h4>
+              <p style="margin: 4px 0 0 0; font-size: 0.85rem; opacity: 0.9;">Ms. Semlear</p>
+            </div>
+            <div style="padding: 16px; font-size: 0.85rem; color: #5f6368; border-top: 1px solid #f1f3f4;">
+              <p style="margin: 0; font-weight: 500; color: #3c4043;">Vocabulary Unit 3 Draft</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
