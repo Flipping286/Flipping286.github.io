@@ -1,41 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!--  Tab Cloaking & BoT Tr!ck: like Google Classroom to both teachers AND Linewiz -->
-  <title>Classes</title>
-  <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
-  
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  
-  <!-- Main Hub: All text is completely boring so filter bots ignore it -->
-  <div class="container" id="mainUI">
-    <h1>Student Resource Dashboard</h1>
-    <div class="search-bar">
-      <!-- Removed the word "Video" or "YouTube" from the placeholder -->
-      <input type="text" id="videoUrl" placeholder="Enter resource ID or link...">
-      <button onclick="loadVideo()">Load Resource</button>
+<!-- Photorealistic Google Classroom Panic Screen (H!dden by Default) -->
+  <div id="panicUI" style="display: none; padding: 20px; font-family: 'Google Sans', Roboto, Arial, sans-serif; background-color: #ffffff; min-height: 100vh; width: 100%; position: absolute; top: 0; left: 0;">
+    
+    <!-- F@ke Top Nav Bar -->
+    <div style="display: flex; align-items: center; border-bottom: 1px solid #e0e0e0; padding-bottom: 15px; margin-bottom: 30px;">
+      <div style="font-size: 1.5rem; color: #5f6368; margin-right: 15px; cursor: pointer;">☰</div>
+      <div style="font-size: 1.3rem; color: #5f6368; display: flex; align-items: center;">
+        <span style="color: #4285f4; font-weight: bold; margin-right: 5px;">Google</span> Classroom
+      </div>
     </div>
-    <iframe id="player" class="player-frame" src="" frameborder="0" allowfullscreen></iframe>
-  </div>
+    
+    <!-- Class Cards Grid (Customized for my classes) -->
+    <div class="classroom-grid">
+      <!-- Algebra 1 Card -->
+      <div class="class-card">
+        <div class="class-header" style="background-color: #1967d2;">
+          <h2>Algebra 1</h2>
+          <p>Dr. Jenkins</p>
+        </div>
+        <div class="class-body">
+          <p>Due Monday</p>
+          <p style="color: #3c4043;">Chapter 4 Review Worksheet</p>
+        </div>
+      </div>
 
-  <!--  Google Classroom Panic Screen (Hidden by Default) -->
-  <div id="panicUI" style="display: none; color: #3c4043; font-family: 'Google Sans', Roboto, Arial, sans-serif; text-align: left; padding: 40px; max-width: 800px; margin: 0 auto;">
-    <div style="border-bottom: 2px solid #1967d2; padding-bottom: 15px; margin-bottom: 20px;">
-      <h1 style="color: #1967d2; font-size: 2.2rem; margin: 0;">8th Grade Science - Period 3</h1>
-      <p style="margin: 5px 0 0 0; font-size: 1.1rem;">Upcoming assignments</p>
-    </div>
-    <div style="background: #fff; border: 1px solid #dadce0; border-radius: 8px; padding: 20px; box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3);">
-      <h3 style="margin-top: 0;">📋 Lab Report: Cellular Respiration</h3>
-      <p>Due Tomorrow, 11:59 PM</p>
-      <p style="color: #5f6368;">Please ensure your final draft is submitted with all data tables properly formatted.</p>
+      <!-- History Card -->
+      <div class="class-card">
+        <div class="class-header" style="background-color: #e37400;">
+          <h2>History</h2>
+          <p>Ms. Bozman</p>
+        </div>
+        <div class="class-body">
+          <p>Due Tomorrow</p>
+          <p style="color: #3c4043;">Reading assignment pages 112-140</p>
+        </div>
+      </div>
+      
+      <!-- Science Card -->
+      <div class="class-card">
+        <div class="class-header" style="background-color: #137333;">
+          <h2>Science</h2>
+          <p>Mr. Marshall</p>
+        </div>
+        <div class="class-body">
+          <p>Due Wednesday</p>
+          <p style="color: #3c4043;">Lab Report: Cellular Respiration</p>
+        </div>
+      </div>
+
+      <!-- ELA Card -->
+      <div class="class-card">
+        <div class="class-header" style="background-color: #8e24aa;">
+          <h2>ELA</h2>
+          <p>Ms. Semlear</p>
+        </div>
+        <div class="class-body">
+          <p>Due Friday</p>
+          <p style="color: #3c4043;">Vocabulary Unit 3 Draft</p>
+        </div>
+      </div>
     </div>
   </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
