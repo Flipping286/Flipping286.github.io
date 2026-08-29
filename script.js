@@ -1,4 +1,4 @@
-// V!deo Loading Engine
+// Video Loading Engine
 function loadVideo() {
   const input = document.getElementById('videoUrl').value.trim();
   const player = document.getElementById('player');
@@ -15,7 +15,7 @@ function loadVideo() {
   }
 }
 
-// sTealtH Logic 
+// Stealth Logic 
 let typedKeys = "";
 document.addEventListener('keydown', function(event) {
   
