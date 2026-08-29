@@ -1,96 +1,135 @@
-/* =========================
-   INFO PAGE
-   ========================= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.info-container {
-  max-width: 700px;
-  text-align: left;
-  padding: 38px;
-}
+  <title>Dashboard Info & Guide</title>
 
-.info-content {
-  color: var(--text-main);
-  font-size: 1.05rem;
-  line-height: 1.6;
-  margin: 20px 0;
-}
+  <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
 
-.info-content section {
-  margin-bottom: 28px;
-}
+<body>
 
-.info-content h2 {
-  color: var(--accent-color);
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-}
+  <!-- Ambient Hacker Decor -->
+  <div class="side-decor left-decor">
+    <p>0</p>
+    <p>1</p>
+    <p>☺</p>
+    <p>1</p>
+    <p>0</p>
+    <p>🐧</p>
+    <p>1</p>
+    <p>👾</p>
+    <p>0</p>
+  </div>
 
-.info-content p {
-  margin: 8px 0;
-}
+  <div class="side-decor right-decor">
+    <p>1</p>
+    <p>0</p>
+    <p>👾</p>
+    <p>0</p>
+    <p>1</p>
+    <p>🐧</p>
+    <p>1</p>
+    <p>0</p>
+    <p>☺</p>
+  </div>
 
-.info-content code {
-  background: #262b38;
-  padding: 3px 7px;
-  border-radius: 4px;
-  color: var(--accent-color);
-  font-family: monospace;
-}
 
-.feature-list {
-  display: grid;
-  gap: 10px;
-  margin-top: 15px;
-}
+  <!-- Info Container -->
+  <div class="container info-container">
 
-.feature-item {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
+    <h1>How to Use the Dashboard</h1>
 
-  padding: 12px 14px;
+    <div class="info-content">
 
-  background: var(--bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-}
+      <section>
+        <h2>1. Loading Resources</h2>
 
-.feature-item strong {
-  color: var(--accent-color);
-}
+        <p>
+          Paste a YouTube link into the resource bar on the main page
+          and press <strong>Load</strong>.
+        </p>
+      </section>
 
-.feature-item span {
-  color: var(--text-muted);
-  text-align: right;
-}
 
-.back-button-container {
-  margin-top: 30px;
-  text-align: center;
-}
+      <section>
+        <h2>2. Panic Screen</h2>
 
-.info-back-btn {
-  display: inline-block;
+        <p>
+          Press
+          <code>Esc</code>
+          at any time to instantly switch to the Google Classroom
+          style panic screen.
+        </p>
+      </section>
 
-  padding: 12px 24px;
 
-  background: var(--accent-color);
-  color: #000;
+      <section>
+        <h2>3. Returning Home</h2>
 
-  font-weight: bold;
-  border-radius: 6px;
+        <p>
+          Type
+          <code>back</code>
+          to return to the dashboard.
+        </p>
 
-  text-decoration: none;
+        <p>
+          You can also refresh the page to reset everything.
+        </p>
+      </section>
 
-  box-shadow: 0 0 15px var(--accent-glow);
 
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
+      <section>
+        <h2>4. What's Coming</h2>
 
-.info-back-btn:hover {
-  transform: translateY(-2px);
+        <p>
+          This dashboard is planned to grow into a larger student
+          resource hub with additional tools and features.
+        </p>
 
-  box-shadow: 0 0 22px rgba(0, 255, 157, 0.45);
-}
+        <div class="feature-list">
+          <div class="feature-item">
+            <strong>YouTube</strong>
+            <span>Embedded video resources</span>
+          </div>
+
+          <div class="feature-item">
+            <strong>Games</strong>
+            <span>Browser-based games and activities</span>
+          </div>
+
+          <div class="feature-item">
+            <strong>Downloads</strong>
+            <span>Useful files and resources</span>
+          </div>
+
+          <div class="feature-item">
+            <strong>More Tools</strong>
+            <span>Additional student utilities</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+
+    <!-- Back Button -->
+    <div class="back-button-container">
+      <a href="index.html" class="info-back-btn">
+        Back to Dashboard
+      </a>
+    </div>
+
+  </div>
+
+
+  <!-- Footer -->
+  <div class="footer">
+    Made by Flipping286, Optimized for students.
+  </div>
+
+</body>
+</html>
