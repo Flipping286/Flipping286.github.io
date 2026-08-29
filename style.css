@@ -27,9 +27,9 @@ body {
   margin-top: 50px;
   background: var(--card-bg);
   padding: 24px;
-  border-radius: 12px;
-  border: 6px solid transparent;
-  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12' viewBox='0 0 24 12'%3E%3Cpath fill='none' stroke='%2300ff9d' stroke-width='3' d='M0 6 Q 6 0, 12 6 T 24 6'/%3E%3C/svg%3E") 6 round;
+  border-radius: 16px;
+  border: 8px solid transparent;
+  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%2300ff9d' stroke-width='3' d='M0,8 Q4,1 8,8 T16,8'/%3E%3C/svg%3E") 6 round;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 157, 0.2);
   z-index: 2;
 }
