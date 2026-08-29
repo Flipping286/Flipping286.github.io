@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Games</title>
+  <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="games.css">
+</head>
+<body>
+  <!-- Ambient side emojis -->
+  <div class="side-decor left-decor">
+    <p>0</p><p>1</p><p>☺</p><p>1</p><p>0</p><p>🐧</p><p>1</p><p>👾</p><p>0</p>
+  </div>
+  <div class="side-decor right-decor">
+    <p>1</p><p>0</p><p>👾</p><p>0</p><p>1</p><p>🐧</p><p>1</p><p>0</p><p>☺</p>
+  </div>
+
+  <main class="container">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h1>Games</h1>
+      <a href="index.html" class="info-btn">Back</a>
+    </div>
+
+    <p style="margin-top:12px; color:var(--text-muted);">Coming soon — games will appear here as tiles with thumbnails. Click a tile to load it into the player below.</p>
+
+    <section class="games-grid" aria-live="polite" style="margin-top:18px;">
+      <!-- Placeholder game cards -->
+      <article class="game-card" tabindex="0">
+        <div class="thumb" aria-hidden="true">🎮</div>
+        <h4>Example Game A</h4>
+        <button class="game-launch" data-src="about:blank">Launch</button>
+      </article>
+
+      <article class="game-card" tabindex="0">
+        <div class="thumb" aria-hidden="true">🟩</div>
+        <h4>Example Game B</h4>
+        <button class="game-launch" data-src="about:blank">Launch</button>
+      </article>
+
+      <article class="game-card" tabindex="0">
+        <div class="thumb" aria-hidden="true">🟦</div>
+        <h4>Example Game C</h4>
+        <button class="game-launch" data-src="about:blank">Launch</button>
+      </article>
+
+      <article class="game-card" tabindex="0">
+        <div class="thumb" aria-hidden="true">🍪</div>
+        <h4>Example Game D</h4>
+        <button class="game-launch" data-src="about:blank">Launch</button>
+      </article>
+    </section>
+
+    <div style="margin-top:20px;">
+      <iframe id="game-frame" src="" frameborder="0" title="Game frame"></iframe>
+    </div>
+
+    <div style="margin-top:12px;">
+      <button id="game-stop">Stop</button>
+    </div>
+  </main>
+
+  <footer class="footer">Made by Flipping286, Optimized for students.</footer>
+
+  <script src="games.js"></script>
+</body>
+</html>
