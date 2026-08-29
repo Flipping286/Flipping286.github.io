@@ -1,38 +1,111 @@
-//  VidEo Loading Engine
-function loadVideo() {
-  const input = document.getElementById('videoUrl').value.trim();
-  const player = document.getElementById('player');
-  
-  let videoId = input;
-  if (input.includes('v=')) {
-    videoId = input.split('v=')[1].split('&')[0];
-  } else if (input.includes('youtu.be/')) {
-    videoId = input.split('youtu.be/')[1].split('?')[0];
+// script.js
+// Wiring for homepage -> Y*utube dashboard, safe video loading, and panic/unpanic behavior
+
+(() => {
+  const VIDEO_ID_RE = /^[A-Za-z0-9_-]{11}$/;
+  const MAX_KEY_BUFFER = 12;
+  const SECRET = "back";
+
+  const homeUI = document.getElementById("homeUI");
+  const youtubeUI = document.getElementById("youtubeUI");
+  const panicUI = document.getElementById("panicUI");
+
+  const openYBtn = document.getElementById("openYBtn");
+  const backHomeBtn = document.getElementById("backHomeBtn");
+  const loadBtn = document.getElementById("loadBtn");
+  const videoInput = document.getElementById("videoUrl");
+  const player = document.getElementById("player");
+
+  let keyBuffer = "";
+
+  function showHome() {
+    if (youtubeUI) youtubeUI.style.display = "none";
+    if (homeUI) homeUI.style.display = "block";
+    if (panicUI) panicUI.style.display = "none";
+    if (player) player.src = "";
   }
 
-  if (videoId) {
-    player.src = `https://www.youtube-nocookie.com/embed/${videoId}`;
-  }
-}
-
-// Google Classroom Panic Button & Secret Un-Panic Key
-let typedKeys = "";
-document.addEventListener('keydown', function(event) {
-  // Panic Mode Trigger (Escape Key)
-  if (event.key === 'Escape') {
-    document.getElementById('mainUI').style.display = 'none';
-    document.getElementById('panicUI').style.display = 'block';
-    document.getElementById('player').src = ''; // Kills the audio instantly
-    document.body.style.backgroundColor = '#ffffff'; // Changes to boring white
-    typedKeys = ""; // Reset secret key tracker
+  function showYDashboard() {
+    if (homeUI) homeUI.style.display = "none";
+    if (youtubeUI) youtubeUI.style.display = "block";
+    if (panicUI) panicUI.style.display = "none";
   }
 
-  // Secret Un-Panic Trigger (Type "back")
-  typedKeys += event.key.toLowerCase();
-  if (typedKeys.endsWith("back")) {
-    document.getElementById('mainUI').style.display = 'block';
-    document.getElementById('panicUI').style.display = 'none';
-    document.body.style.backgroundColor = '#0b0d12'; // Restores dark theme
-    typedKeys = "";
+  function enterPanic() {
+    if (homeUI) homeUI.style.display = "none";
+    if (youtubeUI) youtubeUI.style.display = "none";
+    if (panicUI) panicUI.style.display = "block";
+    if (player) player.src = "";
+    keyBuffer = "";
   }
-});
+
+  function exitPanic() {
+    if (panicUI) panicUI.style.display = "none";
+    showHome();
+    keyBuffer = "";
+  }
+
+  function safeSetPlayerSrc(id) {
+    if (!player) return;
+    if (!VIDEO_ID_RE.test(id)) {
+      console.warn("Rejected invalid video id:", id);
+      return;
+    }
+    player.src = `https://www.youtube-nocookie.com/embed/${id}`;
+  }
+
+  function extractVideoId(input) {
+    if (!input) return "";
+    input = input.trim();
+    try {
+      const maybeUrl = input.startsWith("http") ? input : (input.includes(".") ? `https://${input}` : input);
+      const u = new URL(maybeUrl);
+      const host = u.hostname.toLowerCase();
+      if (host.includes("youtu.be")) {
+        const p = u.pathname.replace(/^\/+/, "");
+        return p.split("/")[0] || "";
+      }
+      if (host.includes("youtube.com")) {
+        return u.searchParams.get("v") || "";
+      }
+    } catch (e) { /* not a URL — fall through */ }
+    const m = input.match(/[A-Za-z0-9_-]{11}/);
+    return m ? m[0] : "";
+  }
+
+  function loadVideoFromInput() {
+    if (!videoInput) return;
+    const id = extractVideoId(videoInput.value || "");
+    if (id) {
+      safeSetPlayerSrc(id);
+      showYDashboard();
+    } else {
+      videoInput.classList.add("invalid");
+      setTimeout(() => videoInput.classList.remove("invalid"), 900);
+      console.warn("No valid video id found in input.");
+    }
+  }
+
+  if (openYBtn) openYBtn.addEventListener("click", (e) => { e.preventDefault(); showYDashboard(); if (videoInput) videoInput.focus(); });
+  if (backHomeBtn) backHomeBtn.addEventListener("click", (e) => { e.preventDefault(); showHome(); });
+  if (loadBtn) loadBtn.addEventListener("click", (e) => { e.preventDefault(); loadVideoFromInput(); });
+  if (videoInput) videoInput.addEventListener("keydown", (ev) => { if (ev.key === "Enter") { ev.preventDefault(); loadVideoFromInput(); } });
+
+  document.addEventListener("keydown", (ev) => {
+    if (ev.key === "Escape") { enterPanic(); return; }
+    const target = ev.target;
+    const tag = target && target.tagName ? target.tagName.toUpperCase() : "";
+    if (tag === "INPUT" || tag === "TEXTAREA" || target.isContentEditable) return;
+    const k = ev.key.length === 1 ? ev.key.toLowerCase() : "";
+    if (k && /[a-z0-9]/.test(k)) {
+      keyBuffer = (keyBuffer + k).slice(-MAX_KEY_BUFFER);
+      if (keyBuffer.endsWith(SECRET)) exitPanic();
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (homeUI) homeUI.style.display = "block";
+    if (youtubeUI) youtubeUI.style.display = "none";
+    if (panicUI) panicUI.style.display = "none";
+  });
+})();
