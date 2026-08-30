@@ -18,17 +18,17 @@
             box-sizing: border-box;
         }
 
-        /* Flashing Side Decor (YouTube Unblocked Style) 👾 */
+        /* Flashing Side Decor (Bigger & Bold) 👾 */
         .side-decor {
             position: fixed;
             top: 0;
             bottom: 0;
-            width: 60px;
+            width: 70px;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
-            font-size: 24px;
+            font-size: 34px;
             animation: pulse-glow 2s infinite ease-in-out;
             user-select: none;
             pointer-events: none;
@@ -245,18 +245,28 @@
             </div>
             <div class="game-card">
                 <div class="game-icon">🐻</div>
+                <div class="game-title">Five Nights At Freddys</div>
+                <button onclick="playGame('https://irv77.github.io/hd_fnaf/1/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🐻</div>
                 <div class="game-title">Five Nights At Freddys 2</div>
-                <button onclick="playGame('https://sudoku-online.github.io/a7/five-nights-at-freddys-2')">Launch</button>
+                <button onclick="playGame('https://irv77.github.io/hd_fnaf/2/')">Launch</button>
             </div>
             <div class="game-card">
                 <div class="game-icon">🐻</div>
                 <div class="game-title">Five Nights At Freddys 3</div>
-                <button onclick="playGame('https://sudoku-online.github.io/a7/five-nights-at-freddys-3')">Launch</button>
+                <button onclick="playGame('https://irv77.github.io/hd_fnaf/3/')">Launch</button>
             </div>
             <div class="game-card">
                 <div class="game-icon">🐻</div>
-                <div class="game-title">Five Nights At Freddys</div>
-                <button onclick="playGame('https://sudoku-online.github.io/a7/five-nights-at-freddys')">Launch</button>
+                <div class="game-title">Five Nights At Freddys 4</div>
+                <button onclick="playGame('https://irv77.github.io/hd_fnaf/4/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🐻</div>
+                <div class="game-title">FNAF Sister Location</div>
+                <button onclick="playGame('https://irv77.github.io/hd_fnaf/sl/')">Launch</button>
             </div>
             <div class="game-card">
                 <div class="game-icon">🐦</div>
@@ -964,7 +974,7 @@
 
     <!-- Hidden Fullscreen Player Overlay -->
     <div id="game-overlay">
-        <button id="close-btn" onclick="closeGame()">✕ EXIT FULLSCREEN</button>
+        <button id="close-btn" onclick="closeGame()">✕ EXIT</button>
         <iframe id="game-frame" src="" allowfullscreen="true"></iframe>
     </div>
 
