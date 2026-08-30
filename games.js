@@ -115,4 +115,35 @@
     });
   });
 
+  // Live Search Filter Function
+  window.filterGames = function() {
+    let input = document.getElementById('gameSearch');
+    if (!input) return;
+    let filter = input.value.toLowerCase();
+    let cards = document.getElementsByClassName('game-card');
+    let visibleCount = 0;
+
+    for (let i = 0; i < cards.length; i++) {
+      let title = cards[i].getElementsByClassName('game-title')[0];
+      if (title) {
+        let textValue = title.textContent || title.innerText;
+        if (textValue.toLowerCase().indexOf(filter) > -1) {
+          cards[i].style.display = "flex";
+          visibleCount++;
+        } else {
+          cards[i].style.display = "none";
+        }
+      }
+    }
+
+    let noResultsMsg = document.getElementById('no-results');
+    if (noResultsMsg) {
+      if (visibleCount === 0) {
+        noResultsMsg.style.display = "block";
+      } else {
+        noResultsMsg.style.display = "none";
+      }
+    }
+  };
+
 })();
