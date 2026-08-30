@@ -1,784 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Games</title>
-  <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="games.css">
+    <meta charset="UTF-8">
+    <title>Arcade Launcher</title>
+    <style>
+        body { font-family: monospace; background-color: #111; color: #0f0; text-align: center; padding: 20px; }
+        .game-list { list-style: none; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; max-height: 85vh; overflow-y: auto; }
+        .game-list li { width: 450px; }
+        .game-list button { display: block; width: 100%; padding: 10px; background-color: #222; color: #0ff; text-decoration: none; border: 2px solid #0ff; border-radius: 6px; font-family: inherit; font-size: 1rem; cursor: pointer; }
+        .game-list button:hover { background-color: #0ff; color: #111; }
+        
+        /* Fullscreen Game Player Overlay */
+        #game-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: #000;
+            z-index: 99999;
+        }
+        #game-overlay iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        #close-btn {
+            position: absolute;
+            top: 10px; right: 10px;
+            background: #ff0055;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            z-index: 100000;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        #close-btn:hover { opacity: 1; }
+    </style>
 </head>
 <body>
-  <!-- Ambient side emojis -->
-  <div class="side-decor left-decor">
-    <p>0</p><p>1</p><p>☺</p><p>1</p><p>0</p><p>🐧</p><p>1</p><p>👾</p><p>0</p>
-  </div>
-  <div class="side-decor right-decor">
-    <p>1</p><p>0</p><p>👾</p><p>0</p><p>1</p><p>🐧</p><p>1</p><p>0</p><p>☺</p>
-  </div>
 
-  <main class="container">
-    <h1 style="margin-bottom:6px;">Games</h1>
-    <p class="welcome-text">Welcome to Games! Click a tile to load the game preview below. Proprietary titles will open in a new tab.</p>
+    <h1>⚡ 148 GAME ARCADE ⚡</h1>
+    <ul class="game-list">
+        <li><button onclick="playGame('https://games.engineering.com/factoryballsforever/index.html')">Factory Balls Forever</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a4/fairy-dressup')">Fairy Dressup</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a4/fancy-pants-2')">Fancy Pants 2</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a4/fancy-pants-3')">Fancy Pants 3</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a4/fancy-pants')">Fancy Pants</button></li>
+        <li><button onclick="playGame('https://fireboy-and-watergirl-forest.github.io/fa/factoryballsforever/')">Fireboy And Watergirl Forest</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/five-nights-at-freddys-2')">Five Nights At Freddys 2</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/five-nights-at-freddys-3')">Five Nights At Freddys 3</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/five-nights-at-freddys')">Five Nights At Freddys</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/flappy-bird-origin')">Flappy Bird Origin</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a2/flappy-bird')">Flappy Bird</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a4/go-kart-go-ultra')">Go Kart Go Ultra</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a4/gobble')">Gobble</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a4/gold-digger-frvr')">Gold Digger Frvr</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a4/golf-champions')">Golf Champions</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a4/golfinity')">Golfinity</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/google-feud')">Google Feud</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/google-snake')">Google Snake</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a4/grand-prix-hero')">Grand Prix Hero</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a4/gravity-soccer')">Gravity Soccer</button></li>
+        <li><button onclick="playGame('https://gswitch3.github.io/g/grindcraft-remastered')">Grindcraft Remastered</button></li>
+        <li><button onclick="playGame('https://mirathecat.github.io/grindcraft/index.html')">Grindcraft</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/gun-mayhem-2')">Gun Mayhem 2</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/gun-mayhem-3')">Gun Mayhem 3</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/gun-mayhem')">Gun Mayhem</button></li>
+        <li><button onclick="playGame('https://ubg44.github.io/GunSpin/')">Gunspin</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a4/hammer-2-reloaded')">Hammer 2 Reloaded</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/happy-room')">Happy Room</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a4/head-soccer-2023')">Head Soccer 2023</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a4/heads-arena-soccer-all-stars')">Heads Arena Soccer All Stars</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a4/heart-star-html5')">Heart Star Html5</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/hextris')">Hextris</button></li>
+        <li><button onclick="playGame('https://ubg77.github.io/edit/highway-racer-3d/')">Highway Racer 3D</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/highway-rider-extreme/')">Highway Rider Extreme</button></li>
+        <li><button onclick="playGame('https://ubg98.github.io/IcyPurpleHead3/')">Icy Purple Head 3</button></li>
+        <li><button onclick="playGame('https://77pen.github.io/p5/idle-ants')">Idle Ants</button></li>
+        <li><button onclick="playGame('https://moyaimoment.github.io/test/idle-breakout/')">Idle Breakout</button></li>
+        <li><button onclick="playGame('https://htmlxm.github.io/h5/idle-digging-tycoon/')">Idle Digging Tycoon</button></li>
+        <li><button onclick="playGame('https://htmlxm.github.io/h5/idle-lumber-inc/')">Idle Lumber Inc</button></li>
+        <li><button onclick="playGame('https://htmlxm.github.io/h5/idle-miner/')">Idle Miner</button></li>
+        <li><button onclick="playGame('https://ubg77.github.io/fix/idle-mining-empire/')">Idle Mining Empire</button></li>
+        <li><button onclick="playGame('https://idle-startup-tycoon.github.io/file/')">Idle Startup Tycoon</button></li>
+        <li><button onclick="playGame('https://ubg44.github.io/ImpossibleMonsterTruck/')">Impossible Monster Truck Race</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/impossible-tic-tac-toe')">Impossible Tic Tac Toe</button></li>
+        <li><button onclick="playGame('https://6bob.net/iframe/Infinity-Loop-Online')">Infinity Loop</button></li>
+        <li><button onclick="playGame('https://webglmath.github.io/iron-snout/')">Iron Snout</button></li>
+        <li><button onclick="playGame('https://webglmath.github.io/jelly-truck/')">Jelly Truck</button></li>
+        <li><button onclick="playGame('https://23azostore.github.io/s/jet-boy/')">Jet Boy</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/jetpack-joyride')">Jetpack Joyride</button></li>
+        <li><button onclick="playGame('https://23azostore.github.io/s5/jollyworld/')">Jollyworld</button></li>
+        <li><button onclick="playGame('https://scrap-metal.github.io/s6/rowdy-wrestling')">Rowdy Wrestling</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a9/run-3-editor')">Run 3 Editor</button></li>
+        <li><button onclick="playGame('https://htmlxm.github.io/h6/running-fred/')">Running Fred</button></li>
+        <li><button onclick="playGame('https://coolmathsgames.github.io/c6/rusher-crusher')">Rusher Crusher</button></li>
+        <li><button onclick="playGame('https://abinbins.github.io/a6/sausage-flip/')">Sausage Flip</button></li>
+        <li><button onclick="playGame('https://classroom6x.gitlab.io/school-bus-demolition-derby/')">School Bus Demolition Derby</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/scrap-metal')">Scrap Metal</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a9/shoot-stickman')">Shoot Stickman</button></li>
+        <li><button onclick="playGame('https://mathgames66.github.io/games/html5/shortlife2/')">Short Life</button></li>
+        <li><button onclick="playGame('https://shortrideonline.github.io/file/')">Short Ride</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a9/shortcut-race')">Shortcut Race</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/sketchbook-04')">Sketchbook 04</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a9/skiing-fred')">Skiing Fred</button></li>
+        <li><button onclick="playGame('https://red-ball4.com/slime-road-online.play')">Slime Road</button></li>
+        <li><button onclick="playGame('https://htmlxm.github.io/h6/slope-2/')">Slope 2</button></li>
+        <li><button onclick="playGame('https://slopeonline.online/game/Slope-game-og-v1-1/')">Slope</button></li>
+        <li><button onclick="playGame('https://soccer-random.github.io/a8/soccer-random/')">Soccar</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/soccer-random/')">Soccer Random</button></li>
+        <li><button onclick="playGame('https://gswitch3.github.io/g6/soccer-skills-champions-league/')">Soccer Skills Champions League</button></li>
+        <li><button onclick="playGame('https://soccerskillseurocup-online.github.io/file/')">Soccer Skills Euro Cup</button></li>
+        <li><button onclick="playGame('https://sipragio06.github.io/soccer-skills-game/')">Soccer Skills World Cup</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/solitaire')">Solitaire</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a9/speed-boat-extreme-racing')">Speed Boat Extreme Racing</button></li>
+        <li><button onclick="playGame('https://scrap-metal.github.io/s6/squish-run/')">Squish Run</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a9/stack-ball')">Stack Ball</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a9/stack-bump-3d')">Stack Bump 3D</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a2/stack')">Stack</button></li>
+        <li><button onclick="playGame('https://abinbins.github.io/a6/stacktris/')">Stacktris</button></li>
+        <li><button onclick="playGame('https://23azostore.github.io/s6/stair-race-3d/')">Stair Race 3D</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/stealing-the-diamond')">Stealing The Diamond</button></li>
+        <li><button onclick="playGame('stick-defenders.html')">Stick Defenders</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a/stick-fighter/')">Stick Fighter</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/stick-merge')">Stick Merge</button></li>
+        <li><button onclick="playGame('https://23azostore.github.io/s6/stickman-army-team-battle/')">Stickman Army Team Battle</button></li>
+        <li><button onclick="playGame('https://htmlxm.github.io/h6/stickman-army-the-resistance')">Stickman Army The Resistance</button></li>
+        <li><button onclick="playGame('https://23azostore.github.io/s6/stickman-bike-pr/')">Stickman Bike Pr</button></li>
+        <li><button onclick="playGame('https://23azostore.github.io/s6/stickman-bike/')">Stickman Bike</button></li>
+        <li><button onclick="playGame('https://htmlxm.github.io/h6/stickman-boxing-ko-champion/')">Stickman Boxing Ko Champion</button></li>
+        <li><button onclick="playGame('https://htmlxm.github.io/h6/stickman-bridge-constructor/')">Stickman Bridge Constructor</button></li>
+        <li><button onclick="playGame('https://smashkartsonlinegames.github.io/v6/stickman-climb-2/')">Stickman Climb 2</button></li>
+        <li><button onclick="playGame('https://crazygames-unblocked.github.io/c6/stickman-fighter-epic-battle-2/')">Stickman Fighter Epic Battle 2</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/stickman-fighter-mega-brawl/')">Stickman Fighter Mega Brawl</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/stickman-golf')">Stickman Golf</button></li>
+        <li><button onclick="playGame('stickman-hook.html')">Stickman Hook</button></li>
+        <li><button onclick="playGame('https://fridaynight-funkin.github.io/f/stickman-ragdoll-crash-fun/')">Stickman Ragdoll Crash Fun</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/stickman-school-run')">Stickman School Run</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/stock-car-hero')">Stock Car Hero</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/street-ball-jam')">Street Ball Jam</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/striker-dummies')">Striker Dummies</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/stunt-car-challenge-3')">Stunt Car Challenge 3</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/stupid-zombies')">Stupid Zombies</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/subway-runner')">Subway Runner</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/subway-surfers-beijing/')">Subway Surfers Beijing</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/subway-surfers-houston/')">Subway Surfers Houston</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/subway-surfers-monaco')">Subway Surfers Monaco</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/subway-surfers-san-francisco')">Subway Surfers Newyork</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/subway-surfers-san-francisco')">Subway Surfers</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/super-bike-the-champion')">Super Bike The Champion</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/super-hexbee-merger')">Super Hexbee Merger</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/super-hot')">Super Hot</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/super-liquid-soccer')">Super Liquid Soccer</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a9/super-mario-64')">Super Mario 64</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a9/super-mario-bros')">Super Mario Bros</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/super-racing-gt-drag-pro')">Super Racing Gt Drag Pro</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/super-santa-kicker')">Super Santa Kicker</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/super-star-car')">Super Star Car</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/super-tunnel-rush')">Super Tunnel Rush</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/superbattle-2')">Superbattle 2</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/superbike-hero')">Superbike Hero</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/survivor-in-rainbow-monster')">Survivor In Rainbow Monster</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/swatforce-vs-terrorists')">Swatforce Vs Terrorists</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/swingo')">Swingo</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/tag')">Tag</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/tank-trouble-2')">Tank Trouble 2</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/tanuki-sunset')">Tanuki Sunset</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/temple-of-boom')">Temple Of Boom</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/temple-run-2')">Temple Run 2</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/tennis-masters')">Tennis Masters</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a7/tetris-flash')">Tetris Flash</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a9/tetris')">Tetris</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/the-impossible-quiz')">The Impossible Quiz</button></li>
+        <li><button onclick="playGame('https://gswitch3.github.io/g/the-little-giant/')">The Little Giant</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/the-spear-stickman')">The Spear Stickman</button></li>
+        <li><button onclick="playGame('https://gswitch3.github.io/g/tiny-fishing/')">Tiny Fishing</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/tinytownracing')">Tinytownracing</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/tomb-of-the-mask-color')">Tomb Of The Mask Color</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a8/tomb-of-the-mask')">Tomb Of The Mask</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/toon-off')">Toon Off</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/top-speed-3d')">Top Speed 3D</button></li>
+        <li><button onclick="playGame('https://gswitch3.github.io/g/top-speed-racing-3d/')">Top Speed Racing 3D</button></li>
+        <li><button onclick="playGame('https://classroom6x.gitlab.io/tower-of-destiny/')">Tower Of Destiny</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/traffic-mania')">Traffic Mania</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a9/traffic-rider')">Traffic Rider</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/tricks')">Tricks</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/truck-traffic')">Truck Traffic</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a3/tube-jumpers')">Tube Jumpers</button></li>
+        <li><button onclick="playGame('https://tunnelrushgame.io/game/tunnel-rush/')">Tunnel Rush</button></li>
+        <li><button onclick="playGame('https://sudoku-online.github.io/a9/turbo-moto-racer')">Turbo Moto Racer</button></li>
+    </ul>
 
-    <div id="gamesGrid" class="games-grid" aria-live="polite">
-      
-
-      <article class="game-card" tabindex="0" data-slug="factory-balls-forever">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Factory Balls Forever</h4>
-        <button class="game-launch" data-src="Games/factory-balls-forever.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="fairy-dressup">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Fairy Dressup</h4>
-        <button class="game-launch" data-src="Games/fairy-dressup.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="fancy-pants-2">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Fancy Pants 2</h4>
-        <button class="game-launch" data-src="Games/fancy-pants-2.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="fancy-pants-3">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Fancy Pants 3</h4>
-        <button class="game-launch" data-src="Games/fancy-pants-3.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="fancy-pants">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Fancy Pants</h4>
-        <button class="game-launch" data-src="Games/fancy-pants.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="fireboy-and-watergirl-forest">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Fireboy And Watergirl Forest</h4>
-        <button class="game-launch" data-src="Games/fireboy-and-watergirl-forest.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="five-nights-at-freddys-2">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Five Nights At Freddys 2</h4>
-        <button class="game-launch" data-src="Games/five-nights-at-freddys-2.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="five-nights-at-freddys-3">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Five Nights At Freddys 3</h4>
-        <button class="game-launch" data-src="Games/five-nights-at-freddys-3.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="five-nights-at-freddys">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Five Nights At Freddys</h4>
-        <button class="game-launch" data-src="Games/five-nights-at-freddys.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="flappy-bird-origin">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Flappy Bird Origin</h4>
-        <button class="game-launch" data-src="Games/flappy-bird-origin.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="flappy-bird">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Flappy Bird</h4>
-        <button class="game-launch" data-src="Games/flappy-bird.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="go-kart-go-ultra">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Go Kart Go Ultra</h4>
-        <button class="game-launch" data-src="Games/go-kart-go-ultra.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="gobble">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Gobble</h4>
-        <button class="game-launch" data-src="Games/gobble.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="gold-digger-frvr">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Gold Digger Frvr</h4>
-        <button class="game-launch" data-src="Games/gold-digger-frvr.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="golf-champions">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Golf Champions</h4>
-        <button class="game-launch" data-src="Games/golf-champions.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="golfinity">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Golfinity</h4>
-        <button class="game-launch" data-src="Games/golfinity.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="google-feud">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Google Feud</h4>
-        <button class="game-launch" data-src="Games/google-feud.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="google-snake">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Google Snake</h4>
-        <button class="game-launch" data-src="Games/google-snake.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="grand-prix-hero">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Grand Prix Hero</h4>
-        <button class="game-launch" data-src="Games/grand-prix-hero.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="gravity-soccer">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Gravity Soccer</h4>
-        <button class="game-launch" data-src="Games/gravity-soccer.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="grindcraft-remastered">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Grindcraft Remastered</h4>
-        <button class="game-launch" data-src="Games/grindcraft-remastered.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="grindcraft">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Grindcraft</h4>
-        <button class="game-launch" data-src="Games/grindcraft.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="gun-mayhem-2">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Gun Mayhem 2</h4>
-        <button class="game-launch" data-src="Games/gun-mayhem-2.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="gun-mayhem-3">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Gun Mayhem 3</h4>
-        <button class="game-launch" data-src="Games/gun-mayhem-3.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="gun-mayhem">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Gun Mayhem</h4>
-        <button class="game-launch" data-src="Games/gun-mayhem.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="gunspin">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Gunspin</h4>
-        <button class="game-launch" data-src="Games/gunspin.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="hammer-2-reloaded">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Hammer 2 Reloaded</h4>
-        <button class="game-launch" data-src="Games/hammer-2-reloaded.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="happy-room">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Happy Room</h4>
-        <button class="game-launch" data-src="Games/happy-room.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="head-soccer-2023">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Head Soccer 2023</h4>
-        <button class="game-launch" data-src="Games/head-soccer-2023.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="heads-arena-soccer-all-stars">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Heads Arena Soccer All Stars</h4>
-        <button class="game-launch" data-src="Games/heads-arena-soccer-all-stars.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="heart-star-html5">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Heart Star Html5</h4>
-        <button class="game-launch" data-src="Games/heart-star-html5.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="hextris">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Hextris</h4>
-        <button class="game-launch" data-src="Games/hextris.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="highway-racer-3d">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Highway Racer 3D</h4>
-        <button class="game-launch" data-src="Games/highway-racer-3d.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="highway-rider-extreme">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Highway Rider Extreme</h4>
-        <button class="game-launch" data-src="Games/highway-rider-extreme.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="icy-purple-head-3">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Icy Purple Head 3</h4>
-        <button class="game-launch" data-src="Games/icy-purple-head-3.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="idle-ants">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Idle Ants</h4>
-        <button class="game-launch" data-src="Games/idle-ants.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="idle-breakout">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Idle Breakout</h4>
-        <button class="game-launch" data-src="Games/idle-breakout.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="idle-digging-tycoon">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Idle Digging Tycoon</h4>
-        <button class="game-launch" data-src="Games/idle-digging-tycoon.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="idle-lumber-inc">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Idle Lumber Inc</h4>
-        <button class="game-launch" data-src="Games/idle-lumber-inc.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="idle-miner">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Idle Miner</h4>
-        <button class="game-launch" data-src="Games/idle-miner.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="idle-mining-empire">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Idle Mining Empire</h4>
-        <button class="game-launch" data-src="Games/idle-mining-empire.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="idle-startup-tycoon">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Idle Startup Tycoon</h4>
-        <button class="game-launch" data-src="Games/idle-startup-tycoon.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="impossible-monster-truck-race">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Impossible Monster Truck Race</h4>
-        <button class="game-launch" data-src="Games/impossible-monster-truck-race.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="impossible-tic-tac-toe">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Impossible Tic Tac Toe</h4>
-        <button class="game-launch" data-src="Games/impossible-tic-tac-toe.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="infinity-loop">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Infinity Loop</h4>
-        <button class="game-launch" data-src="Games/infinity-loop.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="iron-snout">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Iron Snout</h4>
-        <button class="game-launch" data-src="Games/iron-snout.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="jelly-truck">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Jelly Truck</h4>
-        <button class="game-launch" data-src="Games/jelly-truck.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="jet-boy">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Jet Boy</h4>
-        <button class="game-launch" data-src="Games/jet-boy.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="jetpack-joyride">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Jetpack Joyride</h4>
-        <button class="game-launch" data-src="Games/jetpack-joyride.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="jollyworld">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Jollyworld</h4>
-        <button class="game-launch" data-src="Games/jollyworld.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="rowdy-wrestling">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Rowdy Wrestling</h4>
-        <button class="game-launch" data-src="Games/rowdy-wrestling.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="run-3-editor">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Run 3 Editor</h4>
-        <button class="game-launch" data-src="Games/run-3-editor.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="running-fred">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Running Fred</h4>
-        <button class="game-launch" data-src="Games/running-fred.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="rusher-crusher">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Rusher Crusher</h4>
-        <button class="game-launch" data-src="Games/rusher-crusher.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="sausage-flip">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Sausage Flip</h4>
-        <button class="game-launch" data-src="Games/sausage-flip.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="school-bus-demolition-derby">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>School Bus Demolition Derby</h4>
-        <button class="game-launch" data-src="Games/school-bus-demolition-derby.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="scrap-metal">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Scrap Metal</h4>
-        <button class="game-launch" data-src="Games/scrap-metal.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="shoot-stickman">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Shoot Stickman</h4>
-        <button class="game-launch" data-src="Games/shoot-stickman.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="short-life">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Short Life</h4>
-        <button class="game-launch" data-src="Games/short-life.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="short-ride">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Short Ride</h4>
-        <button class="game-launch" data-src="Games/short-ride.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="shortcut-race">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Shortcut Race</h4>
-        <button class="game-launch" data-src="Games/shortcut-race.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="sketchbook-04">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Sketchbook 04</h4>
-        <button class="game-launch" data-src="Games/sketchbook-04.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="skiing-fred">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Skiing Fred</h4>
-        <button class="game-launch" data-src="Games/skiing-fred.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="slime-road">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Slime Road</h4>
-        <button class="game-launch" data-src="Games/slime-road.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="slope-2">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Slope 2</h4>
-        <button class="game-launch" data-src="Games/slope-2.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="slope">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Slope</h4>
-        <button class="game-launch" data-src="Games/slope.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="soccar">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Soccar</h4>
-        <button class="game-launch" data-src="Games/soccar.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="soccer-random">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Soccer Random</h4>
-        <button class="game-launch" data-src="Games/soccer-random.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="soccer-skills-champions-league">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Soccer Skills Champions League</h4>
-        <button class="game-launch" data-src="Games/soccer-skills-champions-league.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="soccer-skills-euro-cup">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Soccer Skills Euro Cup</h4>
-        <button class="game-launch" data-src="Games/soccer-skills-euro-cup.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="soccer-skills-world-cup">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Soccer Skills World Cup</h4>
-        <button class="game-launch" data-src="Games/soccer-skills-world-cup.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="solitaire">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Solitaire</h4>
-        <button class="game-launch" data-src="Games/solitaire.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="speed-boat-extreme-racing">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Speed Boat Extreme Racing</h4>
-        <button class="game-launch" data-src="Games/speed-boat-extreme-racing.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="squish-run">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Squish Run</h4>
-        <button class="game-launch" data-src="Games/squish-run.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stack-ball">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stack Ball</h4>
-        <button class="game-launch" data-src="Games/stack-ball.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stack-bump-3d">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stack Bump 3D</h4>
-        <button class="game-launch" data-src="Games/stack-bump-3d.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stack">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stack</h4>
-        <button class="game-launch" data-src="Games/stack.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stacktris">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stacktris</h4>
-        <button class="game-launch" data-src="Games/stacktris.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stair-race-3d">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stair Race 3D</h4>
-        <button class="game-launch" data-src="Games/stair-race-3d.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stealing-the-diamond">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stealing The Diamond</h4>
-        <button class="game-launch" data-src="Games/stealing-the-diamond.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stick-defenders">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stick Defenders</h4>
-        <button class="game-launch" data-src="Games/stick-defenders.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stick-fighter">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stick Fighter</h4>
-        <button class="game-launch" data-src="Games/stick-fighter.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stick-merge">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stick Merge</h4>
-        <button class="game-launch" data-src="Games/stick-merge.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stickman-army-team-battle">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stickman Army Team Battle</h4>
-        <button class="game-launch" data-src="Games/stickman-army-team-battle.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stickman-army-the-resistance">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stickman Army The Resistance</h4>
-        <button class="game-launch" data-src="Games/stickman-army-the-resistance.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stickman-bike-pr">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stickman Bike Pr</h4>
-        <button class="game-launch" data-src="Games/stickman-bike-pr.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stickman-bike">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stickman Bike</h4>
-        <button class="game-launch" data-src="Games/stickman-bike.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stickman-boxing-ko-champion">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stickman Boxing Ko Champion</h4>
-        <button class="game-launch" data-src="Games/stickman-boxing-ko-champion.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stickman-bridge-constructor">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stickman Bridge Constructor</h4>
-        <button class="game-launch" data-src="Games/stickman-bridge-constructor.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stickman-climb-2">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stickman Climb 2</h4>
-        <button class="game-launch" data-src="Games/stickman-climb-2.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stickman-fighter-epic-battle-2">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stickman Fighter Epic Battle 2</h4>
-        <button class="game-launch" data-src="Games/stickman-fighter-epic-battle-2.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stickman-fighter-mega-brawl">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stickman Fighter Mega Brawl</h4>
-        <button class="game-launch" data-src="Games/stickman-fighter-mega-brawl.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stickman-golf">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stickman Golf</h4>
-        <button class="game-launch" data-src="Games/stickman-golf.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stickman-hook">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stickman Hook</h4>
-        <button class="game-launch" data-src="Games/stickman-hook.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stickman-ragdoll-crash-fun">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stickman Ragdoll Crash Fun</h4>
-        <button class="game-launch" data-src="Games/stickman-ragdoll-crash-fun.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stickman-school-run">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stickman School Run</h4>
-        <button class="game-launch" data-src="Games/stickman-school-run.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stock-car-hero">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stock Car Hero</h4>
-        <button class="game-launch" data-src="Games/stock-car-hero.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="street-ball-jam">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Street Ball Jam</h4>
-        <button class="game-launch" data-src="Games/street-ball-jam.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="striker-dummies">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Striker Dummies</h4>
-        <button class="game-launch" data-src="Games/striker-dummies.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stunt-car-challenge-3">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stunt Car Challenge 3</h4>
-        <button class="game-launch" data-src="Games/stunt-car-challenge-3.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="stupid-zombies">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Stupid Zombies</h4>
-        <button class="game-launch" data-src="Games/stupid-zombies.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="subway-runner">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Subway Runner</h4>
-        <button class="game-launch" data-src="Games/subway-runner.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="subway-surfers-beijing">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Subway Surfers Beijing</h4>
-        <button class="game-launch" data-src="Games/subway-surfers-beijing.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="subway-surfers-houston">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Subway Surfers Houston</h4>
-        <button class="game-launch" data-src="Games/subway-surfers-houston.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="subway-surfers-monaco">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Subway Surfers Monaco</h4>
-        <button class="game-launch" data-src="Games/subway-surfers-monaco.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="subway-surfers-newyork">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Subway Surfers Newyork</h4>
-        <button class="game-launch" data-src="Games/subway-surfers-newyork.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="subway-surfers">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Subway Surfers</h4>
-        <button class="game-launch" data-src="Games/subway-surfers.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="super-bike-the-champion">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Super Bike The Champion</h4>
-        <button class="game-launch" data-src="Games/super-bike-the-champion.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="super-hexbee-merger">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Super Hexbee Merger</h4>
-        <button class="game-launch" data-src="Games/super-hexbee-merger.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="super-hot">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Super Hot</h4>
-        <button class="game-launch" data-src="Games/super-hot.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="super-liquid-soccer">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Super Liquid Soccer</h4>
-        <button class="game-launch" data-src="Games/super-liquid-soccer.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="super-mario-64">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Super Mario 64</h4>
-        <button class="game-launch" data-src="Games/super-mario-64.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="super-mario-bros">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Super Mario Bros</h4>
-        <button class="game-launch" data-src="Games/super-mario-bros.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="super-racing-gt-drag-pro">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Super Racing Gt Drag Pro</h4>
-        <button class="game-launch" data-src="Games/super-racing-gt-drag-pro.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="super-santa-kicker">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Super Santa Kicker</h4>
-        <button class="game-launch" data-src="Games/super-santa-kicker.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="super-star-car">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Super Star Car</h4>
-        <button class="game-launch" data-src="Games/super-star-car.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="super-tunnel-rush">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Super Tunnel Rush</h4>
-        <button class="game-launch" data-src="Games/super-tunnel-rush.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="superbattle-2">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Superbattle 2</h4>
-        <button class="game-launch" data-src="Games/superbattle-2.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="superbike-hero">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Superbike Hero</h4>
-        <button class="game-launch" data-src="Games/superbike-hero.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="survivor-in-rainbow-monster">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Survivor In Rainbow Monster</h4>
-        <button class="game-launch" data-src="Games/survivor-in-rainbow-monster.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="swatforce-vs-terrorists">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Swatforce Vs Terrorists</h4>
-        <button class="game-launch" data-src="Games/swatforce-vs-terrorists.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="swingo">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Swingo</h4>
-        <button class="game-launch" data-src="Games/swingo.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="tag">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Tag</h4>
-        <button class="game-launch" data-src="Games/tag.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="tank-trouble-2">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Tank Trouble 2</h4>
-        <button class="game-launch" data-src="Games/tank-trouble-2.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="tanuki-sunset">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Tanuki Sunset</h4>
-        <button class="game-launch" data-src="Games/tanuki-sunset.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="temple-of-boom">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Temple Of Boom</h4>
-        <button class="game-launch" data-src="Games/temple-of-boom.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="temple-run-2">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Temple Run 2</h4>
-        <button class="game-launch" data-src="Games/temple-run-2.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="tennis-masters">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Tennis Masters</h4>
-        <button class="game-launch" data-src="Games/tennis-masters.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="tetris-flash">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Tetris Flash</h4>
-        <button class="game-launch" data-src="Games/tetris-flash.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="tetris">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Tetris</h4>
-        <button class="game-launch" data-src="Games/tetris.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="the-impossible-quiz">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>The Impossible Quiz</h4>
-        <button class="game-launch" data-src="Games/the-impossible-quiz.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="the-little-giant">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>The Little Giant</h4>
-        <button class="game-launch" data-src="Games/the-little-giant.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="the-spear-stickman">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>The Spear Stickman</h4>
-        <button class="game-launch" data-src="Games/the-spear-stickman.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="tiny-fishing">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Tiny Fishing</h4>
-        <button class="game-launch" data-src="Games/tiny-fishing.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="tinytownracing">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Tinytownracing</h4>
-        <button class="game-launch" data-src="Games/tinytownracing.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="tomb-of-the-mask-color">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Tomb Of The Mask Color</h4>
-        <button class="game-launch" data-src="Games/tomb-of-the-mask-color.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="tomb-of-the-mask">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Tomb Of The Mask</h4>
-        <button class="game-launch" data-src="Games/tomb-of-the-mask.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="toon-off">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Toon Off</h4>
-        <button class="game-launch" data-src="Games/toon-off.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="top-speed-3d">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Top Speed 3D</h4>
-        <button class="game-launch" data-src="Games/top-speed-3d.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="top-speed-racing-3d">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Top Speed Racing 3D</h4>
-        <button class="game-launch" data-src="Games/top-speed-racing-3d.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="tower-of-destiny">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Tower Of Destiny</h4>
-        <button class="game-launch" data-src="Games/tower-of-destiny.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="traffic-mania">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Traffic Mania</h4>
-        <button class="game-launch" data-src="Games/traffic-mania.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="traffic-rider">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Traffic Rider</h4>
-        <button class="game-launch" data-src="Games/traffic-rider.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="tricks">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Tricks</h4>
-        <button class="game-launch" data-src="Games/tricks.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="truck-traffic">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Truck Traffic</h4>
-        <button class="game-launch" data-src="Games/truck-traffic.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="tube-jumpers">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Tube Jumpers</h4>
-        <button class="game-launch" data-src="Games/tube-jumpers.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="tunnel-rush">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Tunnel Rush</h4>
-        <button class="game-launch" data-src="Games/tunnel-rush.html">Launch</button>
-      </article>
-      <article class="game-card" tabindex="0" data-slug="turbo-moto-racer">
-        <div class="thumb" aria-hidden="true">👾</div>
-        <h4>Turbo Moto Racer</h4>
-        <button class="game-launch" data-src="Games/turbo-moto-racer.html">Launch</button>
-      </article>
-
+    <!-- Hidden Fullscreen Player -->
+    <div id="game-overlay">
+        <button id="close-btn" onclick="closeGame()">✕ EXIT FULLSCREEN</button>
+        <iframe id="game-frame" src="" allowfullscreen="true"></iframe>
     </div>
 
-    <div style="margin-top:22px;">
-      <iframe id="game-frame" class="player-frame" src="" frameborder="0" title="Game frame" aria-label="Game player"></iframe>
-    </div>
+    <script>
+        function playGame(url) {
+            document.getElementById('game-frame').src = url;
+            document.getElementById('game-overlay').style.display = 'block';
+        }
 
-    <div style="margin-top:12px;">
-      <button id="game-stop">Stop</button>
-      <a href="index.html" class="info-btn" style="margin-left:12px;">Back</a>
-    </div>
-  </main>
-
-  <footer class="footer">Made by Flipping286, Optimized for students.</footer>
-
-  <script src="games.js"></script>
+        function closeGame() {
+            document.getElementById('game-overlay').style.display = 'none';
+            document.getElementById('game-frame').src = '';
+        }
+    </script>
 </body>
 </html>
