@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Arcade Launcher</title>
+    
+    <!-- This links your page BACK to your original website layout ☀️ -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="games.css">
+
     <style>
-        body { font-family: monospace; background-color: #111; color: #0f0; text-align: center; padding: 20px; }
-        .game-list { list-style: none; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; max-height: 85vh; overflow-y: auto; }
-        .game-list li { width: 450px; }
-        .game-list button { display: block; width: 100%; padding: 10px; background-color: #222; color: #0ff; text-decoration: none; border: 2px solid #0ff; border-radius: 6px; font-family: inherit; font-size: 1rem; cursor: pointer; }
-        .game-list button:hover { background-color: #0ff; color: #111; }
-        
-        /* Fullscreen Game Player Overlay */
+        /* ONLY the Fullscreen Game Player Overlay CSS stays 📟 */
         #game-overlay {
             display: none;
             position: fixed;
