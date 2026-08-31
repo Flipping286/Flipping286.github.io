@@ -1,80 +1,437 @@
-/* games.css - styles for the Games dashboard (tiles + player) */
+/* =========================================================
+   GAMES PAGE
+   Matches the current games.html without changing layout
+   ========================================================= */
 
-.games-grid {
+
+/* =========================
+   GAME GRID
+   ========================= */
+
+.game-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(170px, 1fr));
+
   gap: 16px;
 }
 
+
+/* =========================
+   GAME CARD
+   ========================= */
+
 .game-card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(0, 0, 0, 0.06)
+    );
+
   border: 1px solid var(--border-color);
-  padding: 12px;
   border-radius: 10px;
+
+  padding: 20px 12px;
+
+  text-align: center;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+
   min-height: 140px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.45);
-  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.45);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.game-card:focus,
 .game-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(0,255,157,0.45);
-  box-shadow: 0 10px 26px rgba(0,255,157,0.06);
-  outline: none;
+  transform: translateY(-3px);
+
+  border-color: var(--accent-color);
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.45),
+    0 0 14px rgba(0, 255, 157, 0.08);
 }
 
-.game-card h4 {
-  margin: 0;
-  font-size: 0.95rem;
+
+/* =========================
+   GAME ICON
+   ========================= */
+
+.game-icon {
+  font-size: 38px;
+
+  margin-bottom: 12px;
+
+  line-height: 1;
+}
+
+
+/* =========================
+   GAME TITLE
+   ========================= */
+
+.game-title {
+  font-size: 13px;
+  font-weight: bold;
+
+  margin-bottom: 15px;
+
   color: var(--text-main);
-  text-align: center;
-}
 
-.thumb {
-  width: 84px;
-  height: 84px;
+  height: 32px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.6rem;
-  border-radius: 12px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(255,255,255,0.02));
-  color: var(--accent-color);
-  border: 1px solid rgba(255,255,255,0.02);
+
+  text-align: center;
+
+  line-height: 1.2;
 }
 
-.game-launch {
-  padding: 6px 10px;
-  font-weight: 700;
-  font-size: 0.85rem;
-  border-radius: 6px;
-  border: 1px solid rgba(0,0,0,0.08);
+
+/* =========================
+   GAME LAUNCH BUTTON
+   ========================= */
+
+.game-card button {
+  width: 100%;
+
+  padding: 9px 0;
+
   background: var(--accent-color);
   color: #000;
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  font-weight: bold;
+  font-size: 13px;
+
+  border: none;
+  border-radius: 6px;
+
   cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.12s ease,
+    box-shadow 0.18s ease;
 }
 
-.player-frame {
-  width: 100%;
-  height: 520px;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  background: #000;
+.game-card button:hover {
+  background: var(--accent-color);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 0 12px rgba(0, 255, 157, 0.3);
 }
 
-#game-stop {
-  margin-left: 0;
-  background: transparent;
+.game-card button:active {
+  transform: scale(0.97);
+
+  box-shadow:
+    0 0 16px rgba(0, 255, 157, 0.4);
+}
+
+
+/* =========================
+   SEARCH AREA
+   ========================= */
+
+.search-container {
+  margin-bottom: 25px;
+}
+
+#gameSearch {
+  outline: none;
+
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+#gameSearch:focus {
+  border-color: var(--accent-color) !important;
+
+  box-shadow:
+    0 0 8px var(--accent-glow);
+}
+
+
+/* Search button */
+
+.search-container > div > button {
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+.search-container > div > button:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 0 14px rgba(0, 255, 157, 0.3);
+}
+
+.search-container > div > button:active {
+  transform: scale(0.96);
+}
+
+
+/* =========================
+   NO RESULTS MESSAGE
+   ========================= */
+
+#no-results {
   color: var(--text-muted);
-  border: 1px solid var(--border-color);
 }
 
-@media (max-width:700px) {
-  .player-frame { height: 360px; }
-  .games-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+
+/* =========================
+   ARCADE CONTAINER
+   ========================= */
+
+.arcade-container {
+  width: 100%;
+  max-width: 1200px;
+
+  box-sizing: border-box;
+
+  padding: 35px;
+
+  background: var(--card-bg);
+
+  border: 2px solid var(--accent-color);
+  border-radius: 12px;
+
+  position: relative;
+
+  box-shadow:
+    0 0 25px rgba(0, 255, 157, 0.18);
+
+  z-index: 20;
+}
+
+
+/* =========================
+   GAMES PAGE HEADING
+   ========================= */
+
+.arcade-container h1 {
+  margin-top: 0;
+  margin-bottom: 8px;
+
+  font-size: 28px;
+
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+
+  font-size: 14px;
+
+  margin-bottom: 25px;
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.footer-container {
+  width: 100%;
+  max-width: 1200px;
+
+  margin-top: 25px;
+
+  padding: 0 5px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: relative;
+
+  z-index: 20;
+}
+
+.ambient-text {
+  color: var(--text-muted);
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   BACK BUTTON
+   ========================= */
+
+.back-btn {
+  background: var(--card-bg);
+  color: var(--accent-color);
+
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+
+  padding: 8px 16px;
+
+  font-weight: bold;
+  font-size: 13px;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.12s ease;
+}
+
+.back-btn:hover {
+  background: var(--border-color);
+
+  border-color: var(--accent-color);
+
+  box-shadow:
+    0 0 10px rgba(0, 255, 157, 0.12);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   FULLSCREEN GAME OVERLAY
+   ========================= */
+
+#game-overlay {
+  display: none;
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: #000;
+
+  z-index: 99999;
+}
+
+
+/* =========================
+   FULLSCREEN GAME FRAME
+   ========================= */
+
+#game-overlay iframe {
+  width: 100%;
+  height: 100%;
+
+  border: none;
+
+  display: block;
+}
+
+
+/* =========================
+   CLOSE BUTTON
+   ========================= */
+
+#close-btn {
+  position: absolute;
+
+  top: 15px;
+  right: 15px;
+
+  background: #ff0055;
+  color: #fff;
+
+  border: none;
+  border-radius: 4px;
+
+  padding: 8px 16px;
+
+  font-family: inherit;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  z-index: 100000;
+
+  opacity: 0.8;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.12s ease,
+    box-shadow 0.18s ease;
+}
+
+#close-btn:hover {
+  opacity: 1;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 0 14px rgba(255, 0, 85, 0.25);
+}
+
+#close-btn:active {
+  transform: scale(0.96);
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 700px) {
+
+  .arcade-container {
+    padding: 22px;
+  }
+
+  .game-grid {
+    grid-template-columns:
+      repeat(auto-fill, minmax(120px, 1fr));
+
+    gap: 12px;
+  }
+
+  .game-card {
+    padding: 16px 10px;
+  }
+
+  .game-icon {
+    font-size: 34px;
+  }
+
+  .game-title {
+    font-size: 12px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    gap: 12px;
+
+    text-align: center;
+  }
+
+  .back-btn {
+    width: auto;
+  }
 }
