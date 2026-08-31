@@ -1,6 +1,3 @@
-// script.js
-// Wiring for homepage -> Y*utube dashboard, safe video loading, and panic/unpanic behavior
-
 (() => {
   const VIDEO_ID_RE = /^[A-Za-z0-9_-]{11}$/;
   const MAX_KEY_BUFFER = 12;
@@ -47,10 +44,7 @@
 
   function safeSetPlayerSrc(id) {
     if (!player) return;
-    if (!VIDEO_ID_RE.test(id)) {
-      console.warn("Rejected invalid video id:", id);
-      return;
-    }
+    if (!VIDEO_ID_RE.test(id)) { return; }
     player.src = `https://www.youtube-nocookie.com/embed/${id}`;
   }
 
@@ -61,14 +55,9 @@
       const maybeUrl = input.startsWith("http") ? input : (input.includes(".") ? `https://${input}` : input);
       const u = new URL(maybeUrl);
       const host = u.hostname.toLowerCase();
-      if (host.includes("youtu.be")) {
-        const p = u.pathname.replace(/^\/+/, "");
-        return p.split("/")[0] || "";
-      }
-      if (host.includes("youtube.com")) {
-        return u.searchParams.get("v") || "";
-      }
-    } catch (e) { /* not a URL — fall through */ }
+      if (host.includes("youtu.be")) return u.pathname.replace(/^\/+/, "").split("/")[0] || "";
+      if (host.includes("youtube.com")) return u.searchParams.get("v") || "";
+    } catch (e) { }
     const m = input.match(/[A-Za-z0-9_-]{11}/);
     return m ? m[0] : "";
   }
@@ -82,7 +71,6 @@
     } else {
       videoInput.classList.add("invalid");
       setTimeout(() => videoInput.classList.remove("invalid"), 900);
-      console.warn("No valid video id found in input.");
     }
   }
 
@@ -109,3 +97,8 @@
     if (panicUI) panicUI.style.display = "none";
   });
 })();
+
+// Tab discise. MAN I CANT SPELL DONT JUGE MEH
+let originalTitle = document.title;
+window.addEventListener("blur", () => { document.title = "Google Classroom"; });
+window.addEventListener("focus", () => { document.title = originalTitle; });
