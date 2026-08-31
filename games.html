@@ -1,96 +1,908 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Games - Flipping286's Things!</title>
-  <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* Slowed down the emoji flash to 4 seconds */
-    @keyframes pulse-glow {
-      0% { text-shadow: 0 0 5px rgba(255,255,255,0.2); transform: scale(1); }
-      50% { text-shadow: 0 0 20px rgba(255,255,255,0.8); transform: scale(1.1); }
-      100% { text-shadow: 0 0 5px rgba(255,255,255,0.2); transform: scale(1); }
-    }
-    .game-icon {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      animation: pulse-glow 4s infinite ease-in-out; 
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Games - Flipping286's Things!</title>
+    <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 30px 20px 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Flashing Side Decor (Slower 4s pulse) 👾 */
+        .side-decor {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            font-size: 34px;
+            animation: pulse-glow 4s infinite ease-in-out;
+            user-select: none;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .side-decor.left { left: 10px; }
+        .side-decor.right { right: 10px; }
+
+        @keyframes pulse-glow {
+            0% { opacity: 0.3; text-shadow: 0 0 5px #00ff88; }
+            50% { opacity: 1; text-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88; }
+            100% { opacity: 0.3; text-shadow: 0 0 5px #00ff88; }
+        }
+
+        /* Outer Neon Border Arcade Container */
+        .arcade-container {
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.25);
+            border-radius: 12px;
+            background-color: #11141d;
+            padding: 35px;
+            max-width: 1200px;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 20;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-top: 0;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            color: #8b949e;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        /* Search Bar Styling */
+        .search-container {
+            margin-bottom: 25px;
+        }
+
+        /* Tile Grid Layout */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 16px;
+        }
+
+        /* Individual Game Card Box */
+        .game-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px 12px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-3px);
+            border-color: #00ff88;
+        }
+
+        /* Themed Emoji Icon over game name */
+        .game-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        /* Game Title Text */
+        .game-title {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #e6edf3;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* Launch Button */
+        .game-card button {
+            background-color: #00ff88;
+            color: #000000;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 13px;
+            border: none;
+            border-radius: 6px;
+            padding: 9px 0;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+
+        .game-card button:hover {
+            background-color: #00cc6a;
+        }
+
+        /* Footer & Ambient Text */
+        .footer-container {
+            max-width: 1200px;
+            width: 100%;
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 20;
+            padding: 0 5px;
+        }
+
+        .ambient-text {
+            color: #8b949e;
+            font-size: 13px;
+        }
+
+        /* Bottom Right Back Button */
+        .back-btn {
+            background-color: #21262d;
+            color: #00ff88;
+            border: 1px solid #30363d;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 13px;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .back-btn:hover {
+            background-color: #30363d;
+            border-color: #00ff88;
+        }
+
+        /* Hidden Fullscreen Player Overlay */
+        #game-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: #000;
+            z-index: 99999;
+        }
+        #game-overlay iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        #close-btn {
+            position: absolute;
+            top: 15px; right: 15px;
+            background: #ff0055;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            z-index: 100000;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        #close-btn:hover { opacity: 1; }
+    </style>
 </head>
 <body>
-  <main class="container">
-    <h1 style="text-align: center; margin-bottom: 20px;">🎮 Games</h1>
-    
-    <div style="text-align: center; margin-bottom: 20px;">
-        <a href="index.html" class="info-btn" style="display: inline-block;">← Back Home</a>
+
+    <!-- Flashing Side Decor Columns -->
+    <div class="side-decor left">
+        <span>0</span><span>1</span><span>👾</span><span>1</span><span>0</span><span>🐧</span><span>1</span>
+    </div>
+    <div class="side-decor right">
+        <span>1</span><span>0</span><span>👾</span><span>0</span><span>1</span><span>🐧</span><span>0</span>
     </div>
 
-    <!-- NEW WORKING SEARCH BAR WITH MAGNIFYING GLASS -->
-    <div class="search-container" style="margin-bottom: 25px;">
-        <div style="display: flex; gap: 10px;">
-            <input type="text" id="gameSearch" placeholder="Search 150+ games..." onkeyup="filterGames()" style="flex: 1; padding: 12px 16px; background-color: #161b22; border: 1px solid #30363d; border-radius: 8px; color: #fff; font-size: 14px; box-sizing: border-box;">
-            <button onclick="filterGames()" style="padding: 0 16px; background-color: #00ff88; color: #0b0f19; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 18px;">🔍</button>
+    <div class="arcade-container">
+        <h1>Games</h1>
+        <div class="subtitle">Welcome to Games! Click a tile to load the game preview below.</div>
+        
+        <!-- Working Search Bar with Magnifying Glass Button -->
+        <div class="search-container">
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="gameSearch" placeholder="Search games..." onkeyup="filterGames()" style="flex: 1; padding: 12px 16px; background-color: #161b22; border: 1px solid #30363d; border-radius: 8px; color: #fff; font-size: 14px; box-sizing: border-box;">
+                <button onclick="filterGames()" style="padding: 0 16px; background-color: #00ff88; color: #0b0f19; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 18px;">🔍</button>
+            </div>
+            <div id="no-results" style="display: none; color: #8b949e; text-align: center; margin-top: 15px; font-size: 14px;">
+                Sorry, either we don’t have that game or you spelled it wrong.
+            </div>
         </div>
-        <div id="no-results" style="display: none; color: #8b949e; text-align: center; margin-top: 15px; font-size: 14px;">
-            Sorry, either we don’t have that game or you spelled it wrong.
+
+        <div class="game-grid" id="gameGrid">
+            <div class="game-card">
+                <div class="game-icon">👗</div>
+                <div class="game-title">Fairy Dressup</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a4/fairy-dressup')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏃</div>
+                <div class="game-title">Fancy Pants 2</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a4/fancy-pants-2')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏃</div>
+                <div class="game-title">Fancy Pants 3</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a4/fancy-pants-3')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏃</div>
+                <div class="game-title">Fancy Pants</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a4/fancy-pants')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🐻</div>
+                <div class="game-title">Five Nights At Freddys</div>
+                <button onclick="playGame('https://irv77.github.io/hd_fnaf/1/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🐻</div>
+                <div class="game-title">Five Nights At Freddys 2</div>
+                <button onclick="playGame('https://irv77.github.io/hd_fnaf/2/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🐻</div>
+                <div class="game-title">Five Nights At Freddys 3</div>
+                <button onclick="playGame('https://irv77.github.io/hd_fnaf/3/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🐻</div>
+                <div class="game-title">Five Nights At Freddys 4</div>
+                <button onclick="playGame('https://irv77.github.io/hd_fnaf/4/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🐻</div>
+                <div class="game-title">FNAF Sister Location</div>
+                <button onclick="playGame('https://irv77.github.io/hd_fnaf/sl/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🐦</div>
+                <div class="game-title">Flappy Bird Origin</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/flappy-bird-origin')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🐦</div>
+                <div class="game-title">Flappy Bird</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a2/flappy-bird')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🟢</div>
+                <div class="game-title">Doodle Jump</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a7/doodle-jump')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏎️</div>
+                <div class="game-title">Go Kart Go Ultra</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a4/go-kart-go-ultra')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🟢</div>
+                <div class="game-title">Gobble</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a4/gobble')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⛏️</div>
+                <div class="game-title">Gold Digger Frvr</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a4/gold-digger-frvr')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⛳</div>
+                <div class="game-title">Golf Champions</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a4/golf-champions')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⛳</div>
+                <div class="game-title">Golfinity</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a4/golfinity')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🔍</div>
+                <div class="game-title">Google Feud</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a7/google-feud')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🐍</div>
+                <div class="game-title">Google Snake</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/google-snake')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏎️</div>
+                <div class="game-title">Grand Prix Hero</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a4/grand-prix-hero')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⚽</div>
+                <div class="game-title">Gravity Soccer</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a4/gravity-soccer')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🪵</div>
+                <div class="game-title">Grindcraft Remastered</div>
+                <button onclick="playGame('https://gswitch3.github.io/g/grindcraft-remastered')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🪵</div>
+                <div class="game-title">Grindcraft</div>
+                <button onclick="playGame('https://mirathecat.github.io/grindcraft/index.html')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🎯</div>
+                <div class="game-title">Gun Mayhem 2</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a7/gun-mayhem-2')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🎯</div>
+                <div class="game-title">Gun Mayhem 3</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a7/gun-mayhem-3')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🎯</div>
+                <div class="game-title">Gun Mayhem</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a7/gun-mayhem')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">💥</div>
+                <div class="game-title">Hammer 2 Reloaded</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a4/hammer-2-reloaded')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🧪</div>
+                <div class="game-title">Happy Room</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a7/happy-room')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⚽</div>
+                <div class="game-title">Head Soccer 2023</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a4/head-soccer-2023')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⚽</div>
+                <div class="game-title">Heads Arena Soccer All Stars</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a4/heads-arena-soccer-all-stars')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⭐</div>
+                <div class="game-title">Heart Star Html5</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a4/heart-star-html5')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🔷</div>
+                <div class="game-title">Hextris</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a7/hextris')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏍️</div>
+                <div class="game-title">Highway Rider Extreme</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a7/highway-rider-extreme/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🐜</div>
+                <div class="game-title">Idle Ants</div>
+                <button onclick="playGame('https://77pen.github.io/p5/idle-ants')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🧱</div>
+                <div class="game-title">Idle Breakout</div>
+                <button onclick="playGame('https://idle-breakout.github.io/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏗️</div>
+                <div class="game-title">Idle Digging Tycoon</div>
+                <button onclick="playGame('https://htmlxm.github.io/h5/idle-digging-tycoon/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🌲</div>
+                <div class="game-title">Idle Lumber Inc</div>
+                <button onclick="playGame('https://htmlxm.github.io/h5/idle-lumber-inc/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⛏️</div>
+                <div class="game-title">Idle Miner</div>
+                <button onclick="playGame('https://htmlxm.github.io/h5/idle-miner/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">❌</div>
+                <div class="game-title">Impossible Tic Tac Toe</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a7/impossible-tic-tac-toe')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🚀</div>
+                <div class="game-title">Jetpack Joyride</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a7/jetpack-joyride')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">✏️</div>
+                <div class="game-title">Run 3 Editor</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a9/run-3-editor')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏃</div>
+                <div class="game-title">Running Fred</div>
+                <button onclick="playGame('https://htmlxm.github.io/h6/running-fred/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🌭</div>
+                <div class="game-title">Sausage Flip</div>
+                <button onclick="playGame('https://abinbins.github.io/a6/sausage-flip/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🚗</div>
+                <div class="game-title">Scrap Metal</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/scrap-metal')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🎯</div>
+                <div class="game-title">Shoot Stickman</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a9/shoot-stickman')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🚴</div>
+                <div class="game-title">Short Ride</div>
+                <button onclick="playGame('https://shortrideonline.github.io/file/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏁</div>
+                <div class="game-title">Shortcut Race</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a9/shortcut-race')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🎨</div>
+                <div class="game-title">Sketchbook 04</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/sketchbook-04')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⛷️</div>
+                <div class="game-title">Skiing Fred</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a9/skiing-fred')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⛰️</div>
+                <div class="game-title">Slope 2</div>
+                <button onclick="playGame('https://htmlxm.github.io/h6/slope-2/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⚽</div>
+                <div class="game-title">Soccer Random</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/soccer-random/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⚽</div>
+                <div class="game-title">Soccer Skills Champions League</div>
+                <button onclick="playGame('https://gswitch3.github.io/g6/soccer-skills-champions-league/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⚽</div>
+                <div class="game-title">Soccer Skills Euro Cup</div>
+                <button onclick="playGame('https://soccerskillseurocup-online.github.io/file/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⚽</div>
+                <div class="game-title">Soccer Skills World Cup</div>
+                <button onclick="playGame('https://sipragio06.github.io/soccer-skills-game/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🃏</div>
+                <div class="game-title">Solitaire</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a7/solitaire')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🚤</div>
+                <div class="game-title">Speed Boat Extreme Racing</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a9/speed-boat-extreme-racing')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">📦</div>
+                <div class="game-title">Stack Ball</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a9/stack-ball')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">📦</div>
+                <div class="game-title">Stack Bump 3D</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a9/stack-bump-3d')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">📦</div>
+                <div class="game-title">Stack</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a2/stack')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">📦</div>
+                <div class="game-title">Stacktris</div>
+                <button onclick="playGame('https://abinbins.github.io/a6/stacktris/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">💎</div>
+                <div class="game-title">Stealing The Diamond</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a7/stealing-the-diamond')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🤺</div>
+                <div class="game-title">Stick Fighter</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a/stick-fighter/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⚔️</div>
+                <div class="game-title">Stick Merge</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/stick-merge')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🪖</div>
+                <div class="game-title">Stickman Army Resistance</div>
+                <button onclick="playGame('https://htmlxm.github.io/h6/stickman-army-the-resistance')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🥊</div>
+                <div class="game-title">Stickman Boxing Ko Champion</div>
+                <button onclick="playGame('https://htmlxm.github.io/h6/stickman-boxing-ko-champion/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🌉</div>
+                <div class="game-title">Stickman Bridge Constructor</div>
+                <button onclick="playGame('https://htmlxm.github.io/h6/stickman-bridge-constructor/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🧗</div>
+                <div class="game-title">Stickman Climb 2</div>
+                <button onclick="playGame('https://smashkartsonlinegames.github.io/v6/stickman-climb-2/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⚔️</div>
+                <div class="game-title">Stickman Fighter Epic 2</div>
+                <button onclick="playGame('https://crazygames-unblocked.github.io/c6/stickman-fighter-epic-battle-2/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⚔️</div>
+                <div class="game-title">Stickman Fighter Mega Brawl</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/stickman-fighter-mega-brawl/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⛳</div>
+                <div class="game-title">Stickman Golf</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/stickman-golf')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">💥</div>
+                <div class="game-title">Stickman Ragdoll Crash Fun</div>
+                <button onclick="playGame('https://fridaynight-funkin.github.io/f/stickman-ragdoll-crash-fun/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏃</div>
+                <div class="game-title">Stickman School Run</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/stickman-school-run')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏎️</div>
+                <div class="game-title">Stock Car Hero</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/stock-car-hero')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏀</div>
+                <div class="game-title">Street Ball Jam</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/street-ball-jam')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🎯</div>
+                <div class="game-title">Striker Dummies</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/striker-dummies')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🚗</div>
+                <div class="game-title">Stunt Car Challenge 3</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/stunt-car-challenge-3')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🧟</div>
+                <div class="game-title">Stupid Zombies</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/stupid-zombies')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏃</div>
+                <div class="game-title">Subway Runner</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a7/subway-runner')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🛹</div>
+                <div class="game-title">Subway Surfers Beijing</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/subway-surfers-beijing/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🛹</div>
+                <div class="game-title">Subway Surfers Houston</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/subway-surfers-houston/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🛹</div>
+                <div class="game-title">Subway Surfers Monaco</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/subway-surfers-monaco')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🛹</div>
+                <div class="game-title">Subway Surfers New York</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/subway-surfers-san-francisco')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🛹</div>
+                <div class="game-title">Subway Surfers</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/subway-surfers-san-francisco')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏍️</div>
+                <div class="game-title">Super Bike Champion</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/super-bike-the-champion')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🧩</div>
+                <div class="game-title">Super Hexbee Merger</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/super-hexbee-merger')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🔥</div>
+                <div class="game-title">Super Hot</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/super-hot')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⚽</div>
+                <div class="game-title">Super Liquid Soccer</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/super-liquid-soccer')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🍄</div>
+                <div class="game-title">Super Mario 64</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a9/super-mario-64')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🍄</div>
+                <div class="game-title">Super Mario Bros</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a9/super-mario-bros')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏎️</div>
+                <div class="game-title">Super Racing Gt Drag Pro</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/super-racing-gt-drag-pro')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🎅</div>
+                <div class="game-title">Super Santa Kicker</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/super-santa-kicker')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏎️</div>
+                <div class="game-title">Super Star Car</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/super-star-car')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🌀</div>
+                <div class="game-title">Super Tunnel Rush</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/super-tunnel-rush')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⚔️</div>
+                <div class="game-title">Superbattle 2</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/superbattle-2')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏍️</div>
+                <div class="game-title">Superbike Hero</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/superbike-hero')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">👾</div>
+                <div class="game-title">Survivor Rainbow Monster</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/survivor-in-rainbow-monster')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🪖</div>
+                <div class="game-title">Swatforce Vs Terrorists</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/swatforce-vs-terrorists')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🪀</div>
+                <div class="game-title">Swingo</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/swingo')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏃</div>
+                <div class="game-title">Tag</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/tag')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">💣</div>
+                <div class="game-title">Tank Trouble 2</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/tank-trouble-2')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🌅</div>
+                <div class="game-title">Tanuki Sunset</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/tanuki-sunset')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">💥</div>
+                <div class="game-title">Temple Of Boom</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/temple-of-boom')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🗿</div>
+                <div class="game-title">Temple Run 2</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/temple-run-2')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🎾</div>
+                <div class="game-title">Tennis Masters</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/tennis-masters')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🧱</div>
+                <div class="game-title">Tetris Flash</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a7/tetris-flash')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🧱</div>
+                <div class="game-title">Tetris</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a9/tetris')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">❓</div>
+                <div class="game-title">The Impossible Quiz</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/the-impossible-quiz')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🦾</div>
+                <div class="game-title">The Little Giant</div>
+                <button onclick="playGame('https://gswitch3.github.io/g/the-little-giant/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🗡️</div>
+                <div class="game-title">The Spear Stickman</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/the-spear-stickman')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🎣</div>
+                <div class="game-title">Tiny Fishing</div>
+                <button onclick="playGame('https://gswitch3.github.io/g/tiny-fishing/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏎️</div>
+                <div class="game-title">Tinytownracing</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/tinytownracing')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🎭</div>
+                <div class="game-title">Tomb Of The Mask Color</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/tomb-of-the-mask-color')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🎭</div>
+                <div class="game-title">Tomb Of The Mask</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a8/tomb-of-the-mask')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🦹</div>
+                <div class="game-title">Toon Off</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/toon-off')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏎️</div>
+                <div class="game-title">Top Speed 3D</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/top-speed-3d')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏎️</div>
+                <div class="game-title">Top Speed Racing 3D</div>
+                <button onclick="playGame('https://gswitch3.github.io/g/top-speed-racing-3d/')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🚗</div>
+                <div class="game-title">Traffic Mania</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/traffic-mania')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏍️</div>
+                <div class="game-title">Traffic Rider</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a9/traffic-rider')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🎩</div>
+                <div class="game-title">Tricks</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/tricks')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🚚</div>
+                <div class="game-title">Truck Traffic</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/truck-traffic')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🤸</div>
+                <div class="game-title">Tube Jumpers</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a3/tube-jumpers')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🚗</div>
+                <div class="game-title">Ultimate Car Driving</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a9/ultimate-car-driving')">Launch</button>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏍️</div>
+                <div class="game-title">Turbo Moto Racer</div>
+                <button onclick="playGame('https://sudoku-online.github.io/a9/turbo-moto-racer')">Launch</button>
+            </div>
         </div>
     </div>
 
-    <!-- GAME GRID -->
-    <div class="game-grid" id="gameGrid">
-
-      <!-- ======================================================= -->
-      <!-- ⚠️ PASTE ALL 150+ OF YOUR GAME CARDS RIGHT HERE!!! ⚠️ -->
-      <!-- ======================================================= -->
-      
-      <div class="game-card">
-          <div class="game-icon">🍉</div>
-          <div class="game-title">Suika Game</div>
-          <button onclick="playGame('https://suika-game.app/en/')">Launch</button>
-      </div>
-      <div class="game-card">
-          <div class="game-icon">🍪</div>
-          <div class="game-title">Cookie Clicker</div>
-          <button onclick="playGame('https://orteil.dashnet.org/cookieclicker/')">Launch</button>
-      </div>
-
-      <!-- ======================================================= -->
-      <!-- ======================================================= -->
-
+    <!-- Footer with Ambient Text and Back Button -->
+    <div class="footer-container">
+        <div class="ambient-text">Optimized for students, made by Flipping286</div>
+        <a href="index.html" class="back-btn">← Back to Home</a>
     </div>
-  </main>
 
-  <script src="script.js"></script>
-  
-  <!-- THIS SCRIPT MAKES THE SEARCH BAR WORK -->
-  <script>
-    function filterGames() {
-        let input = document.getElementById('gameSearch').value.toLowerCase();
-        let cards = document.getElementsByClassName('game-card');
-        let hasResults = false;
+    <!-- Hidden Fullscreen Player Overlay -->
+    <div id="game-overlay">
+        <button id="close-btn" onclick="closeGame()">✕ EXIT</button>
+        <iframe id="game-frame" src="" allowfullscreen="true"></iframe>
+    </div>
 
-        for (let i = 0; i < cards.length; i++) {
-            let titleElement = cards[i].querySelector('.game-title');
-            if (titleElement) {
-                let title = titleElement.innerText.toLowerCase();
-                if (title.includes(input)) {
-                    cards[i].style.display = "";
-                    hasResults = true;
-                } else {
-                    cards[i].style.display = "none";
+    <script>
+        function playGame(url) {
+            document.getElementById('game-frame').src = url;
+            document.getElementById('game-overlay').style.display = 'block';
+        }
+
+        function closeGame() {
+            document.getElementById('game-overlay').style.display = 'none';
+            document.getElementById('game-frame').src = '';
+        }
+
+        function filterGames() {
+            let input = document.getElementById('gameSearch').value.toLowerCase();
+            let cards = document.getElementsByClassName('game-card');
+            let hasResults = false;
+
+            for (let i = 0; i < cards.length; i++) {
+                let titleElement = cards[i].querySelector('.game-title');
+                if (titleElement) {
+                    let title = titleElement.innerText.toLowerCase();
+                    if (title.includes(input)) {
+                        cards[i].style.display = "";
+                        hasResults = true;
+                    } else {
+                        cards[i].style.display = "none";
+                    }
                 }
             }
+            let noResultsEl = document.getElementById('no-results');
+            if (noResultsEl) {
+                noResultsEl.style.display = hasResults ? "none" : "block";
+            }
         }
-        document.getElementById('no-results').style.display = hasResults ? "none" : "block";
-    }
 
-    // Stealth Tab Disguise for the games page
-    let originalTitleGames = document.title;
-    window.addEventListener("blur", () => { document.title = "Google Classroom"; });
-    window.addEventListener("focus", () => { document.title = originalTitleGames; });
-  </script>
+        // Stealth Tab Disguise
+        let originalTitleGames = document.title;
+        window.addEventListener("blur", () => { document.title = "Google Classroom"; });
+        window.addEventListener("focus", () => { document.title = originalTitleGames; });
+    </script>
 </body>
 </html>
