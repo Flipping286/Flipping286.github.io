@@ -64,11 +64,11 @@ body {
 .flipper-image {
     position: absolute;
     bottom: -15px;
-    width: 420px; /* Made slightly larger as requested! */
+    width: 420px;
     height: auto;
-    opacity: 0; /* Fully invisible by default */
-    pointer-events: none; /* Prevents blocking clicks */
-    transform: translateY(-35px); /* Starts pushed down */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(100px); /* Starts pushed down */
     transition: opacity 0.9s ease-in-out, transform 0.9s ease-in-out;
     filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.8));
     z-index: 10;
@@ -77,7 +77,7 @@ body {
 /* Floats up smoothly when your mouse enters the empty space below */
 .flipper-staging-area:hover .flipper-image {
     opacity: 1; 
-    transform: translateY(-5px); /* Floats up nicely into view */
+    transform: translateY(-35px); /* Floats up nicely into view */
 }
 /* =========================
    MAIN CONTAINER bro
