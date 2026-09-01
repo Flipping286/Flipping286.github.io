@@ -46,15 +46,15 @@ body {
 
 
 /* =========================
-   flippa hover
+   FLIPPER BOTTOM HOVER ANIMATION
    ========================= */
 
 .flipper-staging-area {
     position: relative;
     width: 100%;
     max-width: 900px;
-    height: 160px; /* Controls the size of the invisible hover area below the dashboard */
-    margin: 30px auto 0 auto;
+    height: 120px; /* Invisible hover strip in the empty space below the main card */
+    margin: 10px auto 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,12 +63,12 @@ body {
 
 .flipper-image {
     position: absolute;
-    bottom: -10px;
-    width: 360px; /* Makes it a nice big Flipper One */
+    bottom: -15px;
+    width: 420px; /* Made slightly larger as requested! */
     height: auto;
     opacity: 0; /* Fully invisible by default */
     pointer-events: none; /* Prevents blocking clicks */
-    transform: translateY(50px); /* Starts pushed down out of view */
+    transform: translateY(40px); /* Starts pushed down */
     transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.8));
     z-index: 10;
@@ -77,9 +77,8 @@ body {
 /* Floats up smoothly when your mouse enters the empty space below */
 .flipper-staging-area:hover .flipper-image {
     opacity: 1; 
-    transform: translateY(-10px); /* Floats up nicely into view */
+    transform: translateY(-5px); /* Floats up nicely into view */
 }
-
 /* =========================
    MAIN CONTAINER bro
    ========================= */
