@@ -33,20 +33,56 @@
 body {
   background-color: var(--bg-color);
   color: var(--text-main);
-
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
   margin: 0;
   min-height: 100vh;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
   position: relative;
-
   /* Prevents horizontal scrolling */
   overflow-x: hidden;
+}
+
+
+/* =========================
+   FLIPPER HOVER FADE EFFECT
+   ========================= */
+
+.flipper-trigger-zone {
+    position: relative;
+    width: 300px;
+    height: 150px;
+    margin: 40px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed var(--border-color); 
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.zone-text {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    user-select: none;
+}
+
+.flipper-image {
+    position: absolute;
+    bottom: 20px;
+    width: 280px;
+    height: auto;
+    opacity: 0; /* Invisible by default */
+    pointer-events: none; /* Passes mouse clicks right through it */
+    transform: translateY(15px); /* Starts slightly lower for a slide-up effect */
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+}
+
+.flipper-trigger-zone:hover .flipper-image {
+    opacity: 1; /* Fades up when you hover the zone */
+    transform: translateY(0); /* Slides into place */
 }
 
 
