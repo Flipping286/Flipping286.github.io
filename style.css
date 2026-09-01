@@ -68,7 +68,7 @@ body {
     height: auto;
     opacity: 0; /* Fully invisible by default */
     pointer-events: none; /* Prevents blocking clicks */
-    transform: translateY(40px); /* Starts pushed down */
+    transform: translateY(-35px); /* Starts pushed down */
     transition: opacity 0.9s ease-in-out, transform 0.9s ease-in-out;
     filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.8));
     z-index: 10;
