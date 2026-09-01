@@ -46,48 +46,42 @@ body {
 
 
 /* =========================
-   FLIPPER HOVER FADE EFFECT
+   flippa hover
    ========================= */
 
-.flipper-trigger-zone {
+.flipper-staging-area {
     position: relative;
-    width: 300px;
-    height: 150px;
-    margin: 40px auto;
+    width: 100%;
+    max-width: 900px;
+    height: 160px; /* Controls the size of the invisible hover area below the dashboard */
+    margin: 30px auto 0 auto;
     display: flex;
-    align-items: center;
     justify-content: center;
-    border: 1px dashed var(--border-color); 
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.zone-text {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    user-select: none;
+    align-items: center;
+    pointer-events: auto;
 }
 
 .flipper-image {
     position: absolute;
-    bottom: 20px;
-    width: 280px;
+    bottom: -10px;
+    width: 360px; /* Makes it a nice big Flipper One */
     height: auto;
-    opacity: 0; /* Invisible by default */
-    pointer-events: none; /* Passes mouse clicks right through it */
-    transform: translateY(15px); /* Starts slightly lower for a slide-up effect */
-    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+    opacity: 0; /* Fully invisible by default */
+    pointer-events: none; /* Prevents blocking clicks */
+    transform: translateY(50px); /* Starts pushed down out of view */
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.8));
+    z-index: 10;
 }
 
-.flipper-trigger-zone:hover .flipper-image {
-    opacity: 1; /* Fades up when you hover the zone */
-    transform: translateY(0); /* Slides into place */
+/* Floats up smoothly when your mouse enters the empty space below */
+.flipper-staging-area:hover .flipper-image {
+    opacity: 1; 
+    transform: translateY(-10px); /* Floats up nicely into view */
 }
-
 
 /* =========================
-   MAIN CONTAINER
+   MAIN CONTAINER bro
    ========================= */
 
 .container {
@@ -117,7 +111,7 @@ body {
 
 
 /* =========================
-   HEADINGS
+   HEADINGS bro
    ========================= */
 
 h1 {
@@ -132,7 +126,7 @@ h1 {
 
 
 /* =========================
-   SEARCH BAR
+   SEARCH BAR easy
    ========================= */
 
 .search-bar {
@@ -147,7 +141,7 @@ h1 {
 
 
 /* =========================
-   TEXT INPUT
+   TEXT INPUT brooo
    ========================= */
 
 input[type="text"] {
