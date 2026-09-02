@@ -1,158 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Downloads Dashboard</title>
-  <style>
-    body {
-      background-color: #111;
-      color: white;
-      font-family: sans-serif;
-      margin: 0;
-      padding: 40px 20px;
-    }
-    
-    /* Big Title */
-    h1 {
-      font-size: 3.5em;
-      text-align: center;
-      margin-bottom: 20px;
-      text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
-    }
+    <meta charset="UTF-8">
+    <title>Downloads - Flipping286's Things!</title>
+    <!-- Google Classroom Favicon -->
+    <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 30px 20px 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
 
-    /* Search Bar */
-    .search-container {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    
-    #download-search {
-      padding: 12px;
-      width: 80%;
-      max-width: 500px;
-      border-radius: 8px;
-      border: none;
-      font-size: 1.1em;
-      background-color: #222;
-      color: white;
-      outline: none;
-      box-shadow: inset 0px 0px 5px rgba(0,0,0,0.5);
-    }
-    
-    #download-search::placeholder {
-      color: #888;
-    }
+        /* Flashing Side Decor (Slower 4s pulse) 👾 */
+        .side-decor {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            font-size: 34px;
+            animation: pulse-glow 4s infinite ease-in-out;
+            user-select: none;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .side-decor.left { left: 10px; }
+        .side-decor.right { right: 10px; }
 
-    /* Download Items Layout */
-    .download-list {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
-    
-    .item-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background-color: #1a1a1a;
-      padding: 15px 25px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 700px;
-      box-shadow: 0px 4px 15px rgba(0,0,0,0.4);
-      border: 1px solid #333;
-    }
-    
-    .emoji {
-      font-size: 1.8em;
-    }
-    
-    .slot {
-      font-weight: bold;
-      color: #666;
-      width: 70px;
-      text-align: center;
-    }
-    
-    .name {
-      flex-grow: 1;
-      margin-left: 20px;
-      font-size: 1.2em;
-      font-family: monospace;
-      color: #ddd;
-    }
-    
-    .download-btn {
-      background-color: #007bff;
-      color: white;
-      text-decoration: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-weight: bold;
-      transition: background 0.2s, transform 0.1s;
-    }
-    
-    .download-btn:hover {
-      background-color: #0056b3;
-      transform: scale(1.05);
-    }
-  </style>
+        @keyframes pulse-glow {
+            0% { opacity: 0.3; text-shadow: 0 0 5px #00ff88; }
+            50% { opacity: 1; text-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88; }
+            100% { opacity: 0.3; text-shadow: 0 0 5px #00ff88; }
+        }
+
+        /* Outer Neon Border Arcade Container */
+        .arcade-container {
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.25);
+            border-radius: 12px;
+            background-color: #11141d;
+            padding: 35px;
+            max-width: 1200px;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 20;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-top: 0;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            color: #8b949e;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        /* Search Bar Styling */
+        .search-container {
+            margin-bottom: 25px;
+        }
+
+        /* Tile Grid Layout */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 16px;
+        }
+
+        /* Individual Card Box */
+        .game-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px 12px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-3px);
+            border-color: #00ff88;
+        }
+
+        /* Themed Emoji Icon over name */
+        .game-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        /* Title Text */
+        .game-title {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #e6edf3;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.2;
+            word-break: break-all;
+        }
+
+        /* Download Button */
+        .download-btn {
+            background-color: #00ff88;
+            color: #000000;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 13px;
+            border: none;
+            border-radius: 6px;
+            padding: 9px 0;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+
+        .download-btn:hover {
+            background-color: #00cc6a;
+        }
+        
+        .download-btn.disabled {
+            background-color: #30363d;
+            color: #8b949e;
+            cursor: not-allowed;
+        }
+        
+        .download-btn.disabled:hover {
+            background-color: #30363d;
+        }
+
+        /* Footer & Ambient Text */
+        .footer-container {
+            max-width: 1200px;
+            width: 100%;
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 20;
+            padding: 0 5px;
+        }
+
+        .ambient-text {
+            color: #8b949e;
+            font-size: 13px;
+        }
+
+        /* Bottom Right Back Button */
+        .back-btn {
+            background-color: #21262d;
+            color: #00ff88;
+            border: 1px solid #30363d;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 13px;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .back-btn:hover {
+            background-color: #30363d;
+            border-color: #00ff88;
+        }
+    </style>
 </head>
 <body>
 
-<div class="side-decor left-decor">
-    <p>0</p><p>1</p><p>☺</p><p>1</p><p>0</p><p>🐧</p><p>1</p><p>👾</p><p>0</p>
-  </div>
-  <div class="side-decor right-decor">
-    <p>1</p><p>0</p><p>👾</p><p>0</p><p>1</p><p>🐧</p><p>1</p><p>0</p><p>☺</p>
-  </div>
-  
-  <!-- Big Title -->
-  <h1>📥 Downloads 💾</h1>
-
-  <!-- Search Bar -->
-  <div class="search-container">
-    <input type="text" id="download-search" placeholder="Search downloads...">
-  </div>
-
-  <!-- Download Items Layout -->
-  <div class="download-list">
-    
-    <!-- Slot 1: Your custom exe file -->
-    <div class="item-row">
-      <span class="emoji">👾</span>
-      <span class="slot">Slot 1</span>
-      <span class="name">you.are.an.idiot.text.messages.exe</span>
-      <a href="https://github.com/Flipping286/Flipping286.github.io/releases/latest/download/you.are.an.idiot.text.messages.exe" class="download-btn" download>Download</a>
+    <!-- Flashing Side Decor Columns -->
+    <div class="side-decor left">
+        <span>🦾</span><span>🏴‍☠️</span><span>📟</span><span>👾</span><span>☀️</span><span>🦾</span><span>🏴‍☠️</span>
+    </div>
+    <div class="side-decor right">
+        <span>☀️</span><span>👾</span><span>📟</span><span>🏴‍☠️</span><span>🦾</span><span>☀️</span><span>👾</span>
     </div>
 
-    <!-- Slot 2: Placeholder for your next file -->
-    <div class="item-row">
-      <span class="emoji">🏴‍☠️</span>
-      <span class="slot">Slot 2</span>
-      <span class="name">Empty Slot</span>
-      <a href="#" class="download-btn" style="background-color: #444; cursor: not-allowed;">Pending</a>
+    <div class="arcade-container">
+        <h1>Downloads</h1>
+        <div class="subtitle">Welcome to Downloads! Grab your files below. Press ESC to panic exit.</div>
+        
+        <!-- Working Search Bar -->
+        <div class="search-container">
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="gameSearch" placeholder="Search downloads..." onkeyup="filterDownloads()" style="flex: 1; padding: 12px 16px; background-color: #161b22; border: 1px solid #30363d; border-radius: 8px; color: #fff; font-size: 14px; box-sizing: border-box;">
+                <button onclick="filterDownloads()" style="padding: 0 16px; background-color: #00ff88; color: #0b0f19; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 18px;">🔍</button>
+            </div>
+            <div id="no-results" style="display: none; color: #8b949e; text-align: center; margin-top: 15px; font-size: 14px;">
+                Sorry, file not found.
+            </div>
+        </div>
+
+        <div class="game-grid" id="gameGrid">
+            
+            <!-- Slot 1: Your custom exe file -->
+            <div class="game-card">
+                <div class="game-icon">👾</div>
+                <div class="game-title">you.are.an.idiot.text.messages.exe</div>
+                <a href="https://github.com/Flipping286/Flipping286.github.io/releases/latest/download/you.are.an.idiot.text.messages.exe" class="download-btn" download>Download</a>
+            </div>
+
+            <!-- 10 Empty Slots Ready for Links -->
+            <div class="game-card"><div class="game-icon">📟</div><div class="game-title">Empty Slot 2</div><a href="#" class="download-btn disabled">Pending</a></div>
+            <div class="game-card"><div class="game-icon">🏴‍☠️</div><div class="game-title">Empty Slot 3</div><a href="#" class="download-btn disabled">Pending</a></div>
+            <div class="game-card"><div class="game-icon">🦾</div><div class="game-title">Empty Slot 4</div><a href="#" class="download-btn disabled">Pending</a></div>
+            <div class="game-card"><div class="game-icon">☀️</div><div class="game-title">Empty Slot 5</div><a href="#" class="download-btn disabled">Pending</a></div>
+            <div class="game-card"><div class="game-icon">📟</div><div class="game-title">Empty Slot 6</div><a href="#" class="download-btn disabled">Pending</a></div>
+            <div class="game-card"><div class="game-icon">🏴‍☠️</div><div class="game-title">Empty Slot 7</div><a href="#" class="download-btn disabled">Pending</a></div>
+            <div class="game-card"><div class="game-icon">🦾</div><div class="game-title">Empty Slot 8</div><a href="#" class="download-btn disabled">Pending</a></div>
+            <div class="game-card"><div class="game-icon">☀️</div><div class="game-title">Empty Slot 9</div><a href="#" class="download-btn disabled">Pending</a></div>
+            <div class="game-card"><div class="game-icon">👾</div><div class="game-title">Empty Slot 10</div><a href="#" class="download-btn disabled">Pending</a></div>
+            <div class="game-card"><div class="game-icon">📟</div><div class="game-title">Empty Slot 11</div><a href="#" class="download-btn disabled">Pending</a></div>
+
+        </div>
     </div>
 
-  </div>
+    <!-- Footer with Ambient Text and Back Button -->
+    <div class="footer-container">
+        <div class="ambient-text">Optimized for students, made by Flipping286</div>
+        <a href="index.html" class="back-btn">← Back to Home</a>
+    </div>
 
-  <!-- Search Bar Logic -->
-  <script>
-    document.getElementById('download-search').addEventListener('input', function(e) {
-      const searchTerm = e.target.value.toLowerCase();
-      const rows = document.querySelectorAll('.item-row');
-      
-      rows.forEach(row => {
-        const fileName = row.querySelector('.name').textContent.toLowerCase();
-        if (fileName.includes(searchTerm)) {
-          row.style.display = 'flex';
-        } else {
-          row.style.display = 'none';
+    <script>
+        // Search Filter Logic
+        function filterDownloads() {
+            let input = document.getElementById('gameSearch').value.toLowerCase();
+            let cards = document.getElementsByClassName('game-card');
+            let hasResults = false;
+
+            for (let i = 0; i < cards.length; i++) {
+                let titleElement = cards[i].querySelector('.game-title');
+                if (titleElement) {
+                    let title = titleElement.innerText.toLowerCase();
+                    if (title.includes(input)) {
+                        cards[i].style.display = "";
+                        hasResults = true;
+                    } else {
+                        cards[i].style.display = "none";
+                    }
+                }
+            }
+            let noResultsEl = document.getElementById('no-results');
+            if (noResultsEl) {
+                noResultsEl.style.display = hasResults ? "none" : "block";
+            }
         }
-      });
-    });
-  </script>
+
+        // Stealth Tab Disguise
+        let originalTitle = document.title;
+        window.addEventListener("blur", () => { document.title = "Google Classroom"; });
+        window.addEventListener("focus", () => { document.title = originalTitle; });
+        
+        // ESC Key Panic Screen
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                window.location.replace("https://classroom.google.com");
+            }
+        });
+    </script>
 </body>
 </html>
