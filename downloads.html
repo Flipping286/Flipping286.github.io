@@ -1,23 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Downloads</title>
-  <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downloads Dashboard</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    
+    /* Big Title */
+    h1 {
+      font-size: 3.5em;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+    }
+
+    /* Search Bar */
+    .search-container {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    #download-search {
+      padding: 12px;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1.1em;
+      background-color: #222;
+      color: white;
+      outline: none;
+      box-shadow: inset 0px 0px 5px rgba(0,0,0,0.5);
+    }
+    
+    #download-search::placeholder {
+      color: #888;
+    }
+
+    /* Download Items Layout */
+    .download-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #1a1a1a;
+      padding: 15px 25px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 700px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.4);
+      border: 1px solid #333;
+    }
+    
+    .emoji {
+      font-size: 1.8em;
+    }
+    
+    .slot {
+      font-weight: bold;
+      color: #666;
+      width: 70px;
+      text-align: center;
+    }
+    
+    .name {
+      flex-grow: 1;
+      margin-left: 20px;
+      font-size: 1.2em;
+      font-family: monospace;
+      color: #ddd;
+    }
+    
+    .download-btn {
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 0.2s, transform 0.1s;
+    }
+    
+    .download-btn:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
-  <main class="container" style="text-align: center; margin-top: 100px;">
-    <h1 style="font-size: 3rem; color: #00ff88;">⬇️ Downloads ⬇️</h1>
-    <p style="color: var(--text-muted); font-size: 1.2rem; margin-bottom: 30px;">Files and Executables</p>
+
+  <!-- Big Title -->
+  <h1>📥 Downloads 💾</h1>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" id="download-search" placeholder="Search downloads...">
+  </div>
+
+  <!-- Download Items Layout -->
+  <div class="download-list">
     
-    <div style="margin-bottom: 40px;">
-      <a href="https://github.com/Flipping286/Flipping286.github.io/releases/latest/download/you.are.an.idiot.text.messages.exe" download class="info-btn" style="display: inline-block; padding: 12px 24px; font-size: 1.2rem; background-color: #00ff88; color: #000; text-decoration: none; font-weight: bold; border-radius: 8px; box-shadow: 0 0 12px rgba(0, 255, 136, 0.3);">💾 YouareAnIDIOT.exe</a>
+    <!-- Slot 1: Your custom exe file -->
+    <div class="item-row">
+      <span class="emoji">👾</span>
+      <span class="slot">Slot 1</span>
+      <span class="name">you.are.an.idiot.text.messages.exe</span>
+      <a href="https://github.com/Flipping286/Flipping286.github.io/releases/latest/download/you.are.an.idiot.text.messages.exe" class="download-btn" download>Download</a>
     </div>
 
-    <a href="index.html" class="info-btn" style="position: static; display: inline-block; padding: 12px 24px;">← Back Home</a>
-  </main>
-  <script src="script.js"></script>
+    <!-- Slot 2: Placeholder for your next file -->
+    <div class="item-row">
+      <span class="emoji">🏴‍☠️</span>
+      <span class="slot">Slot 2</span>
+      <span class="name">Empty Slot</span>
+      <a href="#" class="download-btn" style="background-color: #444; cursor: not-allowed;">Pending</a>
+    </div>
+
+  </div>
+
+  <!-- Search Bar Logic -->
+  <script>
+    document.getElementById('download-search').addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const rows = document.querySelectorAll('.item-row');
+      
+      rows.forEach(row => {
+        const fileName = row.querySelector('.name').textContent.toLowerCase();
+        if (fileName.includes(searchTerm)) {
+          row.style.display = 'flex';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
