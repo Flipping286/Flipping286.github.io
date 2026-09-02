@@ -33,6 +33,7 @@
     if (youtubeUI) youtubeUI.style.display = "none";
     if (panicUI) panicUI.style.display = "block";
     if (player) player.src = "";
+    document.title = "Home - Classroom"; // Forces the title change instantly on panic
     keyBuffer = "";
   }
 
@@ -98,7 +99,7 @@
   });
 })();
 
-// Tab discise. MAN I CANT SPELL DONT JUGE MEH
+// Tab stealth disguise patched
 let originalTitle = document.title;
-window.addEventListener("blur", () => { document.title = "Google Classroom"; });
+window.addEventListener("blur", () => { document.title = "Home - Classroom"; });
 window.addEventListener("focus", () => { document.title = originalTitle; });
