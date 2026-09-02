@@ -134,7 +134,25 @@
     <iframe id="player" class="player-frame" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Resource player" style="margin-top:18px;"></iframe>
 
   </main>
-
+<script>
+    // Stealth Tab Disguise
+    let originalTitle = document.title;
+    
+    window.addEventListener("blur", () => { 
+        document.title = "Google Classroom"; 
+    });
+    
+    window.addEventListener("focus", () => { 
+        document.title = originalTitle; 
+    });
+    
+    // Optional: ESC Panic Key (instantly redirects to Google Classroom)
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            window.location.replace("https://classroom.google.com");
+        }
+    });
+</>
   <script src="youtube.js"></script>
 </body>
 </html>
