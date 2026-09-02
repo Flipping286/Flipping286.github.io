@@ -8,7 +8,99 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!-- THE GOOGLE CLASSROOM PANIC SCREEN UI -->
+<div id="panicUI" style="display: none; background: #ffffff; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 999999; overflow-y: auto; font-family: 'Google Sans', Roboto, Arial, sans-serif; color: #3c4043;">
+  
+  <!-- Top Nav Bar -->
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 16px; border-bottom: 1px solid #e0e0e0; background: #fff;">
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <span style="font-size: 24px; cursor: pointer; padding: 12px; color: #5f6368;">☰</span>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <img src="https://ssl.gstatic.com/classroom/favicon.png" alt="Classroom Logo" style="width: 24px; height: 24px;">
+        <span style="font-size: 22px; color: #5f6368;">Classroom</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <span style="font-size: 24px; cursor: pointer; color: #5f6368;">+</span>
+      <span style="font-size: 20px; cursor: pointer; color: #5f6368;">:::</span>
+      <div style="width: 32px; height: 32px; background: #1a73e8; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px;">I</div>
+    </div>
+  </div>
 
+  <div style="display: flex; min-height: calc(100vh - 65px);">
+    <!-- Sidebar -->
+    <div style="width: 280px; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; padding-top: 12px;">
+      <div style="padding: 12px 24px; background: #e8f0fe; color: #1967d2; border-radius: 0 24px 24px 0; margin-right: 16px; font-weight: 500; display: flex; gap: 16px; cursor: pointer;">
+        <span>🏠</span> Home
+      </div>
+      <div style="padding: 12px 24px; color: #3c4043; display: flex; gap: 16px; cursor: pointer;">
+        <span>📅</span> Calendar
+      </div>
+      <hr style="border: 0; border-top: 1px solid #e0e0e0; margin: 8px 0;">
+      <div style="padding: 12px 24px; color: #3c4043; display: flex; gap: 16px; cursor: pointer;">
+        <span>📦</span> Archived classes
+      </div>
+      <div style="padding: 12px 24px; color: #3c4043; display: flex; gap: 16px; cursor: pointer;">
+        <span>⚙️</span> Settings
+      </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div style="flex: 1; padding: 24px; background: #fff;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px;">
+        
+        <div style="border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; height: 260px; position: relative;">
+          <div style="height: 100px; background: #1967d2; padding: 16px; color: #fff;">
+            <div style="font-size: 22px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Algebra 1</div>
+            <div style="font-size: 13px; margin-top: 4px;">Justin Jenkins</div>
+          </div>
+          <div style="position: absolute; top: 76px; right: 16px; width: 68px; height: 68px; background: #e0e0e0; border-radius: 50%; border: 4px solid #fff;"></div>
+        </div>
+
+        <div style="border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; height: 260px; position: relative;">
+          <div style="height: 100px; background: #1e8e3e; padding: 16px; color: #fff;">
+            <div style="font-size: 22px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">8th Grade Art</div>
+            <div style="font-size: 13px; margin-top: 4px;">Kyndall Carns</div>
+          </div>
+          <div style="position: absolute; top: 76px; right: 16px; width: 68px; height: 68px; background: #e0e0e0; border-radius: 50%; border: 4px solid #fff;"></div>
+        </div>
+
+        <div style="border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; height: 260px; position: relative;">
+          <div style="height: 100px; background: #d93025; padding: 16px; color: #fff;">
+            <div style="font-size: 22px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">8th Grade ELA</div>
+            <div style="font-size: 13px; margin-top: 4px;">Kelly Semlear</div>
+          </div>
+          <div style="position: absolute; top: 76px; right: 16px; width: 68px; height: 68px; background: #e0e0e0; border-radius: 50%; border: 4px solid #fff;"></div>
+        </div>
+
+        <div style="border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; height: 260px; position: relative;">
+          <div style="height: 100px; background: #f29900; padding: 16px; color: #fff;">
+            <div style="font-size: 22px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">8th Grade Science</div>
+            <div style="font-size: 13px; margin-top: 4px;">Milton Marshall</div>
+          </div>
+          <div style="position: absolute; top: 76px; right: 16px; width: 68px; height: 68px; background: #e0e0e0; border-radius: 50%; border: 4px solid #fff;"></div>
+        </div>
+
+        <div style="border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; height: 260px; position: relative;">
+          <div style="height: 100px; background: #8e24aa; padding: 16px; color: #fff;">
+            <div style="font-size: 22px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">8th grade U.S. Hi...</div>
+            <div style="font-size: 13px; margin-top: 4px;">Lesley Bozman</div>
+          </div>
+          <div style="position: absolute; top: 76px; right: 16px; width: 68px; height: 68px; background: #e0e0e0; border-radius: 50%; border: 4px solid #fff;"></div>
+        </div>
+
+        <div style="border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; height: 260px; position: relative;">
+          <div style="height: 100px; background: #00acc1; padding: 16px; color: #fff;">
+            <div style="font-size: 22px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">8th Grade Advisory</div>
+            <div style="font-size: 13px; margin-top: 4px;">Homeroom</div>
+          </div>
+          <div style="position: absolute; top: 76px; right: 16px; width: 68px; height: 68px; background: #e0e0e0; border-radius: 50%; border: 4px solid #fff;"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
   <div class="side-decor left-decor">
     <p>0</p><p>1</p><p>☺</p><p>1</p><p>0</p><p>🐧</p><p>1</p><p>👾</p><p>0</p>
   </div>
