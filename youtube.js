@@ -3,9 +3,7 @@
   function extractVideoId(input) {
     if (!input) return "";
     input = input.trim();
-    // If the input already looks like a nocookie embed src, return it
     if (input.includes('youtube-nocookie.com/embed')) return input;
-    // Try parsing URLs
     try {
       const maybeUrl = input.startsWith('http') ? input : (input.includes('.') ? `https://${input}` : input);
       const u = new URL(maybeUrl);
@@ -17,10 +15,7 @@
         const v = u.searchParams.get('v');
         if (v) return v;
       }
-    } catch (e) {
-      // not a URL, fall through
-    }
-    // fallback: extract 11-char id
+    } catch (e) {}
     const m = input.match(/[A-Za-z0-9_-]{11}/);
     return m ? m[0] : '';
   }
@@ -50,11 +45,15 @@
       });
     }
 
-    // Support Enter key
     if (input) {
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') { e.preventDefault(); if (loadBtn) loadBtn.click(); }
       });
     }
   });
+
+  // ADDED: Stealth Tab Disguise specifically for the YouTube page
+  let originalTitleYT = document.title;
+  window.addEventListener("blur", () => { document.title = "Home - Classroom"; });
+  window.addEventListener("focus", () => { document.title = originalTitleYT; });
 })();
