@@ -191,6 +191,14 @@
             height: 100%;
             border: none;
         }
+        
+        /* Corner Hover Exit Zone */
+        .exit-zone {
+            position: absolute;
+            top: 0; right: 0;
+            width: 150px; height: 100px;
+            z-index: 100000;
+        }
         #close-btn {
             position: absolute;
             top: 15px; right: 15px;
@@ -202,11 +210,18 @@
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
-            z-index: 100000;
-            opacity: 0.8;
-            transition: opacity 0.2s;
+            opacity: 0; /* Hidden initially */
+            transition: opacity 0.3s ease, transform 0.2s ease;
         }
-        #close-btn:hover { opacity: 1; }
+        
+        /* Fades in only when mouse is in the corner zone */
+        .exit-zone:hover #close-btn, #close-btn:focus {
+            opacity: 0.8; 
+        }
+        #close-btn:hover {
+            opacity: 1 !important;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -237,6 +252,11 @@
 
         <div class="game-grid" id="gameGrid">
             <!-- New Added Games -->
+            <div class="game-card">
+                <div class="game-icon">🦔</div>
+                <div class="game-title">Sonic the Hedgehog - Genesis</div>
+                <button onclick="playGame('https://theooofficial.github.io/myRETROGAMES/launcher.html#sthg')">Launch</button>
+            </div>
             <div class="game-card">
                 <div class="game-icon">🗡️</div>
                 <div class="game-title">ZeldaJS</div>
@@ -884,7 +904,10 @@
 
     <!-- Hidden Fullscreen Player Overlay -->
     <div id="game-overlay">
-        <button id="close-btn" onclick="closeGame()">✕ EXIT</button>
+        <!-- New Hover Zone for the EXIT Button -->
+        <div class="exit-zone">
+            <button id="close-btn" onclick="closeGame()">✕ EXIT</button>
+        </div>
         <iframe id="game-frame" src="" allowfullscreen="true"></iframe>
     </div>
 
