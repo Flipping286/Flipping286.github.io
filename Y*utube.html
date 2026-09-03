@@ -154,5 +154,10 @@
     });
 </>
   <script src="youtube.js"></script>
+  <script>
+        let originalTitleGames = document.title;
+        window.addEventListener("blur", () => { document.title = "Home - Classroom"; });
+        window.addEventListener("focus", () => { document.title = originalTitleGames; });
+    </script>
 </body>
 </html>
