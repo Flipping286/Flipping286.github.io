@@ -56,9 +56,20 @@
       const maybeUrl = input.startsWith("http") ? input : (input.includes(".") ? `https://${input}` : input);
       const u = new URL(maybeUrl);
       const host = u.hostname.toLowerCase();
-      if (host.includes("youtu.be")) return u.pathname.replace(/^\/+/, "").split("/")[0] || "";
-      if (host.includes("youtube.com")) return u.searchParams.get("v") || "";
+      
+      if (host.includes("youtu.be")) {
+        const pathId = u.pathname.replace(/^\/+/, "").split(/[\/?]/)[0];
+        if (pathId) return pathId;
+      }
+      
+      if (host.includes("youtube.com")) {
+        const v = u.searchParams.get("v");
+        if (v) return v;
+        if (u.pathname.includes("/shorts/")) return u.pathname.split("/shorts/")[1].split(/[\/?]/)[0];
+        if (u.pathname.includes("/embed/")) return u.pathname.split("/embed/")[1].split(/[\/?]/)[0];
+      }
     } catch (e) { }
+    
     const m = input.match(/[A-Za-z0-9_-]{11}/);
     return m ? m[0] : "";
   }
