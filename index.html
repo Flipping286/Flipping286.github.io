@@ -4,101 +4,263 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Homepage</title>
-  <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
+  <link rel="icon" href="https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- THE GOOGLE CLASSROOM PANIC SCREEN UI -->
-<div id="panicUI" style="display: none; background: #ffffff; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 999999; overflow-y: auto; font-family: 'Google Sans', Roboto, Arial, sans-serif; color: #3c4043;">
+<!-- CANVAS LMS STEALTH PANIC SCREEN UI -->
+<div id="panicUI" style="display: none; background: #f5f5f5; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 999999; overflow-y: auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #2d3b45;">
   
-  <!-- Top Nav Bar -->
-  <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 16px; border-bottom: 1px solid #e0e0e0; background: #fff;">
-    <div style="display: flex; align-items: center; gap: 16px;">
-      <span style="font-size: 24px; cursor: pointer; padding: 12px; color: #5f6368;">☰</span>
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <img src="https://ssl.gstatic.com/classroom/favicon.png" alt="Classroom Logo" style="width: 24px; height: 24px;">
-        <span style="font-size: 22px; color: #5f6368;">Classroom</span>
+  <div style="display: flex; min-height: 100vh;">
+    <!-- Canvas Global Dark Navy Navigation Bar -->
+    <div style="width: 84px; background: #2d3b45; display: flex; flex-direction: column; align-items: center; padding-top: 10px; color: #fff; flex-shrink: 0; user-select: none;">
+      
+      <!-- Canvas / Instructure Logo -->
+      <div style="margin-bottom: 14px; cursor: pointer;">
+        <svg width="40" height="40" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="44" stroke="#e02424" stroke-width="8"/>
+          <circle cx="50" cy="50" r="22" fill="#e02424"/>
+          <path d="M50 14 L50 28 M50 72 L50 86 M14 50 L28 50 M72 50 L86 50" stroke="#e02424" stroke-width="8" stroke-linecap="round"/>
+        </svg>
       </div>
-    </div>
-    <div style="display: flex; align-items: center; gap: 16px;">
-      <span style="font-size: 24px; cursor: pointer; color: #5f6368;">+</span>
-      <span style="font-size: 20px; cursor: pointer; color: #5f6368;">:::</span>
-      <div style="width: 32px; height: 32px; background: #1a73e8; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px;">I</div>
-    </div>
-  </div>
 
-  <div style="display: flex; min-height: calc(100vh - 65px);">
-    <!-- Sidebar -->
-    <div style="width: 280px; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; padding-top: 12px;">
-      <div style="padding: 12px 24px; background: #e8f0fe; color: #1967d2; border-radius: 0 24px 24px 0; margin-right: 16px; font-weight: 500; display: flex; gap: 16px; cursor: pointer;">
-        <span>🏠</span> Home
+      <!-- Account Icon -->
+      <div style="display: flex; flex-direction: column; align-items: center; padding: 12px 0; width: 100%; cursor: pointer; color: #c7cdd1;">
+        <div style="width: 32px; height: 32px; border-radius: 50%; background: #445460; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; color: #fff;">ST</div>
+        <span style="font-size: 11px; margin-top: 4px;">Account</span>
       </div>
-      <div style="padding: 12px 24px; color: #3c4043; display: flex; gap: 16px; cursor: pointer;">
-        <span>📅</span> Calendar
+
+      <!-- Dashboard (Active) -->
+      <div style="display: flex; flex-direction: column; align-items: center; padding: 12px 0; width: 100%; cursor: pointer; background: #fff; color: #008ee2; font-weight: bold; border-left: 4px solid #008ee2;">
+        <span style="font-size: 20px;">📊</span>
+        <span style="font-size: 11px; margin-top: 2px;">Dashboard</span>
       </div>
-      <hr style="border: 0; border-top: 1px solid #e0e0e0; margin: 8px 0;">
-      <div style="padding: 12px 24px; color: #3c4043; display: flex; gap: 16px; cursor: pointer;">
-        <span>📦</span> Archived classes
+
+      <!-- Courses -->
+      <div style="display: flex; flex-direction: column; align-items: center; padding: 12px 0; width: 100%; cursor: pointer; color: #c7cdd1;">
+        <span style="font-size: 20px;">📚</span>
+        <span style="font-size: 11px; margin-top: 2px;">Courses</span>
       </div>
-      <div style="padding: 12px 24px; color: #3c4043; display: flex; gap: 16px; cursor: pointer;">
-        <span>⚙️</span> Settings
+
+      <!-- Calendar -->
+      <div style="display: flex; flex-direction: column; align-items: center; padding: 12px 0; width: 100%; cursor: pointer; color: #c7cdd1;">
+        <span style="font-size: 20px;">📅</span>
+        <span style="font-size: 11px; margin-top: 2px;">Calendar</span>
       </div>
+
+      <!-- Inbox -->
+      <div style="display: flex; flex-direction: column; align-items: center; padding: 12px 0; width: 100%; cursor: pointer; color: #c7cdd1;">
+        <span style="font-size: 20px;">✉️</span>
+        <span style="font-size: 11px; margin-top: 2px;">Inbox</span>
+      </div>
+
+      <!-- History -->
+      <div style="display: flex; flex-direction: column; align-items: center; padding: 12px 0; width: 100%; cursor: pointer; color: #c7cdd1;">
+        <span style="font-size: 20px;">🕒</span>
+        <span style="font-size: 11px; margin-top: 2px;">History</span>
+      </div>
+
+      <!-- Help -->
+      <div style="display: flex; flex-direction: column; align-items: center; padding: 12px 0; width: 100%; cursor: pointer; color: #c7cdd1; margin-top: auto; margin-bottom: 12px;">
+        <span style="font-size: 20px;">❓</span>
+        <span style="font-size: 11px; margin-top: 2px;">Help</span>
+      </div>
+
     </div>
 
-    <!-- Main Content Grid -->
-    <div style="flex: 1; padding: 24px; background: #fff;">
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px;">
+    <!-- Main Canvas Dashboard Body -->
+    <div style="flex: 1; display: flex; flex-direction: row; background: #fff; overflow-y: auto;">
+      
+      <!-- Center Cards Column -->
+      <div style="flex: 1; padding: 28px 36px;">
         
-        <div style="border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; height: 260px; position: relative;">
-          <div style="height: 100px; background: #1967d2; padding: 16px; color: #fff;">
-            <div style="font-size: 22px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Algebra 1</div>
-            <div style="font-size: 13px; margin-top: 4px;">Justin Jenkins</div>
+        <!-- Dashboard Top Header Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e0e0e0; padding-bottom: 14px; margin-bottom: 24px;">
+          <h1 style="font-size: 26px; font-weight: 700; color: #2d3b45; margin: 0;">Dashboard</h1>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <button style="background: none; border: 1px solid #c7cdd1; border-radius: 4px; padding: 6px 12px; font-size: 13px; font-weight: 600; color: #2d3b45; cursor: pointer;">Card View</button>
+            <span style="font-size: 20px; color: #5f6368; cursor: pointer;">⋮</span>
           </div>
-          <div style="position: absolute; top: 76px; right: 16px; width: 68px; height: 68px; background: #e0e0e0; border-radius: 50%; border: 4px solid #fff;"></div>
         </div>
 
-        <div style="border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; height: 260px; position: relative;">
-          <div style="height: 100px; background: #1e8e3e; padding: 16px; color: #fff;">
-            <div style="font-size: 22px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">8th Grade Art</div>
-            <div style="font-size: 13px; margin-top: 4px;">Kyndall Carns</div>
+        <!-- Canvas Course Cards Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px;">
+          
+          <!-- Course Card 1: Algebra II -->
+          <div style="background: #fff; border: 1px solid #c7cdd1; border-radius: 4px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: transform 0.15s ease;">
+            <div style="height: 125px; background: #0077c8; position: relative;">
+              <span style="position: absolute; top: 8px; right: 8px; color: #fff; font-size: 18px; cursor: pointer;">⋮</span>
+            </div>
+            <div style="padding: 14px 16px;">
+              <div style="font-size: 15px; font-weight: 600; color: #008ee2; line-height: 1.3; cursor: pointer;">Algebra II - Period 3</div>
+              <div style="font-size: 12px; color: #6c757d; margin-top: 4px;">MATH201_2026</div>
+              <div style="font-size: 12px; color: #6c757d; margin-top: 2px;">Semester 1</div>
+            </div>
+            <div style="padding: 10px 16px; border-top: 1px solid #f0f0f0; display: flex; gap: 16px; font-size: 16px; color: #6c757d;">
+              <span title="Announcements" style="cursor: pointer;">📢</span>
+              <span title="Assignments" style="cursor: pointer;">📝</span>
+              <span title="Discussions" style="cursor: pointer;">💬</span>
+              <span title="Files" style="cursor: pointer;">📁</span>
+            </div>
           </div>
-          <div style="position: absolute; top: 76px; right: 16px; width: 68px; height: 68px; background: #e0e0e0; border-radius: 50%; border: 4px solid #fff;"></div>
+
+          <!-- Course Card 2: Biology Honors -->
+          <div style="background: #fff; border: 1px solid #c7cdd1; border-radius: 4px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08);">
+            <div style="height: 125px; background: #008554; position: relative;">
+              <span style="position: absolute; top: 8px; right: 8px; color: #fff; font-size: 18px; cursor: pointer;">⋮</span>
+            </div>
+            <div style="padding: 14px 16px;">
+              <div style="font-size: 15px; font-weight: 600; color: #008ee2; line-height: 1.3; cursor: pointer;">Biology 1 Honors - Period 2</div>
+              <div style="font-size: 12px; color: #6c757d; margin-top: 4px;">SCI104_HONORS</div>
+              <div style="font-size: 12px; color: #6c757d; margin-top: 2px;">Semester 1</div>
+            </div>
+            <div style="padding: 10px 16px; border-top: 1px solid #f0f0f0; display: flex; gap: 16px; font-size: 16px; color: #6c757d;">
+              <span title="Announcements">📢</span>
+              <span title="Assignments">📝</span>
+              <span title="Discussions">💬</span>
+              <span title="Files">📁</span>
+            </div>
+          </div>
+
+          <!-- Course Card 3: English 10 -->
+          <div style="background: #fff; border: 1px solid #c7cdd1; border-radius: 4px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08);">
+            <div style="height: 125px; background: #b52626; position: relative;">
+              <span style="position: absolute; top: 8px; right: 8px; color: #fff; font-size: 18px; cursor: pointer;">⋮</span>
+            </div>
+            <div style="padding: 14px 16px;">
+              <div style="font-size: 15px; font-weight: 600; color: #008ee2; line-height: 1.3; cursor: pointer;">English 10 - Period 4</div>
+              <div style="font-size: 12px; color: #6c757d; margin-top: 4px;">ENG202_SEM1</div>
+              <div style="font-size: 12px; color: #6c757d; margin-top: 2px;">Semester 1</div>
+            </div>
+            <div style="padding: 10px 16px; border-top: 1px solid #f0f0f0; display: flex; gap: 16px; font-size: 16px; color: #6c757d;">
+              <span title="Announcements">📢</span>
+              <span title="Assignments">📝</span>
+              <span title="Discussions">💬</span>
+              <span title="Files">📁</span>
+            </div>
+          </div>
+
+          <!-- Course Card 4: AP Computer Science -->
+          <div style="background: #fff; border: 1px solid #c7cdd1; border-radius: 4px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08);">
+            <div style="height: 125px; background: #7d3f98; position: relative;">
+              <span style="position: absolute; top: 8px; right: 8px; color: #fff; font-size: 18px; cursor: pointer;">⋮</span>
+            </div>
+            <div style="padding: 14px 16px;">
+              <div style="font-size: 15px; font-weight: 600; color: #008ee2; line-height: 1.3; cursor: pointer;">AP Computer Science - Period 1</div>
+              <div style="font-size: 12px; color: #6c757d; margin-top: 4px;">CS301_AP_2026</div>
+              <div style="font-size: 12px; color: #6c757d; margin-top: 2px;">Semester 1</div>
+            </div>
+            <div style="padding: 10px 16px; border-top: 1px solid #f0f0f0; display: flex; gap: 16px; font-size: 16px; color: #6c757d;">
+              <span title="Announcements">📢</span>
+              <span title="Assignments">📝</span>
+              <span title="Discussions">💬</span>
+              <span title="Files">📁</span>
+            </div>
+          </div>
+
+          <!-- Course Card 5: World History -->
+          <div style="background: #fff; border: 1px solid #c7cdd1; border-radius: 4px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08);">
+            <div style="height: 125px; background: #cf6d00; position: relative;">
+              <span style="position: absolute; top: 8px; right: 8px; color: #fff; font-size: 18px; cursor: pointer;">⋮</span>
+            </div>
+            <div style="padding: 14px 16px;">
+              <div style="font-size: 15px; font-weight: 600; color: #008ee2; line-height: 1.3; cursor: pointer;">World History - Period 5</div>
+              <div style="font-size: 12px; color: #6c757d; margin-top: 4px;">HIST200_P5</div>
+              <div style="font-size: 12px; color: #6c757d; margin-top: 2px;">Semester 1</div>
+            </div>
+            <div style="padding: 10px 16px; border-top: 1px solid #f0f0f0; display: flex; gap: 16px; font-size: 16px; color: #6c757d;">
+              <span title="Announcements">📢</span>
+              <span title="Assignments">📝</span>
+              <span title="Discussions">💬</span>
+              <span title="Files">📁</span>
+            </div>
+          </div>
+
+          <!-- Course Card 6: Spanish II -->
+          <div style="background: #fff; border: 1px solid #c7cdd1; border-radius: 4px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08);">
+            <div style="height: 125px; background: #008b8b; position: relative;">
+              <span style="position: absolute; top: 8px; right: 8px; color: #fff; font-size: 18px; cursor: pointer;">⋮</span>
+            </div>
+            <div style="padding: 14px 16px;">
+              <div style="font-size: 15px; font-weight: 600; color: #008ee2; line-height: 1.3; cursor: pointer;">Spanish II - Period 6</div>
+              <div style="font-size: 12px; color: #6c757d; margin-top: 4px;">SPAN102_P6</div>
+              <div style="font-size: 12px; color: #6c757d; margin-top: 2px;">Semester 1</div>
+            </div>
+            <div style="padding: 10px 16px; border-top: 1px solid #f0f0f0; display: flex; gap: 16px; font-size: 16px; color: #6c757d;">
+              <span title="Announcements">📢</span>
+              <span title="Assignments">📝</span>
+              <span title="Discussions">💬</span>
+              <span title="Files">📁</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Canvas Right Sidebar (To Do list & Feedback) -->
+      <div style="width: 290px; border-left: 1px solid #e0e0e0; padding: 24px 20px; background: #fff; font-size: 13px;">
+        <h2 style="font-size: 16px; font-weight: 700; color: #2d3b45; margin: 0 0 16px 0; border-bottom: 1px solid #e0e0e0; padding-bottom: 8px;">To Do</h2>
+        
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          
+          <div style="display: flex; gap: 10px; align-items: flex-start;">
+            <span style="font-size: 16px; color: #6c757d;">📝</span>
+            <div>
+              <div style="font-weight: 600; color: #008ee2; cursor: pointer; line-height: 1.3;">Turn in Lab 4 Write-Up</div>
+              <div style="color: #6c757d; font-size: 11px; margin-top: 2px;">Biology 1 Honors</div>
+              <div style="color: #d9534f; font-size: 11px; margin-top: 1px;">50 points • Due Tomorrow 11:59pm</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: flex-start;">
+            <span style="font-size: 16px; color: #6c757d;">📄</span>
+            <div>
+              <div style="font-weight: 600; color: #008ee2; cursor: pointer; line-height: 1.3;">Polynomial Quiz 6.2</div>
+              <div style="color: #6c757d; font-size: 11px; margin-top: 2px;">Algebra II</div>
+              <div style="color: #6c757d; font-size: 11px; margin-top: 1px;">25 points • Friday at 3:15pm</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: flex-start;">
+            <span style="font-size: 16px; color: #6c757d;">✍️</span>
+            <div>
+              <div style="font-weight: 600; color: #008ee2; cursor: pointer; line-height: 1.3;">Rhetorical Essay Draft</div>
+              <div style="color: #6c757d; font-size: 11px; margin-top: 2px;">English 10</div>
+              <div style="color: #6c757d; font-size: 11px; margin-top: 1px;">100 points • Oct 24 at 11:59pm</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: flex-start;">
+            <span style="font-size: 16px; color: #6c757d;">💻</span>
+            <div>
+              <div style="font-weight: 600; color: #008ee2; cursor: pointer; line-height: 1.3;">Recursion Problem Set 3</div>
+              <div style="color: #6c757d; font-size: 11px; margin-top: 2px;">AP Computer Science</div>
+              <div style="color: #6c757d; font-size: 11px; margin-top: 1px;">40 points • Oct 28 at 8:00am</div>
+            </div>
+          </div>
+
         </div>
 
-        <div style="border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; height: 260px; position: relative;">
-          <div style="height: 100px; background: #d93025; padding: 16px; color: #fff;">
-            <div style="font-size: 22px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">8th Grade ELA</div>
-            <div style="font-size: 13px; margin-top: 4px;">Kelly Semlear</div>
+        <h2 style="font-size: 16px; font-weight: 700; color: #2d3b45; margin: 28px 0 12px 0; border-bottom: 1px solid #e0e0e0; padding-bottom: 8px;">Recent Feedback</h2>
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
+          <div>
+            <div style="color: #008ee2; font-weight: 600; cursor: pointer;">Unit 2 Exam</div>
+            <div style="color: #28a745; font-weight: bold;">96/100 • Algebra II</div>
           </div>
-          <div style="position: absolute; top: 76px; right: 16px; width: 68px; height: 68px; background: #e0e0e0; border-radius: 50%; border: 4px solid #fff;"></div>
+          <div>
+            <div style="color: #008ee2; font-weight: 600; cursor: pointer;">Lab 3 Microscopy Quiz</div>
+            <div style="color: #28a745; font-weight: bold;">48/50 • Biology Honors</div>
+          </div>
         </div>
 
-        <div style="border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; height: 260px; position: relative;">
-          <div style="height: 100px; background: #f29900; padding: 16px; color: #fff;">
-            <div style="font-size: 22px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">8th Grade Science</div>
-            <div style="font-size: 13px; margin-top: 4px;">Milton Marshall</div>
-          </div>
-          <div style="position: absolute; top: 76px; right: 16px; width: 68px; height: 68px; background: #e0e0e0; border-radius: 50%; border: 4px solid #fff;"></div>
-        </div>
-
-        <div style="border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; height: 260px; position: relative;">
-          <div style="height: 100px; background: #8e24aa; padding: 16px; color: #fff;">
-            <div style="font-size: 22px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">8th grade U.S. Hi...</div>
-            <div style="font-size: 13px; margin-top: 4px;">Lesley Bozman</div>
-          </div>
-          <div style="position: absolute; top: 76px; right: 16px; width: 68px; height: 68px; background: #e0e0e0; border-radius: 50%; border: 4px solid #fff;"></div>
-        </div>
-
-        <div style="border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; height: 260px; position: relative;">
-          <div style="height: 100px; background: #00acc1; padding: 16px; color: #fff;">
-            <div style="font-size: 22px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">8th Grade Advisory</div>
-            <div style="font-size: 13px; margin-top: 4px;">Homeroom</div>
-          </div>
-          <div style="position: absolute; top: 76px; right: 16px; width: 68px; height: 68px; background: #e0e0e0; border-radius: 50%; border: 4px solid #fff;"></div>
-        </div>
+        <button style="width: 100%; margin-top: 24px; padding: 10px; background: #fff; border: 1px solid #c7cdd1; border-radius: 4px; font-weight: 600; color: #2d3b45; font-size: 13px; cursor: pointer;">
+          📊 View Grades
+        </button>
 
       </div>
+
     </div>
+
   </div>
 </div>
   <div class="side-decor left-decor">
@@ -119,7 +281,7 @@
           <div style="color:var(--text-muted);">Embedded video resources</div>
         </div>
         <div style="align-self:center">
-          <a href="Y*utube.html" class="info-btn" style="display:inline-block; padding:10px 14px; text-decoration:none;">Open</a>
+          <a href="youtube.html" class="info-btn" style="display:inline-block; padding:10px 14px; text-decoration:none;">Open</a>
         </div>
       </div>
 
