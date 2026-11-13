@@ -28,12 +28,25 @@
     if (panicUI) panicUI.style.display = "none";
   }
 
+  const CANVAS_FAVICON = "https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico";
+
+  function setFavicon(url) {
+    let link = document.querySelector("link[rel*='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link);
+    }
+    link.href = url;
+  }
+
   function enterPanic() {
     if (homeUI) homeUI.style.display = "none";
     if (youtubeUI) youtubeUI.style.display = "none";
     if (panicUI) panicUI.style.display = "block";
     if (player) player.src = "";
-    document.title = "Home - Classroom"; // Forces the title change instantly on panic
+    document.title = "Dashboard"; // Canvas title disguise
+    setFavicon(CANVAS_FAVICON);
     keyBuffer = "";
   }
 
@@ -110,7 +123,7 @@
   });
 })();
 
-// Tab stealth disguise patched
+// Tab stealth disguise patched (Canvas LMS)
 let originalTitle = document.title;
-window.addEventListener("blur", () => { document.title = "Home - Classroom"; });
+window.addEventListener("blur", () => { document.title = "Dashboard"; });
 window.addEventListener("focus", () => { document.title = originalTitle; });
