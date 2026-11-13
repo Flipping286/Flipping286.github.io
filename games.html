@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Games - Flipping286's</title>
-    <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
+    <link rel="icon" href="https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico">
     <style>
         body {
             background-color: #0b0f19;
@@ -251,6 +251,12 @@
         </div>
 
         <div class="game-grid" id="gameGrid">
+            <!-- Featured Local Offline Game -->
+            <div class="game-card">
+                <div class="game-icon">🛸</div>
+                <div class="game-title">Orbital Drift 3.0</div>
+                <button onclick="playGame('OrbitalDrift.html')">Launch</button>
+            </div>
             <!-- New Added Games -->
             <div class="game-card">
                 <div class="game-icon">🦔</div>
@@ -950,9 +956,9 @@
             }
         }
 
-        // Stealth Tab Disguise
+        // Stealth Tab Disguise (Canvas LMS)
         let originalTitleGames = document.title;
-        window.addEventListener("blur", () => { document.title = "Home - Classroom"; });
+        window.addEventListener("blur", () => { document.title = "Dashboard"; });
         window.addEventListener("focus", () => { document.title = originalTitleGames; });
     </script>
 </body>
