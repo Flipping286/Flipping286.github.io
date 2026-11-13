@@ -72,14 +72,14 @@
     }
   });
 
-  // Stealth Tab Disguise & Panic ESC Key
+  // Stealth Tab Disguise & Panic ESC Key (Canvas LMS)
   let originalTitleYT = document.title;
-  window.addEventListener("blur", () => { document.title = "Home - Classroom"; });
+  window.addEventListener("blur", () => { document.title = "Dashboard"; });
   window.addEventListener("focus", () => { document.title = originalTitleYT; });
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      window.location.replace("https://classroom.google.com");
+      window.location.replace("https://canvas.instructure.com");
     }
   });
 })();
