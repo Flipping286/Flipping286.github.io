@@ -39,15 +39,15 @@
         .side-decor.right { right: 10px; }
 
         @keyframes pulse-glow {
-            0% { opacity: 0.3; text-shadow: 0 0 5px #00ff88; }
-            50% { opacity: 1; text-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88; }
-            100% { opacity: 0.3; text-shadow: 0 0 5px #00ff88; }
+            0% { opacity: 0.3; text-shadow: 0 0 5px var(--accent-color, #00ff88); }
+            50% { opacity: 1; text-shadow: 0 0 20px var(--accent-color, #00ff88), 0 0 30px var(--accent-color, #00ff88); }
+            100% { opacity: 0.3; text-shadow: 0 0 5px var(--accent-color, #00ff88); }
         }
 
         /* Outer Neon Border Arcade Container */
         .arcade-container {
-            border: 2px solid #00ff88;
-            box-shadow: 0 0 25px rgba(0, 255, 136, 0.25);
+            border: 2px solid var(--accent-color, #00ff88);
+            box-shadow: 0 0 25px color-mix(in srgb, var(--accent-color, var(--accent-color, #00ff88)) 25%, transparent);
             border-radius: 12px;
             background-color: #11141d;
             padding: 35px;
@@ -99,7 +99,7 @@
 
         .game-card:hover {
             transform: translateY(-3px);
-            border-color: #00ff88;
+            border-color: var(--accent-color, #00ff88);
         }
 
         /* Themed Emoji Icon over game name */
@@ -124,7 +124,7 @@
 
         /* Launch Button */
         .game-card button {
-            background-color: #00ff88;
+            background-color: var(--accent-color, #00ff88);
             color: #000000;
             font-family: Arial, sans-serif;
             font-weight: bold;
@@ -138,7 +138,7 @@
         }
 
         .game-card button:hover {
-            background-color: #00cc6a;
+            background-color: color-mix(in srgb, var(--accent-color, var(--accent-color, #00ff88)) 80%, #000);
         }
 
         /* Footer & Ambient Text */
@@ -162,7 +162,7 @@
         /* Bottom Right Back Button */
         .back-btn {
             background-color: #21262d;
-            color: #00ff88;
+            color: var(--accent-color, #00ff88);
             border: 1px solid #30363d;
             padding: 8px 16px;
             border-radius: 6px;
@@ -174,7 +174,7 @@
 
         .back-btn:hover {
             background-color: #30363d;
-            border-color: #00ff88;
+            border-color: var(--accent-color, #00ff88);
         }
 
         /* Hidden Fullscreen Player Overlay */
@@ -223,6 +223,7 @@
             transform: scale(1.05);
         }
     </style>
+  <script src="accent.js"></script>
 </head>
 <body>
 
@@ -242,7 +243,7 @@
         <div class="search-container">
             <div style="display: flex; gap: 10px;">
                 <input type="text" id="gameSearch" placeholder="Search games..." onkeyup="filterGames()" style="flex: 1; padding: 12px 16px; background-color: #161b22; border: 1px solid #30363d; border-radius: 8px; color: #fff; font-size: 14px; box-sizing: border-box;">
-                <button onclick="filterGames()" style="padding: 0 16px; background-color: #00ff88; color: #0b0f19; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 18px;">🔍</button>
+                <button onclick="filterGames()" style="padding: 0 16px; background-color: var(--accent-color, #00ff88); color: #0b0f19; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 18px;">🔍</button>
             </div>
             <!-- Lowered position via margin-top adjustment -->
             <div id="no-results" style="display: none; color: #8b949e; text-align: center; margin-top: 30px; font-size: 14px;">
