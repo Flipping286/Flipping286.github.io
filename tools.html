@@ -26,7 +26,7 @@
       transition: all 0.2s ease;
     }
     .filter-btn.active, .filter-btn:hover {
-      background: rgba(0, 255, 157, 0.15);
+      background: color-mix(in srgb, var(--accent-color) 15%, transparent);
       color: var(--accent-color);
       border-color: var(--accent-color);
     }
@@ -50,7 +50,7 @@
     .tool-card:hover {
       border-color: var(--accent-color);
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 255, 157, 0.12);
+      box-shadow: 0 8px 20px color-mix(in srgb, var(--accent-color) 12%, transparent);
     }
     .tool-icon {
       font-size: 2.2rem;
@@ -130,7 +130,7 @@
       gap: 6px;
     }
     .back-browse-btn:hover {
-      background: rgba(0, 255, 157, 0.2);
+      background: color-mix(in srgb, var(--accent-color) 20%, transparent);
       color: var(--accent-color);
     }
     
@@ -172,7 +172,7 @@
       padding: 14px;
       border-radius: 6px;
       font-family: monospace;
-      color: #00ff9d;
+      color: var(--accent-color, #00ff9d);
       word-break: break-all;
       min-height: 40px;
       margin-top: 10px;
@@ -200,6 +200,7 @@
       font-weight: bold;
     }
   </style>
+  <script src="accent.js"></script>
 </head>
 <body>
 
