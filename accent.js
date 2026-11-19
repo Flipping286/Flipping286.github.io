@@ -23,7 +23,7 @@
     .game-card:hover{box-shadow:0 8px 22px rgba(0,0,0,.45),0 0 14px var(--accent-glow)}
     .feature-item:hover{border-color:var(--accent-color)}
     button:hover{box-shadow:0 0 12px var(--accent-glow)}
-    #accentPicker{position:fixed;left:20px;bottom:20px;display:flex;gap:8px;z-index:100;padding:8px 10px;background:var(--card-bg);border:1px solid var(--border-color);border-radius:20px}
+    #accentPicker{position:fixed;left:20px;bottom:20px;display:flex;gap:8px;z-index:100;padding:8px 10px;background:var(--card-bg,#161922);border:1px solid var(--border-color,#262b38);border-radius:20px}
     .accent-dot{width:18px;height:18px;padding:0;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:transform .12s}
     .accent-dot:hover{transform:scale(1.2);box-shadow:none}
     .accent-dot.on{border-color:#fff}
