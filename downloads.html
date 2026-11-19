@@ -1,289 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Downloads - Flipping286's Things!</title>
-    <!-- Google Classroom Favicon -->
-    <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
-    <style>
-        body {
-            background-color: #0b0f19;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 30px 20px 60px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-
-        /* Flashing Side Decor */
-        .side-decor {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            width: 70px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            font-size: 34px;
-            animation: pulse-glow 4s infinite ease-in-out;
-            user-select: none;
-            pointer-events: none;
-            z-index: 10;
-        }
-        .side-decor.left { left: 10px; }
-        .side-decor.right { right: 10px; }
-
-        @keyframes pulse-glow {
-            0% { opacity: 0.3; text-shadow: 0 0 5px #00ff88; }
-            50% { opacity: 1; text-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88; }
-            100% { opacity: 0.3; text-shadow: 0 0 5px #00ff88; }
-        }
-
-        /* Outer Neon Border Arcade Container */
-        .arcade-container {
-            border: 2px solid #00ff88;
-            box-shadow: 0 0 25px rgba(0, 255, 136, 0.25);
-            border-radius: 12px;
-            background-color: #11141d;
-            padding: 35px;
-            max-width: 1200px;
-            width: 100%;
-            box-sizing: border-box;
-            position: relative;
-            z-index: 20;
-        }
-
-        h1 {
-            font-size: 28px;
-            margin-top: 0;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-        }
-
-        .subtitle {
-            color: #8b949e;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-
-        /* Search Bar Styling */
-        .search-container {
-            margin-bottom: 25px;
-        }
-
-        /* Tile Grid Layout */
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-            gap: 16px;
-        }
-
-        /* Individual Card Box */
-        .game-card {
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            padding: 20px 12px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-
-        .game-card:hover {
-            transform: translateY(-3px);
-            border-color: #00ff88;
-        }
-
-        /* Themed Emoji Icon over name */
-        .game-icon {
-            font-size: 38px;
-            margin-bottom: 12px;
-        }
-
-        /* Title Text */
-        .game-title {
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #e6edf3;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            line-height: 1.2;
-            word-break: break-all;
-        }
-
-        /* Download Button */
-        .download-btn {
-            background-color: #00ff88;
-            color: #000000;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-            font-size: 13px;
-            border: none;
-            border-radius: 6px;
-            padding: 9px 0;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.2s;
-            text-decoration: none;
-            display: inline-block;
-            box-sizing: border-box;
-        }
-
-        .download-btn:hover {
-            background-color: #00cc6a;
-        }
-        
-        .download-btn.disabled {
-            background-color: #30363d;
-            color: #8b949e;
-            cursor: not-allowed;
-        }
-        
-        .download-btn.disabled:hover {
-            background-color: #30363d;
-        }
-
-        /* Footer & Ambient Text */
-        .footer-container {
-            max-width: 1200px;
-            width: 100%;
-            margin-top: 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            z-index: 20;
-            padding: 0 5px;
-        }
-
-        .ambient-text {
-            color: #8b949e;
-            font-size: 13px;
-        }
-
-        /* Bottom Right Back Button */
-        .back-btn {
-            background-color: #21262d;
-            color: #00ff88;
-            border: 1px solid #30363d;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 13px;
-            transition: background-color 0.2s, border-color 0.2s;
-        }
-
-        .back-btn:hover {
-            background-color: #30363d;
-            border-color: #00ff88;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Downloads - Flipping286's e-waste</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⬇️</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="games.css">
+  <style>
+    body { padding: 30px 20px 60px; }
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .chip { padding: 6px 14px; background: transparent; color: var(--text-main); border: 1px solid var(--border-color); border-radius: 20px; font-size: 13px; }
+    .chip.on { background: var(--accent-color); color: #000; border-color: var(--accent-color); }
+    .badge { font-size: 11px; color: var(--text-muted); border: 1px solid var(--border-color); border-radius: 4px; padding: 1px 7px; margin-bottom: 10px; }
+    .game-card .row { display: flex; gap: 8px; width: 100%; }
+    .dl-btn { flex: 1; display: inline-block; padding: 9px 0; background: var(--accent-color); color: #000; font-weight: bold; font-size: 13px; border-radius: 6px; text-decoration: none; transition: transform .12s ease; }
+    .dl-btn:hover, .dl-btn:focus-visible { transform: translateY(-1px); outline: none; }
+    .copy-btn { padding: 9px 11px; font-size: 13px; background: var(--bg-color); color: var(--accent-color); border: 1px solid var(--border-color); }
+    .desc { color: var(--text-muted); font-size: 12px; margin: -6px 0 12px; line-height: 1.35; }
+    .game-card.soon { border-style: dashed; opacity: .6; }
+    .notice { color: var(--text-muted); font-size: 12px; margin-top: 18px; }
+  </style>
 </head>
 <body>
+  <div class="side-decor left-decor">
+    <p>1</p><p>👾</p><p>📟</p><p>0</p><p>🦾</p><p>1</p><p>👾</p><p>0</p><p>📟</p>
+  </div>
+  <div class="side-decor right-decor">
+    <p>0</p><p>📟</p><p>👾</p><p>1</p><p>0</p><p>🦾</p><p>0</p><p>👾</p><p>1</p>
+  </div>
 
-    <!-- Flashing Side Decor Columns -->
-    <div class="side-decor left">
-        <span>1</span><span>🏴‍☠️</span><span>📟</span><span>👾</span><span>0</span><span>🦾</span><span>🏴‍☠️</span>
-    </div>
-    <div class="side-decor right">
-        <span>0</span><span>👾</span><span>📟</span><span>🏴‍☠️</span><span>1</span><span>0</span><span>👾</span>
-    </div>
+  <div class="arcade-container">
+    <h1>Downloads</h1>
+    <div class="subtitle">Files and resources. Search, filter by type, or copy a link to share.</div>
 
-    <div class="arcade-container">
-        <h1>Downloads</h1>
-        <div class="subtitle">Welcome to Downloads! Grab files below, .txt, .exe, whatever. I may upload harmless "malware."</div>
-        
-        <!-- Working Search Bar -->
-        <div class="search-container">
-            <div style="display: flex; gap: 10px;">
-                <input type="text" id="gameSearch" placeholder="Search downloads..." onkeyup="filterDownloads()" style="flex: 1; padding: 12px 16px; background-color: #161b22; border: 1px solid #30363d; border-radius: 8px; color: #fff; font-size: 14px; box-sizing: border-box;">
-                <button onclick="filterDownloads()" style="padding: 0 16px; background-color: #00ff88; color: #0b0f19; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 18px;">🔍</button>
-            </div>
-            <div id="no-results" style="display: none; color: #8b949e; text-align: center; margin-top: 15px; font-size: 14px;">
-                Sorry, file not found. Mabye Spell better IDK...
-            </div>
-        </div>
-
-        <div class="game-grid" id="gameGrid">
-            
-            <!-- Slot 1: Your custom exe file -->
-            <div class="game-card">
-                <div class="game-icon">👾</div>
-                <div class="game-title">YouAreAnIdiot.exe</div>
-                <a href="https://github.com/Flipping286/Flipping286.github.io/releases/latest/download/you.are.an.idiot.text.messages.exe" class="download-btn" download>Download</a>
-            </div>
-
-            <!-- 10 Empty Slots Ready for Links -->
-            <div class="game-card"><div class="game-icon">IDK</div><div class="game-title">Empty Slot 2</div><a href="#" class="download-btn disabled">Pending</a></div>
-            <div class="game-card"><div class="game-icon">IDK</div><div class="game-title">Empty Slot 3</div><a href="#" class="download-btn disabled">Pending</a></div>
-            <div class="game-card"><div class="game-icon">IDK</div><div class="game-title">Empty Slot 4</div><a href="#" class="download-btn disabled">Pending</a></div>
-            <div class="game-card"><div class="game-icon">IDK</div><div class="game-title">Empty Slot 5</div><a href="#" class="download-btn disabled">Pending</a></div>
-            <div class="game-card"><div class="game-icon">IDK</div><div class="game-title">Empty Slot 6</div><a href="#" class="download-btn disabled">Pending</a></div>
-            <div class="game-card"><div class="game-icon">IDK</div><div class="game-title">Empty Slot 7</div><a href="#" class="download-btn disabled">Pending</a></div>
-            <div class="game-card"><div class="game-icon">IDK</div><div class="game-title">Empty Slot 8</div><a href="#" class="download-btn disabled">Pending</a></div>
-            <div class="game-card"><div class="game-icon">IDK</div><div class="game-title">Empty Slot 9</div><a href="#" class="download-btn disabled">Pending</a></div>
-            <div class="game-card"><div class="game-icon">IDK</div><div class="game-title">Empty Slot 10</div><a href="#" class="download-btn disabled">Pending</a></div>
-            <div class="game-card"><div class="game-icon">IDK</div><div class="game-title">Empty Slot 11</div><a href="#" class="download-btn disabled">Pending</a></div>
-
-        </div>
+    <div class="search-container">
+      <div style="display:flex; gap:10px;">
+        <input type="text" id="gameSearch" placeholder="Search downloads... (press / to focus)" aria-label="Search downloads" autocomplete="off" style="flex:1; padding:12px 16px; background:var(--bg-color); border:1px solid var(--border-color); border-radius:8px; color:var(--text-main); font-size:14px;">
+        <button type="button" id="clearBtn" style="padding:0 16px; border-radius:8px;" aria-label="Clear search">✕</button>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="File types"></div>
+      <div id="no-results" style="display:none; text-align:center; margin-top:15px; font-size:14px;">No files match that. Try a different word or clear the filter.</div>
     </div>
 
-    <!-- Footer with Ambient Text and Back Button -->
-    <div class="footer-container">
-        <div class="ambient-text">made by yours truely - Flipping286 :P XD</div>
-        <a href="index.html" class="back-btn">← Back to Home</a>
-    </div>
+    <div class="game-grid" id="grid"></div>
+    <p class="notice">Only run files you trust. Your browser or antivirus may warn about .exe files.</p>
+  </div>
 
-    <script>
-        // Search Filter Logic
-        function filterDownloads() {
-            let input = document.getElementById('gameSearch').value.toLowerCase();
-            let cards = document.getElementsByClassName('game-card');
-            let hasResults = false;
+  <div class="footer-container">
+    <div class="ambient-text">made by yours truly - Flipping286 :P</div>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+  </div>
 
-            for (let i = 0; i < cards.length; i++) {
-                let titleElement = cards[i].querySelector('.game-title');
-                if (titleElement) {
-                    let title = titleElement.innerText.toLowerCase();
-                    if (title.includes(input)) {
-                        cards[i].style.display = "";
-                        hasResults = true;
-                    } else {
-                        cards[i].style.display = "none";
-                    }
-                }
-            }
-            let noResultsEl = document.getElementById('no-results');
-            if (noResultsEl) {
-                noResultsEl.style.display = hasResults ? "none" : "block";
-            }
-        }
+  <script src="accent.js"></script>
+  <script>
+    // ADD FILES HERE: copy a line, change the values, save. Types: "Windows", "Text", "Archive", "Other".
+    const FILES = [
+      { name: 'YouAreAnIdiot.exe', icon: '👾', type: 'Windows', desc: 'Windows program',
+        url: 'https://github.com/Flipping286/Flipping286.github.io/releases/latest/download/you.are.an.idiot.text.messages.exe' },
+      // { name: 'notes.txt', icon: '📄', type: 'Text', desc: 'Short description', url: 'files/notes.txt' },
+    ];
 
-        // Stealth Tab Disguise
-        let originalTitle = document.title;
-        window.addEventListener("blur", () => { document.title = "Google Classroom"; });
-        window.addEventListener("focus", () => { document.title = originalTitle; });
-        
-        // ESC Key Panic Screen
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                window.location.replace("https://classroom.google.com");
-            }
+    const grid = document.getElementById('grid'), search = document.getElementById('gameSearch'),
+          chips = document.getElementById('chips'), none = document.getElementById('no-results');
+    let activeType = 'All';
+
+    function toast(btn, msg) { const old = btn.textContent; btn.textContent = msg; setTimeout(() => btn.textContent = old, 1100); }
+
+    function render() {
+      const q = search.value.trim().toLowerCase();
+      const list = FILES.filter(f => (activeType === 'All' || f.type === activeType) && (f.name + ' ' + (f.desc || '')).toLowerCase().includes(q));
+      grid.innerHTML = '';
+      list.forEach(f => {
+        const card = document.createElement('div');
+        card.className = 'game-card';
+        card.innerHTML = '<div class="game-icon"></div><span class="badge"></span><div class="game-title"></div><div class="desc"></div>' +
+          '<div class="row"><a class="dl-btn" download>Download</a><button type="button" class="copy-btn" aria-label="Copy link" title="Copy link">🔗</button></div>';
+        card.querySelector('.game-icon').textContent = f.icon || '📦';
+        card.querySelector('.badge').textContent = f.type || 'Other';
+        card.querySelector('.game-title').textContent = f.name;
+        card.querySelector('.desc').textContent = f.desc || '';
+        const a = card.querySelector('.dl-btn'); a.href = f.url; a.setAttribute('download', f.name);
+        card.querySelector('.copy-btn').addEventListener('click', e => {
+          const full = new URL(f.url, location.href).href;
+          (navigator.clipboard ? navigator.clipboard.writeText(full) : Promise.reject()).then(() => toast(e.currentTarget, '✓'), () => prompt('Copy this link:', full));
         });
-    </script>
+        grid.appendChild(card);
+      });
+      if (!q && activeType === 'All') {
+        const soon = document.createElement('div');
+        soon.className = 'game-card soon';
+        soon.innerHTML = '<div class="game-icon">➕</div><div class="game-title">More files coming soon</div><div class="desc">Check back later.</div>';
+        grid.appendChild(soon);
+      }
+      none.style.display = list.length ? 'none' : 'block';
+    }
+
+    function buildChips() {
+      const types = ['All', ...new Set(FILES.map(f => f.type || 'Other'))];
+      chips.innerHTML = '';
+      types.forEach(t => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'chip' + (t === activeType ? ' on' : ''); b.textContent = t;
+        b.addEventListener('click', () => { activeType = t; buildChips(); render(); });
+        chips.appendChild(b);
+      });
+    }
+
+    search.addEventListener('input', render);
+    document.getElementById('clearBtn').addEventListener('click', () => { search.value = ''; activeType = 'All'; buildChips(); render(); search.focus(); });
+    document.addEventListener('keydown', e => { if (e.key === '/' && document.activeElement !== search) { e.preventDefault(); search.focus(); } });
+    buildChips(); render();
+  </script>
 </body>
 </html>
