@@ -3,69 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Downloads - Flipping286's e-waste</title>
+  <title>Download Vault - Flipping286's e-waste</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⬇️</text></svg>">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="games.css">
+  <script>try { if (localStorage.getItem('f286-dl-ack') === '1') document.documentElement.classList.add('acked'); } catch (e) {}</script>
   <style>
     body { padding: 30px 20px 60px; }
-    .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+
+    /* title */
+    .arcade-container h1.vault {
+      font-size: clamp(2.1rem, 6.5vw, 3.2rem); font-weight: 800; letter-spacing: 0.01em; margin: 0 0 6px;
+      background: linear-gradient(90deg, var(--accent-color) 0%, #fff 45%, var(--accent-color) 90%);
+      background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+      filter: drop-shadow(0 0 14px var(--accent-glow, rgba(0,255,157,.2)));
+      animation: shine 6s linear infinite;
+    }
+    @keyframes shine { to { background-position: -220% 0; } }
+    .subtitle { margin-bottom: 22px; }
+
+    /* toolbar */
+    #gameSearch { width: 100%; padding: 12px 16px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-main); font-size: 14px; }
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
     .chip { padding: 6px 14px; background: transparent; color: var(--text-main); border: 1px solid var(--border-color); border-radius: 20px; font-size: 13px; }
     .chip.on { background: var(--accent-color); color: #000; border-color: var(--accent-color); }
-    .badge { font-size: 11px; color: var(--text-muted); border: 1px solid var(--border-color); border-radius: 4px; padding: 1px 7px; margin-bottom: 10px; }
-    .game-card .row { display: flex; gap: 8px; width: 100%; }
-    .dl-btn { flex: 1; display: inline-block; padding: 9px 0; background: var(--accent-color); color: #000; font-weight: bold; font-size: 13px; border-radius: 6px; text-decoration: none; transition: transform .12s ease; }
+    .search-container { margin-bottom: 22px; }
+
+    /* cards */
+    .game-grid { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+    .game-card { padding: 22px 16px 18px; min-height: 0; gap: 2px; }
+    .game-icon { width: 64px; height: 64px; display: grid; place-items: center; border-radius: 14px; font-size: 30px; margin-bottom: 14px;
+      background: color-mix(in srgb, var(--accent-color) 12%, transparent); }
+    .game-title { height: auto; margin-bottom: 6px; font-size: 14px; word-break: break-word; }
+    .badge { font-size: 11px; color: var(--text-muted); border: 1px solid var(--border-color); border-radius: 4px; padding: 1px 8px; margin-bottom: 8px; }
+    .desc { color: var(--text-muted); font-size: 12px; margin: 0 0 12px; line-height: 1.35; }
+    .undo { width: 100%; color: var(--text-muted); font-size: 11px; line-height: 1.35; margin: 0 0 14px; padding-top: 8px; border-top: 1px solid var(--border-color); }
+    .dl-btn { display: block; width: 100%; padding: 10px 0; background: var(--accent-color); color: #000; font-weight: bold; font-size: 13px; border-radius: 6px; text-decoration: none; transition: transform .12s ease; }
     .dl-btn:hover, .dl-btn:focus-visible { transform: translateY(-1px); outline: none; }
-    .copy-btn { padding: 9px 11px; font-size: 13px; background: var(--bg-color); color: var(--accent-color); border: 1px solid var(--border-color); }
-    .desc { color: var(--text-muted); font-size: 12px; margin: -6px 0 12px; line-height: 1.35; }
-    .game-card.soon { border-style: dashed; opacity: .6; }
-    .notice { color: var(--text-muted); font-size: 12px; margin-top: 18px; }
+    .game-card.soon { border-style: dashed; opacity: .55; justify-content: center; min-height: 190px; }
+    .notice { color: var(--text-muted); font-size: 12px; margin: 22px 0 0; }
+    .linkish { background: none; border: 0; padding: 0; color: var(--accent-color); font: inherit; text-decoration: underline; cursor: pointer; }
+    .linkish:hover { transform: none; box-shadow: none; }
+
+    /* one-time disclaimer */
+    #gate { position: fixed; inset: 0; z-index: 100000; display: flex; align-items: center; justify-content: center; padding: 20px;
+      background: rgba(5, 7, 12, .86); backdrop-filter: blur(6px); }
+    .acked #gate { display: none; }
+    .gate-box { max-width: 520px; background: var(--card-bg); border: 2px solid var(--accent-color); border-radius: 14px; padding: 30px 30px 26px;
+      box-shadow: 0 0 40px var(--accent-glow, rgba(0,255,157,.2)); text-align: left; }
+    .gate-box h2 { margin: 0 0 14px; font-size: 1.5rem; }
+    .gate-box p { margin: 0 0 12px; line-height: 1.55; color: var(--text-main); }
+    .gate-box .fine { color: var(--text-muted); font-size: 13px; margin-bottom: 20px; }
+    .gate-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .gate-actions a { color: var(--text-muted); font-size: 14px; }
+    @media (max-width: 700px) { .gate-box { padding: 22px; } .gate-actions button { width: 100%; } }
+    @media (prefers-reduced-motion: reduce) { .arcade-container h1.vault { animation: none; } }
   </style>
 </head>
 <body>
-  <div class="side-decor left-decor">
+  <div class="side-decor left-decor gated">
     <p>1</p><p>👾</p><p>📟</p><p>0</p><p>🦾</p><p>1</p><p>👾</p><p>0</p><p>📟</p>
   </div>
-  <div class="side-decor right-decor">
+  <div class="side-decor right-decor gated">
     <p>0</p><p>📟</p><p>👾</p><p>1</p><p>0</p><p>🦾</p><p>0</p><p>👾</p><p>1</p>
   </div>
 
-  <div class="arcade-container">
-    <h1>Downloads</h1>
-    <div class="subtitle">Files and resources. Search, filter by type, or copy a link to share.</div>
+  <div class="arcade-container gated">
+    <h1 class="vault">Download Vault</h1>
+    <div class="subtitle" id="count">Loading…</div>
 
     <div class="search-container">
-      <div style="display:flex; gap:10px;">
-        <input type="text" id="gameSearch" placeholder="Search downloads... (press / to focus)" aria-label="Search downloads" autocomplete="off" style="flex:1; padding:12px 16px; background:var(--bg-color); border:1px solid var(--border-color); border-radius:8px; color:var(--text-main); font-size:14px;">
-        <button type="button" id="clearBtn" style="padding:0 16px; border-radius:8px;" aria-label="Clear search">✕</button>
-      </div>
+      <input type="text" id="gameSearch" placeholder="Search files… (press / to focus)" aria-label="Search downloads" autocomplete="off">
       <div class="chips" id="chips" role="group" aria-label="File types"></div>
-      <div id="no-results" style="display:none; text-align:center; margin-top:15px; font-size:14px;">No files match that. Try a different word or clear the filter.</div>
+      <div id="no-results" style="display:none; text-align:center; margin-top:15px; font-size:14px;">No files match that. Try a different word.</div>
     </div>
 
     <div class="game-grid" id="grid"></div>
-    <p class="notice">Only run files you trust. Your browser or antivirus may warn about .exe files.</p>
+    <p class="notice">Only run files you trust. <button type="button" class="linkish" id="showGate">Read the disclaimer again</button></p>
   </div>
 
-  <div class="footer-container">
+  <div class="footer-container gated">
     <div class="ambient-text">made by yours truly - Flipping286 :P</div>
     <a href="index.html" class="back-btn">← Back to Home</a>
   </div>
 
+  <!-- shown once, until you click proceed -->
+  <div id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+    <div class="gate-box">
+      <h2 id="gateTitle">Before you download</h2>
+      <p>This is a hobby page, and everything here is shared as-is. I'm not responsible for anything a file does to your device, whether it's here now or added later.</p>
+      <p>Some of these are joke programs, like one that fills a folder with copies of cat.jpeg. They're easy to stop or delete (Task Manager works), and antivirus may flag them. A file might also not run on your system at all. Future files might not be as gentle, so read what each one does first, only download what you're comfortable running, and only on a computer you own.</p>
+      <p class="fine">By clicking proceed, you confirm you've read this.</p>
+      <div class="gate-actions">
+        <button type="button" id="ack">I understand, proceed</button>
+        <a href="index.html">Take me back</a>
+      </div>
+    </div>
+  </div>
+
   <script src="accent.js"></script>
   <script>
-    // ADD FILES HERE: copy a line, change the values, save. Types: "Windows", "Text", "Archive", "Other".
+    // ADD FILES HERE: copy a line, change the values, save.
+    // type: "Windows", "Text", "Archive" or "Other"  |  desc: what it does  |  undo: how to stop or remove it (optional)
     const FILES = [
-      { name: 'YouAreAnIdiot.exe', icon: '👾', type: 'Windows', desc: 'Windows program',
+      { name: 'YouAreAnIdiot.exe', icon: '👾', type: 'Windows', desc: 'Joke program for Windows.', undo: 'close it in Task Manager (Ctrl+Shift+Esc).',
         url: 'https://github.com/Flipping286/Flipping286.github.io/releases/latest/download/you.are.an.idiot.text.messages.exe' },
-      // { name: 'notes.txt', icon: '📄', type: 'Text', desc: 'Short description', url: 'files/notes.txt' },
+      // { name: 'cat-maker.exe', icon: '🐱', type: 'Windows', desc: 'Fills a folder with 100 copies of cat.jpeg.', undo: 'delete the cat.jpeg files.', url: 'files/cat-maker.exe' },
     ];
 
     const grid = document.getElementById('grid'), search = document.getElementById('gameSearch'),
           chips = document.getElementById('chips'), none = document.getElementById('no-results');
     let activeType = 'All';
-
-    function toast(btn, msg) { const old = btn.textContent; btn.textContent = msg; setTimeout(() => btn.textContent = old, 1100); }
 
     function render() {
       const q = search.value.trim().toLowerCase();
@@ -74,32 +122,29 @@
       list.forEach(f => {
         const card = document.createElement('div');
         card.className = 'game-card';
-        card.innerHTML = '<div class="game-icon"></div><span class="badge"></span><div class="game-title"></div><div class="desc"></div>' +
-          '<div class="row"><a class="dl-btn" download>Download</a><button type="button" class="copy-btn" aria-label="Copy link" title="Copy link">🔗</button></div>';
+        card.innerHTML = '<div class="game-icon"></div><span class="badge"></span><div class="game-title"></div><div class="desc"></div><a class="dl-btn">Download</a>';
         card.querySelector('.game-icon').textContent = f.icon || '📦';
         card.querySelector('.badge').textContent = f.type || 'Other';
         card.querySelector('.game-title').textContent = f.name;
         card.querySelector('.desc').textContent = f.desc || '';
+        if (f.undo) { const u = document.createElement('div'); u.className = 'undo'; u.textContent = 'To undo: ' + f.undo; card.insertBefore(u, card.querySelector('.dl-btn')); }
         const a = card.querySelector('.dl-btn'); a.href = f.url; a.setAttribute('download', f.name);
-        card.querySelector('.copy-btn').addEventListener('click', e => {
-          const full = new URL(f.url, location.href).href;
-          (navigator.clipboard ? navigator.clipboard.writeText(full) : Promise.reject()).then(() => toast(e.currentTarget, '✓'), () => prompt('Copy this link:', full));
-        });
         grid.appendChild(card);
       });
       if (!q && activeType === 'All') {
         const soon = document.createElement('div');
         soon.className = 'game-card soon';
-        soon.innerHTML = '<div class="game-icon">➕</div><div class="game-title">More files coming soon</div><div class="desc">Check back later.</div>';
+        soon.innerHTML = '<div class="game-icon">➕</div><div class="game-title">More files coming soon</div>';
         grid.appendChild(soon);
       }
       none.style.display = list.length ? 'none' : 'block';
     }
 
     function buildChips() {
-      const types = ['All', ...new Set(FILES.map(f => f.type || 'Other'))];
+      const types = [...new Set(FILES.map(f => f.type || 'Other'))];
       chips.innerHTML = '';
-      types.forEach(t => {
+      if (types.length < 2) return;          // filters only show up when there is something to filter
+      ['All', ...types].forEach(t => {
         const b = document.createElement('button');
         b.type = 'button'; b.className = 'chip' + (t === activeType ? ' on' : ''); b.textContent = t;
         b.addEventListener('click', () => { activeType = t; buildChips(); render(); });
@@ -107,10 +152,25 @@
       });
     }
 
+    document.getElementById('count').textContent = FILES.length + (FILES.length === 1 ? ' file' : ' files') + ' ready to grab';
     search.addEventListener('input', render);
-    document.getElementById('clearBtn').addEventListener('click', () => { search.value = ''; activeType = 'All'; buildChips(); render(); search.focus(); });
-    document.addEventListener('keydown', e => { if (e.key === '/' && document.activeElement !== search) { e.preventDefault(); search.focus(); } });
+    search.addEventListener('keydown', e => { if (e.key === 'Escape') { search.value = ''; render(); search.blur(); } });
+    document.addEventListener('keydown', e => {
+      if (e.key === '/' && document.activeElement !== search && !isGateOpen()) { e.preventDefault(); search.focus(); }
+    });
     buildChips(); render();
+
+    // Disclaimer: shows once, remembered on this device
+    const root = document.documentElement, gated = [...document.querySelectorAll('.gated')];
+    const isGateOpen = () => !root.classList.contains('acked');
+    function syncGate() { gated.forEach(el => el.inert = isGateOpen()); if (isGateOpen()) document.getElementById('ack').focus(); }
+    document.getElementById('ack').addEventListener('click', () => {
+      root.classList.add('acked');
+      try { localStorage.setItem('f286-dl-ack', '1'); } catch (e) {}
+      syncGate();
+    });
+    document.getElementById('showGate').addEventListener('click', () => { root.classList.remove('acked'); syncGate(); });
+    syncGate();
   </script>
 </body>
 </html>
