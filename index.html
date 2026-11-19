@@ -6,6 +6,11 @@
   <title>Homepage</title>
   <link rel="icon" href="https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .caret { color: var(--accent-color); animation: caret-blink 0.9s steps(2) infinite; margin-left: 2px; }
+    @keyframes caret-blink { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
+  </style>
 </head>
 <body>
 <!-- CANVAS LMS STEALTH PANIC SCREEN UI -->
@@ -271,7 +276,7 @@
   </div>
   
   <main class="container" id="homeUI">
-    <h1>Flipping286's e-waste🥀</h1>
+    <h1 aria-label="Flipping286's e-waste🥀"><span id="typed"></span><span class="caret" aria-hidden="true">_</span><noscript>Flipping286's e-waste🥀</noscript></h1>
     <p style="opacity:.9; margin-bottom:18px;">Browse gam∄s, downloads, and the Y⌀utube dashboard.</p>
 
     <div class="classroom-grid">
@@ -328,5 +333,18 @@
 
   <footer class="footer">Made by Flipping286, Optimized for students.</footer>
   <script src="script.js"></script>
+  <script src="accent.js"></script>
+  <script>
+    // Typed, blinking title
+    (function () {
+      const full = "Flipping286's e-waste🥀", el = document.getElementById('typed'), chars = Array.from(full);
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = full; return; }
+      let i = 0;
+      (function type() {
+        el.textContent = chars.slice(0, ++i).join('');
+        if (i < chars.length) setTimeout(type, 60 + Math.random() * 60);
+      })();
+    })();
+  </script>
 </body>
 </html>
